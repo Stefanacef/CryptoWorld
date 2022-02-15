@@ -1,0 +1,17 @@
+.mainStatsBar {
+  display: flex;
+  justify-content: center;
+  background-color: #f64c71;
+  height: 30px;
+  width: 100%;
+}
+.mainStatsBar-list {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  list-style: none;
+}
+.mainStatsBar-list li {
+  margin-left: 21px;
+  color: white;
+}

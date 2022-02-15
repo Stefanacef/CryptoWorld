@@ -1,0 +1,7 @@
+.home {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
