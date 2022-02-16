@@ -1,5 +1,4 @@
 import "../../assets/styles/Navigation/Navigation.css";
-import Logo3 from "../../assets/images/logo3.png";
 
 function TopNavigation() {
   const links: string[] = ["Coins", "Research", "Exchanges", "Feed"];
