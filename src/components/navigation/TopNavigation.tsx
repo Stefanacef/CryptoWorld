@@ -1,11 +1,11 @@
 import "../../assets/styles/Navigation/Navigation.css";
-import Logo2 from "../../assets/images/logo2.png";
+import Logo3 from "../../assets/images/logo3.png";
 
 function TopNavigation() {
   const links: string[] = ["Coins", "Research", "Exchanges", "Feed"];
   return (
     <nav className="navigation-top">
-      <img className="navigation-logo" src={Logo2} alt="logo" />
+      <img className="navigation-logo" src={Logo3} alt="logo" />
       <div className="navigation-links">
         {links.map((el, index) => (
           <a href="#" key={index}>
@@ -13,7 +13,7 @@ function TopNavigation() {
           </a>
         ))}
         <button type="submit" className="navigation-button">
-          Sing up{" "}
+          Sign up{" "}
         </button>
       </div>
     </nav>
