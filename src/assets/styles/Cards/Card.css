@@ -1,0 +1,19 @@
+.card {
+  height: 200px;
+  width: 300px;
+  color: wheat;
+  margin-right: 30px;
+}
+
+.border {
+  border-style: solid;
+  border-width: 4px;
+}
+.border-purple {
+  border-image: linear-gradient(90deg, #d950e5 0%, #f767ca 46.88%, #917ee9 100%)
+    1;
+}
+.border-maroon {
+  border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
+    1;
+}

@@ -5,7 +5,7 @@ function TopNavigation() {
   const links: string[] = ["Coins", "Research", "Exchanges", "Feed"];
   return (
     <nav className="navigation-top">
-      <img className="navigation-logo" src={Logo3} alt="logo" />
+      <h3>LOGO</h3>
       <div className="navigation-links">
         {links.map((el, index) => (
           <a href="https://crypto-world-stefana.netlify.app/" key={index}>
