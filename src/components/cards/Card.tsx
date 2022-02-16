@@ -1,6 +1,10 @@
-import CardModel from "../../interfaces/card";
 import "../../assets/styles/Cards/Card.css";
-function Card({ border }: CardModel) {
+interface ICard {
+  border?: string;
+  height?: number;
+  width?: number;
+}
+function Card({ border }: ICard) {
   return (
     <div className={`card ${border}`}>
       <h1>Title</h1>
