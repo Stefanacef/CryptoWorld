@@ -8,7 +8,7 @@ function TopNavigation() {
       <img className="navigation-logo" src={Logo3} alt="logo" />
       <div className="navigation-links">
         {links.map((el, index) => (
-          <a href="#" key={index}>
+          <a href="https://crypto-world-stefana.netlify.app/" key={index}>
             {el}
           </a>
         ))}
