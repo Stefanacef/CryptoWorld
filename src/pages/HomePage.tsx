@@ -1,6 +1,7 @@
 import TopNavigation from "../components/navigation/TopNavigation";
 import MainStatsBar from "../components/navigation/MainStatsBar";
 import Carousel from "../components/carousel/Carousel";
+import Card from "../components/cards/Card";
 import Table from "../components/tables/Table";
 import "../assets/styles/HomePage/HomePage.css";
 import { useEffect, useState } from "react";
@@ -15,13 +16,23 @@ export default function HomePage() {
       .catch((err) => {
         console.error(err);
       });
-    console.log(data);
   }, []);
+  const topFiveCoins = data.slice(-3);
   return (
     <div className="home">
       <MainStatsBar />
       <TopNavigation />
-      <Carousel />
+      <Carousel>
+        {topFiveCoins.map((crypto: any) => (
+          <Card
+            key={crypto.id}
+            border=" border border-purple"
+            title={crypto.name}
+            icon={crypto.image}
+            price={crypto.current_price}
+          />
+        ))}
+      </Carousel>
       <Table data={data} />
     </div>
   );

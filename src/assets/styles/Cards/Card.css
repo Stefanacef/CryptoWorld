@@ -16,3 +16,7 @@
   border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
     1;
 }
+.card-icon {
+  margin-top: 10px;
+  width: 50px;
+}
