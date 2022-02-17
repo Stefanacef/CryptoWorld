@@ -17,7 +17,7 @@ export default function HomePage() {
         console.error(err);
       });
   }, []);
-  const topFiveCoins = data.slice(-3);
+  const topFiveCoins = data.slice(-5);
   return (
     <div className="home">
       <MainStatsBar />
