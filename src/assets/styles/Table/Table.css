@@ -1,0 +1,24 @@
+.table {
+  width: 100%;
+  margin-top: 100px;
+  border-spacing: 0;
+}
+.table-head {
+  background-color: rgb(73, 70, 70);
+}
+.table-head-row {
+  border: none;
+  color: white;
+  height: 40px;
+}
+.table-body-row {
+  color: azure;
+}
+.table-body-name {
+  align-items: center;
+  background-color: rgba(73, 70, 70, 0.877);
+  display: flex;
+}
+.table-body-symbol {
+  width: 30px;
+}
