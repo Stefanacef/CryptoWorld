@@ -1,6 +1,5 @@
 import "../../assets/styles/Posts/Posts.css";
 import {
-  AiFillHeart as Heart,
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
 } from "react-icons/ai";

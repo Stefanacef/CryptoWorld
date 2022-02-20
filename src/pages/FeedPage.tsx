@@ -16,7 +16,7 @@ function FeedPage() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [URL]);
   return (
     <div className="feed">
       <h1 className="feed-title">Feed</h1>
