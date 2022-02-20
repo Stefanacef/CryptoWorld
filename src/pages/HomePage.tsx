@@ -21,8 +21,7 @@ export default function HomePage() {
       .catch((err) => {
         console.error(err);
       });
-  }),
-    [URL];
+  }, [URL]);
   const topFiveCoins = data.slice(-5);
   return (
     <div className="home">
