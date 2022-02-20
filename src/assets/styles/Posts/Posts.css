@@ -1,0 +1,39 @@
+.post-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.post {
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
+    1;
+  color: wheat;
+  display: flex;
+  height: 120px;
+  margin: 20px 0;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+  width: 80%;
+}
+.post-avatar {
+  text-align: center;
+  background-color: rgb(134, 131, 127);
+  border-radius: 50%;
+  height: 30px;
+  margin-right: 10px;
+  padding-top: 2.5px;
+  width: 30px;
+}
+.post-like {
+  bottom: 10px;
+  font-size: 25px;
+  position: absolute;
+}
+.post-delete {
+  font-size: 20px;
+  right: 8px;
+  position: absolute;
+  top: 5px;
+}

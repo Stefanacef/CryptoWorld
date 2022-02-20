@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "../../assets/styles/Table/Table.css";
 interface ITable {
   id: string;

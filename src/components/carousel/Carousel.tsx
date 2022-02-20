@@ -1,5 +1,5 @@
 import "../../assets/styles/Carousel/Carousel.css";
-import React, { FC } from "react";
+import { FC } from "react";
 type Props = {
   children?: JSX.Element[];
 };

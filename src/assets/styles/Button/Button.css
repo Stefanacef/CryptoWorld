@@ -1,0 +1,10 @@
+.button {
+  background-color: transparent;
+}
+.border-send {
+  border: 1px solid #cafc01;
+  color: #cafc01;
+  height: 35px;
+  cursor: pointer;
+  width: 90px;
+}

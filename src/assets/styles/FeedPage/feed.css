@@ -1,0 +1,12 @@
+.feed {
+  background-color: #141414;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 50px 10%;
+  position: relative;
+}
+.feed-title {
+  background-color: #141414;
+  color: #cafc01;
+  font-size: 50px;
+}
