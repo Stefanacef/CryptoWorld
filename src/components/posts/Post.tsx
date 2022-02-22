@@ -16,7 +16,7 @@ function Post(props: IPostProps) {
   useEffect(() => {
     const currentDate = new Date();
     setDate(currentDate.toLocaleDateString());
-  });
+  }, [date]);
   const handelDelete = (id: number) => {
     props.setContentPost((previous) =>
       [...previous].filter((post) => post.id !== id)
