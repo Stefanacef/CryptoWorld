@@ -6,10 +6,10 @@ export interface IComment {
   id: number;
   content: string;
 }
-interface CommentList {
+interface ICommentList {
   setCommentNumber: React.Dispatch<React.SetStateAction<number>>;
 }
-function CommentList(props: CommentList) {
+function CommentList(props: ICommentList) {
   const [commentBody, setCommentBody] = useState<string>("");
   const [comments, setComments] = useState<IComment[]>([]);
 

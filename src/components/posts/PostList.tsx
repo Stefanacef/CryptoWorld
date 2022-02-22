@@ -30,8 +30,9 @@ function PostList(props: IPostList) {
             post.content
               .toLocaleLowerCase()
               .includes(searchValue.toLocaleLowerCase())
-          )
+          ) {
             return post;
+          }
         })
         .map((post) => (
           <Post
