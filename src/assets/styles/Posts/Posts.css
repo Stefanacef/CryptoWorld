@@ -31,7 +31,7 @@
     1;
   color: wheat;
   display: flex;
-  height: 120px;
+  min-height: 120px;
   margin: 20px 0;
   padding: 20px;
   position: relative;
@@ -50,6 +50,20 @@
 .post-like {
   bottom: 10px;
   font-size: 25px;
+  position: absolute;
+}
+.post-comments {
+  bottom: 10px;
+  left: 50px;
+  font-size: 25px;
+  position: absolute;
+}
+.post-comments-span {
+  z-index: 1;
+  color: wheat;
+  bottom: 22px;
+  left: 70px;
+  font-size: 15px;
   position: absolute;
 }
 .post-delete {
