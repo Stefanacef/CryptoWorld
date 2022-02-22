@@ -3,11 +3,10 @@
   border-style: solid;
   border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
     1;
-  height: 200px;
-  left: 0;
-  position: absolute;
+  min-height: 200px;
+  position: relative;
   margin-bottom: 10px;
-  top: 118px;
+
   width: 100%;
 }
 .comments-textarea {

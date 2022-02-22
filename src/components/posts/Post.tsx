@@ -31,22 +31,27 @@ function Post(props: IPostProps) {
 
   return (
     <div className="post">
-      <div className="post-avatar"> AV</div>
-      {props.content.content}
-      <EmptyHeart className="post-like" />
-      <div onClick={() => setComment((previous) => !previous)}>
-        <span className="post-comments-span">{commentNumber}</span>
-        <Comment className="post-comments" />
+      <div className="post-header">
+        <div className="post-avatar"> AV</div>
+        {props.content.content}
+        <Delete
+          onClick={() => handelDelete(props.content.id)}
+          className="post-delete"
+        />
+      </div>
+      <div className="post-interaction">
+        <EmptyHeart className="post-like" />
+        <div onClick={() => setComment((previous) => !previous)}>
+          <span className="post-comments-span">{commentNumber}</span>
+          <Comment className="post-comments" />
+        </div>
+
+        <span className="post-date">{date}</span>
+        <div className="post-edit">
+          <Button text="Edit" border="border-edit" />
+        </div>
       </div>
 
-      <Delete
-        onClick={() => handelDelete(props.content.id)}
-        className="post-delete"
-      />
-      <span className="post-date">{date}</span>
-      <div className="post-edit">
-        <Button text="Edit" border="border-edit" />
-      </div>
       {comment && <CommentList setCommentNumber={setCommentNumber} />}
     </div>
   );
