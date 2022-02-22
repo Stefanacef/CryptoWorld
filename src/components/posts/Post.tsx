@@ -4,12 +4,19 @@ import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
 } from "react-icons/ai";
+import Button from "../buttons/Button";
+import { useEffect, useState } from "react";
 interface IPostProps {
   setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
   content: IPost;
 }
 
 function Post(props: IPostProps) {
+  const [date, setDate] = useState<string>("");
+  useEffect(() => {
+    const currentDate = new Date();
+    setDate(currentDate.toLocaleDateString());
+  });
   const handelDelete = (id: number) => {
     props.setContentPost((previous) =>
       [...previous].filter((post) => post.id !== id)
@@ -25,6 +32,10 @@ function Post(props: IPostProps) {
         onClick={() => handelDelete(props.content.id)}
         className="post-delete"
       />
+      <span className="post-date">{date}</span>
+      <div className="post-edit">
+        <Button text="Edit" border="border-edit" />
+      </div>
     </div>
   );
 }

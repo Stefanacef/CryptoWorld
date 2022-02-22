@@ -8,3 +8,10 @@
   cursor: pointer;
   width: 90px;
 }
+.border-edit {
+  border: 1px solid wheat;
+  color: #8b79f086;
+  height: 35px;
+  cursor: pointer;
+  width: 90px;
+}

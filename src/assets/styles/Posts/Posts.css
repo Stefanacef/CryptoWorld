@@ -37,3 +37,15 @@
   position: absolute;
   top: 5px;
 }
+.post-edit {
+  font-size: 20px;
+  right: 8px;
+  position: absolute;
+  bottom: 5px;
+}
+.post-date {
+  font-size: 15px;
+  right: 110px;
+  position: absolute;
+  bottom: 4px;
+}
