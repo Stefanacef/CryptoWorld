@@ -2,6 +2,27 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+.post-list-container {
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: -250px;
+  left: 10px;
+}
+.post-list-search {
+  background-color: #eaa47a;
+  border: none;
+  height: 32px;
+  outline: none;
+  padding: 5px 25px;
+  width: 190px;
+}
+.post-list-search-icon {
+  color: wheat;
+  left: 5px;
+  position: absolute;
 }
 .post {
   border-width: 2px;
