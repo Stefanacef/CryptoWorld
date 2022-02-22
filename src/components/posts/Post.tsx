@@ -1,32 +1,30 @@
 import "../../assets/styles/Posts/Posts.css";
+import { IPost } from "../../pages/FeedPage";
 import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
 } from "react-icons/ai";
-
-interface IPost {
-  id: number;
-  content: string;
+interface IPostProps {
+  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
+  content: IPost;
 }
-function Post(props: { data: IPost[] }) {
-  const handelDelete = (id: string) => {
-    fetch(`http://localhost:8000/posts/${id}`, {
-      method: "DELETE",
-    });
+
+function Post(props: IPostProps) {
+  const handelDelete = (id: number) => {
+    props.setContentPost((previous) =>
+      [...previous].filter((post) => post.id !== id)
+    );
   };
+
   return (
-    <div className="post-list">
-      {props.data.map((post: IPost) => (
-        <div key={post.id} className="post">
-          <div className="post-avatar"> AV</div>
-          {post.content}
-          <EmptyHeart className="post-like" />
-          <Delete
-            onClick={() => handelDelete(post.id.toString())}
-            className="post-delete"
-          />
-        </div>
-      ))}
+    <div className="post">
+      <div className="post-avatar"> AV</div>
+      {props.content.content}
+      <EmptyHeart className="post-like" />
+      <Delete
+        onClick={() => handelDelete(props.content.id)}
+        className="post-delete"
+      />
     </div>
   );
 }
