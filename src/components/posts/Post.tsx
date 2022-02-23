@@ -23,7 +23,7 @@ function Post(props: IPostProps) {
     setDate(currentDate.toLocaleDateString());
   }, [date]);
 
-  const handelDelete = (id: number) => {
+  const handleDelete = (id: number) => {
     props.setContentPost((previous) =>
       [...previous].filter((post) => post.id !== id)
     );
@@ -35,7 +35,7 @@ function Post(props: IPostProps) {
         <div className="post-avatar"> AV</div>
         {props.content.content}
         <Delete
-          onClick={() => handelDelete(props.content.id)}
+          onClick={() => handleDelete(props.content.id)}
           className="post-delete"
         />
       </div>
