@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../assets/styles/Comments/Comments.css";
 import Comment from "./Comment";
-import Button from "../buttons/Button";
+import Textarea from "../textarea/Textarea";
 export interface IComment {
   id: number;
   content: string;
@@ -10,32 +10,12 @@ interface ICommentList {
   setCommentNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 function CommentList(props: ICommentList) {
-  const [commentBody, setCommentBody] = useState<string>("");
   const [comments, setComments] = useState<IComment[]>([]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setComments((previous) => [
-      ...previous,
-      { content: commentBody, id: Math.floor(Math.random() * 100 + 1) },
-    ]);
-    props.setCommentNumber(comments.length + 1);
-    setCommentBody("");
-  };
+  useEffect(() => props.setCommentNumber(comments.length), [comments]);
 
   return (
     <div className="comments">
-      <form onSubmit={handleSubmit}>
-        <textarea
-          className="comments-textarea"
-          placeholder="Leave a comment"
-          value={commentBody}
-          onChange={(e) => {
-            setCommentBody(e.target.value);
-          }}
-        ></textarea>
-        <Button text="Post" border="border-send" />
-      </form>
+      <Textarea setContent={setComments} placeholder="Leave a comment..." />
       <div className="comments-list">
         <Comment comments={comments} />
       </div>

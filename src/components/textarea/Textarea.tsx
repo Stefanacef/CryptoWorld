@@ -3,14 +3,16 @@ import "../../assets/styles/Textarea/Textarea.css";
 import React, { useState } from "react";
 import { IPost } from "../../pages/FeedPage";
 export interface ITextarea {
-  setContentPost?: React.Dispatch<React.SetStateAction<IPost[]>>;
+  setContent?: React.Dispatch<React.SetStateAction<IPost[]>>;
+  placeholder?: string;
 }
 function Textarea(props: ITextarea) {
   const [content, setContent] = useState<string>("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (props.setContentPost) {
-      props.setContentPost((previous) => [
+    if (props.setContent) {
+      props.setContent((previous) => [
         ...previous,
         { content: content, id: Math.floor(Math.random() * 100 + 1) },
       ]);
@@ -25,6 +27,7 @@ function Textarea(props: ITextarea) {
           className="form-textarea"
           required
           value={content}
+          placeholder={props.placeholder}
           onChange={(e) => {
             setContent(e.target.value);
           }}

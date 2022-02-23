@@ -33,7 +33,7 @@ function Post(props: IPostProps) {
     <div className="post">
       <div className="post-header">
         <div className="post-avatar"> AV</div>
-        {props.content.content}
+        <p> {props.content.content}</p>
         <Delete
           onClick={() => handleDelete(props.content.id)}
           className="post-delete"

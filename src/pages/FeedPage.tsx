@@ -12,7 +12,10 @@ function FeedPage() {
   return (
     <div className="feed">
       <h1 className="feed-title">Feed</h1>
-      <Textarea setContentPost={setContentPost} />
+      <Textarea
+        setContent={setContentPost}
+        placeholder="What's on your mind?"
+      />
       <PostList content={content} setContentPost={setContentPost} />
     </div>
   );
