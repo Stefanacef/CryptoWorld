@@ -94,3 +94,11 @@
   position: absolute;
   bottom: 4px;
 }
+.post-textarea {
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
+    1;
+  background-color: #222222;
+  color: white;
+}
