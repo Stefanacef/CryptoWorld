@@ -12,7 +12,8 @@ interface ICommentList {
 function CommentList(props: ICommentList) {
   const [comments, setComments] = useState<IComment[]>([]);
   const [textComments, setTextComments] = useState<string>("");
-  useEffect(() => props.setCommentNumber(comments.length), [comments]);
+  const { setCommentNumber } = props;
+  useEffect(() => setCommentNumber(comments.length), [comments]);
   useEffect(() => {
     textComments &&
       setComments((previous) => [

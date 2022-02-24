@@ -30,6 +30,7 @@ function PostList() {
           ) {
             return post;
           }
+          return;
         })
         .map((post) => (
           <Post key={post.id} content={post} />
