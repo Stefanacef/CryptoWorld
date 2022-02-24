@@ -1,24 +1,17 @@
 import Button from "../buttons/Button";
 import "../../assets/styles/Textarea/Textarea.css";
-import React, { useState, useContext } from "react";
-import { IPost } from "../../pages/FeedPage";
-import { PostsContent } from "../../pages/FeedPage";
+import React, { useState } from "react";
 export interface ITextarea {
-  setContent?: React.Dispatch<React.SetStateAction<IPost[]>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
 }
 function Textarea(props: ITextarea) {
-  const { setContentPost } = useContext(PostsContent);
-  const [contentTextarea, setContentTextarea] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setContentPost((previous) => [
-      ...previous,
-      { content: contentTextarea, id: Math.floor(Math.random() * 100 + 1) },
-    ]);
-
-    setContentTextarea("");
+    props.setContent(content);
+    setContent("");
   };
 
   return (
@@ -27,10 +20,10 @@ function Textarea(props: ITextarea) {
         <textarea
           className="form-textarea"
           required
-          value={contentTextarea}
+          value={content}
           placeholder={props.placeholder}
           onChange={(e) => {
-            setContentTextarea(e.target.value);
+            setContent(e.target.value);
           }}
         ></textarea>
         <div className="form-btn">
