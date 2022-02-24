@@ -1,15 +1,12 @@
 import "../../assets/styles/Posts/Posts.css";
 import Post from "./Post";
-import { IPost } from "../../pages/FeedPage";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { AiOutlineSearch as Search } from "react-icons/ai";
-interface IPostList {
-  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
-  content: IPost[];
-}
-function PostList(props: IPostList) {
-  const [searchValue, setSearchValue] = useState<string>("");
+import { PostsContent } from "../../pages/FeedPage";
 
+function PostList() {
+  const [searchValue, setSearchValue] = useState<string>("");
+  const { content } = useContext(PostsContent);
   return (
     <div className="post-list">
       <div className="post-list-container">
@@ -23,7 +20,7 @@ function PostList(props: IPostList) {
           }
         />
       </div>
-      {props.content
+      {content
         .filter((post) => {
           if (searchValue === "") return post;
           else if (
@@ -35,11 +32,7 @@ function PostList(props: IPostList) {
           }
         })
         .map((post) => (
-          <Post
-            key={post.id}
-            setContentPost={props.setContentPost}
-            content={post}
-          />
+          <Post key={post.id} content={post} />
         ))}
     </div>
   );

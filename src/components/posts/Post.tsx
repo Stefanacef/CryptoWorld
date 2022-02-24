@@ -7,13 +7,15 @@ import {
 } from "react-icons/ai";
 import Button from "../buttons/Button";
 import CommentList from "../comments/CommentList";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { PostsContent } from "../../pages/FeedPage";
 interface IPostProps {
-  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
   content: IPost;
 }
 
 function Post(props: IPostProps) {
+  const { setContentPost } = useContext(PostsContent);
+
   const [commentStatus, setCommentStatus] = useState<boolean>(false);
   const [date, setDate] = useState<string>("");
   const [commentNumber, setCommentNumber] = useState<number>(0);
@@ -22,20 +24,20 @@ function Post(props: IPostProps) {
 
   useEffect(() => {
     const currentDate = new Date();
-    setDate(currentDate.toLocaleDateString());
-  }, [date]);
-
-  const handleDelete = (id: number) => {
-    props.setContentPost((previous) =>
-      [...previous].filter((post) => post.id !== id)
-    );
-  };
+    const time = currentDate.getHours() + ":" + currentDate.getMinutes();
+    setDate(`${time} - ${currentDate.toLocaleDateString()}`);
+  }, []);
 
   const handleEdit = (id: number) => {
-    props.setContentPost((previous) =>
+    setContentPost((previous) =>
       [...previous].filter((post) =>
         post.id === id ? (post.content = editComment) : post.content
       )
+    );
+  };
+  const handleDelete = (id: number) => {
+    setContentPost((previous) =>
+      [...previous].filter((post) => post.id !== id)
     );
   };
 
