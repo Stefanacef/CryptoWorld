@@ -7,13 +7,15 @@ import {
 } from "react-icons/ai";
 import Button from "../buttons/Button";
 import CommentList from "../comments/CommentList";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { PostsContent } from "../../pages/FeedPage";
 interface IPostProps {
-  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
   content: IPost;
 }
 
-function Post(props: IPostProps) {
+function Post({ content }: IPostProps) {
+  const { setContentPost } = useContext(PostsContent);
+
   const [commentStatus, setCommentStatus] = useState<boolean>(false);
   const [date, setDate] = useState<string>("");
   const [commentNumber, setCommentNumber] = useState<number>(0);
@@ -22,20 +24,22 @@ function Post(props: IPostProps) {
 
   useEffect(() => {
     const currentDate = new Date();
-    setDate(currentDate.toLocaleDateString());
-  }, [date]);
-
-  const handleDelete = (id: number) => {
-    props.setContentPost((previous) =>
-      [...previous].filter((post) => post.id !== id)
-    );
-  };
+    const time = currentDate.getHours() + ":" + currentDate.getMinutes();
+    setDate(`${time} - ${currentDate.toLocaleDateString()}`);
+  }, [editStatus]);
 
   const handleEdit = (id: number) => {
-    props.setContentPost((previous) =>
-      [...previous].filter((post) =>
-        post.id === id ? (post.content = editComment) : post.content
+    setContentPost((previous) =>
+      [...previous].map((post) =>
+        post.id === id
+          ? { content: editComment, id: id }
+          : { content: post.content, id: post.id }
       )
+    );
+  };
+  const handleDelete = (id: number) => {
+    setContentPost((previous) =>
+      [...previous].filter((post) => post.id !== id)
     );
   };
 
@@ -44,18 +48,18 @@ function Post(props: IPostProps) {
       <div className="post-header">
         <div className="post-avatar"> AV</div>
         {!editStatus ? (
-          <p> {props.content.content}</p>
+          <p> {content.content}</p>
         ) : (
           <textarea
             className="post-textarea"
-            defaultValue={props.content.content}
+            defaultValue={content.content}
             onChange={(e) => {
               setEditComment(e.target.value);
             }}
           ></textarea>
         )}
         <Delete
-          onClick={() => handleDelete(props.content.id)}
+          onClick={() => handleDelete(content.id)}
           className="post-delete"
         />
       </div>
@@ -74,7 +78,7 @@ function Post(props: IPostProps) {
           {!editStatus ? (
             <Button text="Edit" border="border-edit" />
           ) : (
-            <div onClick={() => handleEdit(props.content.id)}>
+            <div onClick={() => handleEdit(content.id)}>
               <Button text="Save" border="border-edit" />
             </div>
           )}

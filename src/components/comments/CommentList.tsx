@@ -11,11 +11,19 @@ interface ICommentList {
 }
 function CommentList(props: ICommentList) {
   const [comments, setComments] = useState<IComment[]>([]);
-  useEffect(() => props.setCommentNumber(comments.length), [comments]);
-
+  const [textComments, setTextComments] = useState<string>("");
+  const { setCommentNumber } = props;
+  useEffect(() => setCommentNumber(comments.length), [comments]);
+  useEffect(() => {
+    textComments &&
+      setComments((previous) => [
+        ...previous,
+        { content: textComments, id: Math.floor(Math.random() * 100 + 1) },
+      ]);
+  }, [textComments]);
   return (
     <div className="comments">
-      <Textarea setContent={setComments} placeholder="Leave a comment..." />
+      <Textarea setContent={setTextComments} placeholder="Leave a comment..." />
       <div className="comments-list">
         <Comment comments={comments} />
       </div>

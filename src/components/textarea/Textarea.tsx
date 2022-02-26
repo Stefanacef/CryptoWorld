@@ -1,9 +1,8 @@
 import Button from "../buttons/Button";
 import "../../assets/styles/Textarea/Textarea.css";
 import React, { useState } from "react";
-import { IPost } from "../../pages/FeedPage";
 export interface ITextarea {
-  setContent?: React.Dispatch<React.SetStateAction<IPost[]>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
 }
 function Textarea(props: ITextarea) {
@@ -11,12 +10,7 @@ function Textarea(props: ITextarea) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (props.setContent) {
-      props.setContent((previous) => [
-        ...previous,
-        { content: content, id: Math.floor(Math.random() * 100 + 1) },
-      ]);
-    }
+    props.setContent(content);
     setContent("");
   };
 
