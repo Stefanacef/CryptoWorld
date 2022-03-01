@@ -1,12 +1,18 @@
 import '../../assets/styles/Posts/Posts.css'
 import Post from './Post'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { AiOutlineSearch as Search } from 'react-icons/ai'
-import { PostsContent } from './PostContentProvider'
+import postAtom from './State'
+import { useRecoilValue } from 'recoil'
 
-function PostList() {
+export interface IPost {
+  id: number
+  content: string
+}
+
+const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
-  const { contentPost } = useContext(PostsContent)
+  const contentPost = useRecoilValue(postAtom)
 
   return (
     <div className="post-list">

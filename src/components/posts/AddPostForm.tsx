@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
-import { PostsContent } from './PostContentProvider'
+import { useEffect, useState } from 'react'
 import Textarea from '../textarea/Textarea'
+import { useSetRecoilState } from 'recoil'
+import postAtom from './State'
 
-export default function AddPostForm() {
-  const { setContentPost } = useContext(PostsContent)
+const AddPostForm = () => {
   const [textContent, setTextContent] = useState<string>('')
+  const setContentPost = useSetRecoilState(postAtom)
 
   useEffect(() => {
     textContent &&
@@ -18,3 +19,5 @@ export default function AddPostForm() {
     <Textarea setContent={setTextContent} placeholder="What's on your mind?" />
   )
 }
+
+export default AddPostForm

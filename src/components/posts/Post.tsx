@@ -1,5 +1,5 @@
 import '../../assets/styles/Posts/Posts.css'
-import { IPost } from '../../pages/FeedPage'
+import { IPost } from './PostList'
 import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
@@ -7,15 +7,16 @@ import {
 } from 'react-icons/ai'
 import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
-import { useEffect, useState, useContext } from 'react'
-import { PostsContent } from './PostContentProvider'
+import { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import postAtom from './State'
 
 interface IPostProps {
   content: IPost
 }
 
-function Post({ content }: IPostProps) {
-  const { setContentPost } = useContext(PostsContent)
+const Post = ({ content }: IPostProps) => {
+  const setContentPost = useSetRecoilState(postAtom)
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
   const [date, setDate] = useState<string>('')
