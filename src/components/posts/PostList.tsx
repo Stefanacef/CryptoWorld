@@ -2,10 +2,11 @@ import '../../assets/styles/Posts/Posts.css'
 import Post from './Post'
 import { useState, useContext } from 'react'
 import { AiOutlineSearch as Search } from 'react-icons/ai'
-import { PostsContent } from '../../pages/FeedPage'
+import { PostsContent } from './PostContentProvider'
+
 function PostList() {
   const [searchValue, setSearchValue] = useState<string>('')
-  const { content } = useContext(PostsContent)
+  const { contentPost } = useContext(PostsContent)
 
   return (
     <div className="post-list">
@@ -20,17 +21,18 @@ function PostList() {
           }
         />
       </div>
-      {content
+      {contentPost
         .filter(post => {
-          if (searchValue === '') return post
-          else if (
+          const display = false
+          if (
+            searchValue === '' ||
             post.content
               .toLocaleLowerCase()
               .includes(searchValue.toLocaleLowerCase())
           ) {
             return post
           }
-          return
+          return display
         })
         .map(post => (
           <Post key={post.id} content={post} />

@@ -6,9 +6,10 @@ import {
   AiFillMessage as Comment,
 } from 'react-icons/ai'
 import Button from '../buttons/Button'
-import CommentList from '../comments/CommentList'
+import CommentList from './comments/CommentList'
 import { useEffect, useState, useContext } from 'react'
-import { PostsContent } from '../../pages/FeedPage'
+import { PostsContent } from './PostContentProvider'
+
 interface IPostProps {
   content: IPost
 }
