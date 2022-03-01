@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
-import "../../assets/styles/Comments/Comments.css";
-import Comment from "./Comment";
-import Textarea from "../textarea/Textarea";
+import { useEffect, useState } from 'react'
+import '../../assets/styles/Comments/Comments.css'
+import Comment from './Comment'
+import Textarea from '../textarea/Textarea'
 export interface IComment {
-  id: number;
-  content: string;
+  id: number
+  content: string
 }
 interface ICommentList {
-  setCommentNumber: React.Dispatch<React.SetStateAction<number>>;
+  setCommentNumber: React.Dispatch<React.SetStateAction<number>>
 }
 function CommentList(props: ICommentList) {
-  const [comments, setComments] = useState<IComment[]>([]);
-  const [textComments, setTextComments] = useState<string>("");
-  const { setCommentNumber } = props;
-  useEffect(() => setCommentNumber(comments.length), [comments]);
+  const [comments, setComments] = useState<IComment[]>([])
+  const [textComments, setTextComments] = useState<string>('')
+  const { setCommentNumber } = props
+
+  useEffect(() => setCommentNumber(comments.length), [comments])
   useEffect(() => {
     textComments &&
-      setComments((previous) => [
+      setComments(previous => [
         ...previous,
         { content: textComments, id: Math.floor(Math.random() * 100 + 1) },
-      ]);
-  }, [textComments]);
+      ])
+  }, [textComments])
+
   return (
     <div className="comments">
       <Textarea setContent={setTextComments} placeholder="Leave a comment..." />
@@ -28,7 +30,7 @@ function CommentList(props: ICommentList) {
         <Comment comments={comments} />
       </div>
     </div>
-  );
+  )
 }
 
-export default CommentList;
+export default CommentList

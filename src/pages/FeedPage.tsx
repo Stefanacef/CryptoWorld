@@ -1,32 +1,32 @@
-import "../assets/styles/FeedPage/feed.css";
-import PostList from "../components/posts/PostList";
-import Textarea from "../components/textarea/Textarea";
-import { useState, createContext, useEffect } from "react";
+import '../assets/styles/FeedPage/feed.css'
+import PostList from '../components/posts/PostList'
+import Textarea from '../components/textarea/Textarea'
+import { useState, createContext, useEffect } from 'react'
 
 export interface IPost {
-  id: number;
-  content: string;
+  id: number
+  content: string
 }
 export interface IPostsContent {
-  content: IPost[];
-  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>;
+  content: IPost[]
+  setContentPost: React.Dispatch<React.SetStateAction<IPost[]>>
 }
 export const PostsContent = createContext<IPostsContent>({
   content: [],
   setContentPost: () => {},
-});
+})
 
 function FeedPage() {
-  const [content, setContentPost] = useState<IPost[]>([]);
-  const [textContent, setTextContent] = useState<string>("");
+  const [content, setContentPost] = useState<IPost[]>([])
+  const [textContent, setTextContent] = useState<string>('')
 
   useEffect(() => {
     textContent &&
-      setContentPost((previous) => [
+      setContentPost(previous => [
         ...previous,
         { content: textContent, id: Math.floor(Math.random() * 100 + 1) },
-      ]);
-  }, [textContent]);
+      ])
+  }, [textContent])
 
   return (
     <div className="feed">
@@ -41,7 +41,7 @@ function FeedPage() {
         </PostsContent.Provider>
       </div>
     </div>
-  );
+  )
 }
 
-export default FeedPage;
+export default FeedPage

@@ -1,47 +1,45 @@
-import "../../assets/styles/Posts/Posts.css";
-import { IPost } from "../../pages/FeedPage";
+import '../../assets/styles/Posts/Posts.css'
+import { IPost } from '../../pages/FeedPage'
 import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
   AiFillMessage as Comment,
-} from "react-icons/ai";
-import Button from "../buttons/Button";
-import CommentList from "../comments/CommentList";
-import { useEffect, useState, useContext } from "react";
-import { PostsContent } from "../../pages/FeedPage";
+} from 'react-icons/ai'
+import Button from '../buttons/Button'
+import CommentList from '../comments/CommentList'
+import { useEffect, useState, useContext } from 'react'
+import { PostsContent } from '../../pages/FeedPage'
 interface IPostProps {
-  content: IPost;
+  content: IPost
 }
 
 function Post({ content }: IPostProps) {
-  const { setContentPost } = useContext(PostsContent);
+  const { setContentPost } = useContext(PostsContent)
 
-  const [commentStatus, setCommentStatus] = useState<boolean>(false);
-  const [date, setDate] = useState<string>("");
-  const [commentNumber, setCommentNumber] = useState<number>(0);
-  const [editStatus, setEditStatus] = useState<boolean>(false);
-  const [editComment, setEditComment] = useState<string>("");
+  const [commentStatus, setCommentStatus] = useState<boolean>(false)
+  const [date, setDate] = useState<string>('')
+  const [commentNumber, setCommentNumber] = useState<number>(0)
+  const [editStatus, setEditStatus] = useState<boolean>(false)
+  const [editComment, setEditComment] = useState<string>('')
 
   useEffect(() => {
-    const currentDate = new Date();
-    const time = currentDate.getHours() + ":" + currentDate.getMinutes();
-    setDate(`${time} - ${currentDate.toLocaleDateString()}`);
-  }, [editStatus]);
+    const currentDate = new Date()
+    const time = currentDate.getHours() + ':' + currentDate.getMinutes()
+    setDate(`${time} - ${currentDate.toLocaleDateString()}`)
+  }, [editStatus])
 
   const handleEdit = (id: number) => {
-    setContentPost((previous) =>
-      [...previous].map((post) =>
+    setContentPost(previous =>
+      [...previous].map(post =>
         post.id === id
           ? { content: editComment, id: id }
           : { content: post.content, id: post.id }
       )
-    );
-  };
+    )
+  }
   const handleDelete = (id: number) => {
-    setContentPost((previous) =>
-      [...previous].filter((post) => post.id !== id)
-    );
-  };
+    setContentPost(previous => [...previous].filter(post => post.id !== id))
+  }
 
   return (
     <div className="post">
@@ -53,8 +51,8 @@ function Post({ content }: IPostProps) {
           <textarea
             className="post-textarea"
             defaultValue={content.content}
-            onChange={(e) => {
-              setEditComment(e.target.value);
+            onChange={e => {
+              setEditComment(e.target.value)
             }}
           ></textarea>
         )}
@@ -65,7 +63,7 @@ function Post({ content }: IPostProps) {
       </div>
       <div className="post-interaction">
         <EmptyHeart className="post-like" />
-        <div onClick={() => setCommentStatus((previous) => !previous)}>
+        <div onClick={() => setCommentStatus(previous => !previous)}>
           <span className="post-comments-span">{commentNumber}</span>
           <Comment className="post-comments" />
         </div>
@@ -73,7 +71,7 @@ function Post({ content }: IPostProps) {
         <span className="post-date">{date}</span>
         <div
           className="post-edit"
-          onClick={() => setEditStatus((previous) => !previous)}
+          onClick={() => setEditStatus(previous => !previous)}
         >
           {!editStatus ? (
             <Button text="Edit" border="border-edit" />
@@ -86,7 +84,7 @@ function Post({ content }: IPostProps) {
       </div>
       {commentStatus && <CommentList setCommentNumber={setCommentNumber} />}
     </div>
-  );
+  )
 }
 
-export default Post;
+export default Post

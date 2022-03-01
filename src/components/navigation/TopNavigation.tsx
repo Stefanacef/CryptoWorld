@@ -1,7 +1,8 @@
-import "../../assets/styles/Navigation/Navigation.css";
+import '../../assets/styles/Navigation/Navigation.css'
 
 function TopNavigation() {
-  const links: string[] = ["Coins", "Research", "Exchanges", "Feed"];
+  const links: string[] = ['Coins', 'Research', 'Exchanges', 'Feed']
+
   return (
     <nav className="navigation-top">
       <h3>LOGO</h3>
@@ -12,11 +13,11 @@ function TopNavigation() {
           </a>
         ))}
         <button type="submit" className="navigation-button">
-          Sign up{" "}
+          Sign up{' '}
         </button>
       </div>
     </nav>
-  );
+  )
 }
 
-export default TopNavigation;
+export default TopNavigation
