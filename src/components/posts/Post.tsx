@@ -84,7 +84,12 @@ const Post = ({ content }: IPostProps) => {
           )}
         </div>
       </div>
-      {commentStatus && <CommentList setCommentNumber={setCommentNumber} />}
+      {commentStatus && (
+        <CommentList
+          parentId={content.id}
+          setCommentNumber={setCommentNumber}
+        />
+      )}
     </div>
   )
 }

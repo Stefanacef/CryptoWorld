@@ -1,4 +1,5 @@
-import { atom } from 'recoil'
+import { atom, atomFamily } from 'recoil'
+import { IComment } from './comments/CommentList'
 import { IPost } from './PostList'
 
 const postAtom = atom<IPost[]>({
@@ -7,3 +8,8 @@ const postAtom = atom<IPost[]>({
 })
 
 export default postAtom
+
+export const commentAtom = atomFamily<IComment[], number>({
+  key: 'comment',
+  default: [],
+})
