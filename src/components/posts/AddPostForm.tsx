@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Textarea from '../textarea/Textarea'
 import { useSetRecoilState } from 'recoil'
-import postAtom from './State'
+import postAtom from './state'
 
 const AddPostForm = () => {
   const [textContent, setTextContent] = useState<string>('')

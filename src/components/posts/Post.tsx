@@ -1,5 +1,5 @@
 import '../../assets/styles/Posts/Posts.css'
-import { IPost } from './PostList'
+import { IPost } from './types'
 import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
@@ -9,7 +9,7 @@ import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import postAtom from './State'
+import postAtom from './state'
 
 interface IPostProps {
   content: IPost
@@ -33,7 +33,7 @@ const Post = ({ content }: IPostProps) => {
 
   const handleEdit = (id: number) => {
     setContentPost(previous =>
-      [...previous].map(post =>
+      previous.map(post =>
         post.id === id
           ? { content: editComment, id: id }
           : { content: post.content, id: post.id }
@@ -42,7 +42,7 @@ const Post = ({ content }: IPostProps) => {
     setDateUpdate(previous => !previous)
   }
   const handleDelete = (id: number) => {
-    setContentPost(previous => [...previous].filter(post => post.id !== id))
+    setContentPost(previous => previous.filter(post => post.id !== id))
   }
 
   return (

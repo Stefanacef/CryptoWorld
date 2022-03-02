@@ -3,22 +3,15 @@ import '../../../assets/styles/Comments/Comments.css'
 import Comment from './Comment'
 import Textarea from '../../textarea/Textarea'
 import { useRecoilState } from 'recoil'
-import { commentAtom } from '../State'
-
-export interface IComment {
-  id: number
-  content: string
-}
+import { commentsAtom } from '../state'
 
 interface ICommentList {
   setCommentNumber: React.Dispatch<React.SetStateAction<number>>
   parentId: number
 }
 
-function CommentList(props: ICommentList) {
-  const [comments, setContentComment] = useRecoilState(
-    commentAtom(props.parentId)
-  )
+const CommentList = (props: ICommentList) => {
+  const [comments, setComments] = useRecoilState(commentsAtom(props.parentId))
   const [textComments, setTextComments] = useState<string>('')
   const { setCommentNumber } = props
 
@@ -28,11 +21,11 @@ function CommentList(props: ICommentList) {
   )
   useEffect(() => {
     textComments &&
-      setContentComment(previous => [
+      setComments(previous => [
         ...previous,
         { content: textComments, id: Math.floor(Math.random() * 100 + 1) },
       ])
-  }, [textComments, setContentComment])
+  }, [textComments, setComments])
 
   return (
     <div className="comments">
