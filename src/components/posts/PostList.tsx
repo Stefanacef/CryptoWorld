@@ -9,17 +9,13 @@ const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const contentPost = useRecoilValue(postAtom)
 
-  const filterPost = useMemo(() => {
+  const filterPosts = useMemo(() => {
     return contentPost.filter(post => {
-      const display = false
-      if (
+      const display =
         searchValue === '' ||
         post.content
           .toLocaleLowerCase()
           .includes(searchValue.toLocaleLowerCase())
-      ) {
-        return !display
-      }
       return display
     })
   }, [searchValue, contentPost])
@@ -37,7 +33,7 @@ const PostList = () => {
           }
         />
       </div>
-      {filterPost.map(post => (
+      {filterPosts.map(post => (
         <Post key={post.id} content={post} />
       ))}
     </div>
