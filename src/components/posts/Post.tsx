@@ -20,15 +20,16 @@ const Post = ({ content }: IPostProps) => {
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
   const [date, setDate] = useState<string>('')
+  const [dateUpdate, setDateUpdate] = useState<boolean>(false)
   const [commentNumber, setCommentNumber] = useState<number>(0)
-  const [editStatus, setEditStatus] = useState<boolean>(false)
   const [editComment, setEditComment] = useState<string>('')
+  const [editStatus, setEditStatus] = useState<boolean>(false)
 
   useEffect(() => {
     const currentDate = new Date()
     const time = currentDate.getHours() + ':' + currentDate.getMinutes()
     setDate(`${time} - ${currentDate.toLocaleDateString()}`)
-  }, [editStatus])
+  }, [dateUpdate])
 
   const handleEdit = (id: number) => {
     setContentPost(previous =>
@@ -38,6 +39,7 @@ const Post = ({ content }: IPostProps) => {
           : { content: post.content, id: post.id }
       )
     )
+    setDateUpdate(previous => !previous)
   }
   const handleDelete = (id: number) => {
     setContentPost(previous => [...previous].filter(post => post.id !== id))
