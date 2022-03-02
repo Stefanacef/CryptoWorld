@@ -1,13 +1,28 @@
 import '../../assets/styles/Posts/Posts.css'
 import Post from './Post'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AiOutlineSearch as Search } from 'react-icons/ai'
-import postAtom from './state'
+import { postAtom } from './state'
 import { useRecoilValue } from 'recoil'
 
 const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const contentPost = useRecoilValue(postAtom)
+
+  const filterPost = useMemo(() => {
+    return contentPost.filter(post => {
+      const display = false
+      if (
+        searchValue === '' ||
+        post.content
+          .toLocaleLowerCase()
+          .includes(searchValue.toLocaleLowerCase())
+      ) {
+        return !display
+      }
+      return display
+    })
+  }, [searchValue, contentPost])
 
   return (
     <div className="post-list">
@@ -22,22 +37,9 @@ const PostList = () => {
           }
         />
       </div>
-      {contentPost
-        .filter(post => {
-          const display = false
-          if (
-            searchValue === '' ||
-            post.content
-              .toLocaleLowerCase()
-              .includes(searchValue.toLocaleLowerCase())
-          ) {
-            return post
-          }
-          return display
-        })
-        .map(post => (
-          <Post key={post.id} content={post} />
-        ))}
+      {filterPost.map(post => (
+        <Post key={post.id} content={post} />
+      ))}
     </div>
   )
 }

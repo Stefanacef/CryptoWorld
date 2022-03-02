@@ -9,7 +9,7 @@ import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import postAtom from './state'
+import { postAtom } from './state'
 
 interface IPostProps {
   content: IPost

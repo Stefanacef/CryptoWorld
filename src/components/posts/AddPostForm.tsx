@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import Textarea from '../textarea/Textarea'
 import { useSetRecoilState } from 'recoil'
-import postAtom from './state'
+import { postAtom } from './state'
 
 const AddPostForm = () => {
   const setContentPost = useSetRecoilState(postAtom)
