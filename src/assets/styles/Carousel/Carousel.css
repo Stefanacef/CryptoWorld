@@ -2,5 +2,18 @@
   display: flex;
   margin-top: 100px;
   width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.carousel-title {
+  color: wheat;
+  margin-bottom: 20px;
+}
+.carousel-content {
+  display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+.carousel-button {
+  margin-top: 20px;
 }
