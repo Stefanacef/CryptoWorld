@@ -4,10 +4,12 @@ import { useMemo, useState } from 'react'
 import { AiOutlineSearch as Search } from 'react-icons/ai'
 import { postAtom } from './state'
 import { useRecoilValue } from 'recoil'
+import { useIntl } from 'react-intl'
 
 const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const contentPost = useRecoilValue(postAtom)
+  const intl = useIntl()
 
   const filterPosts = useMemo(() => {
     return contentPost.filter(post => {
@@ -27,7 +29,7 @@ const PostList = () => {
         <input
           className="post-list-search"
           type="text"
-          placeholder=" Search..."
+          placeholder={intl.formatMessage({ id: 'feed.search.placeholder' })}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearchValue(e.target.value)
           }
