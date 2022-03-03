@@ -1,10 +1,9 @@
-import TopNavigation from '../components/navigation/TopNavigation'
-import MainStatsBar from '../components/navigation/MainStatsBar'
 import Carousel from '../components/carousel/Carousel'
 import Card from '../components/cards/Card'
 import Table from '../components/tables/Table'
 import '../assets/styles/HomePage/HomePage.css'
 import { useEffect, useState } from 'react'
+
 interface ICryptoCoin {
   id: string
   name: string
@@ -27,8 +26,6 @@ export default function HomePage() {
 
   return (
     <div className="home">
-      <MainStatsBar />
-      <TopNavigation />
       <Carousel>
         {topFiveCoins.map((crypto: ICryptoCoin) => (
           <Card
