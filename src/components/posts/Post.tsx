@@ -7,44 +7,52 @@ import {
 } from 'react-icons/ai'
 import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { postAtom } from './state'
-import { useIntl } from 'react-intl'
+import { postsAtom } from './state'
+import { FormattedDate, useIntl } from 'react-intl'
 
 interface IPostProps {
-  content: IPost
+  post: IPost
 }
 
-const Post = ({ content }: IPostProps) => {
-  const setContentPost = useSetRecoilState(postAtom)
+const Post = ({ post }: IPostProps) => {
+  const setPost = useSetRecoilState(postsAtom)
   const intl = useIntl()
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
-  const [date, setDate] = useState<string>('')
-  const [dateUpdate, setDateUpdate] = useState<boolean>(false)
   const [commentNumber, setCommentNumber] = useState<number>(0)
   const [editComment, setEditComment] = useState<string>('')
   const [editStatus, setEditStatus] = useState<boolean>(false)
 
-  useEffect(() => {
-    const currentDate = new Date()
-    const time = currentDate.getHours() + ':' + currentDate.getMinutes()
-    setDate(`${time} - ${currentDate.toLocaleDateString()}`)
-  }, [dateUpdate])
-
   const handleEdit = (id: number) => {
-    setContentPost(previous =>
+    setPost(previous =>
       previous.map(post =>
         post.id === id
-          ? { content: editComment, id: id }
-          : { content: post.content, id: post.id }
+          ? {
+              content: editComment,
+              id: id,
+              lastEditAt: (
+                <FormattedDate
+                  value={new Date()}
+                  hour="numeric"
+                  minute="numeric"
+                  year="numeric"
+                  month="long"
+                  day="numeric"
+                />
+              ),
+            }
+          : {
+              content: post.content,
+              id: post.id,
+              lastEditAt: post.lastEditAt,
+            }
       )
     )
-    setDateUpdate(previous => !previous)
   }
   const handleDelete = (id: number) => {
-    setContentPost(previous => previous.filter(post => post.id !== id))
+    setPost(previous => previous.filter(post => post.id !== id))
   }
 
   return (
@@ -52,20 +60,17 @@ const Post = ({ content }: IPostProps) => {
       <div className="post-header">
         <div className="post-avatar"> AV</div>
         {!editStatus ? (
-          <p> {content.content}</p>
+          <p> {post.content}</p>
         ) : (
           <textarea
             className="post-textarea"
-            defaultValue={content.content}
+            defaultValue={post.content}
             onChange={e => {
               setEditComment(e.target.value)
             }}
           ></textarea>
         )}
-        <Delete
-          onClick={() => handleDelete(content.id)}
-          className="post-delete"
-        />
+        <Delete onClick={() => handleDelete(post.id)} className="post-delete" />
       </div>
       <div className="post-interaction">
         <EmptyHeart className="post-like" />
@@ -74,7 +79,7 @@ const Post = ({ content }: IPostProps) => {
           <Comment className="post-comments" />
         </div>
 
-        <span className="post-date">{date}</span>
+        <span className="post-date">{post.lastEditAt}</span>
         <div
           className="post-edit"
           onClick={() => setEditStatus(previous => !previous)}
@@ -85,7 +90,7 @@ const Post = ({ content }: IPostProps) => {
               border="border-edit"
             />
           ) : (
-            <div onClick={() => handleEdit(content.id)}>
+            <div onClick={() => handleEdit(post.id)}>
               <Button
                 text={intl.formatMessage({ id: 'button.save' })}
                 border="border-edit"
@@ -95,10 +100,7 @@ const Post = ({ content }: IPostProps) => {
         </div>
       </div>
       {commentStatus && (
-        <CommentList
-          parentId={content.id}
-          setCommentNumber={setCommentNumber}
-        />
+        <CommentList parentId={post.id} setCommentNumber={setCommentNumber} />
       )}
     </div>
   )
