@@ -15,5 +15,10 @@
   "button.why": "Why?",
   "research.page.title": "Research",
   "signup.page.title": "Sign up Page",
-  "exchanges.page.title": "Exchanges"
+  "exchanges.page.title": "Exchanges",
+  "table.header.cell.name": "NAME",
+  "table.header.cell.price": "PRICE",
+  "table.header.cell.market.cap": "MARKET CAP",
+  "table.header.cell.volume": "VOLUME 24H",
+  "table.header.cell.low": "LOW 24H "
 }

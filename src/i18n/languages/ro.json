@@ -15,5 +15,10 @@
   "button.why": "De ce?",
   "research.page.title": "Documentatie",
   "signup.page.title": "Inregistreaza-te",
-  "exchanges.page.title": "Schimb valutar"
+  "exchanges.page.title": "Schimb valutar",
+  "table.header.cell.name": "NUME",
+  "table.header.cell.price": "PRET",
+  "table.header.cell.market.cap": "CAPITALUL PIETEI",
+  "table.header.cell.volume": "VOLUM 24H",
+  "table.header.cell.low": "CEL MAI MIC PRET 24H "
 }
