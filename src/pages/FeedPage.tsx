@@ -7,7 +7,7 @@ const FeedPage = () => {
   return (
     <div className="feed">
       <h1 className="feed-title">
-        <FormattedMessage id="feed.title" defaultMessage="Feed" />
+        <FormattedMessage id="feed.page.title" defaultMessage="Feed" />
       </h1>
       <div className="feed-content-container">
         <AddPostForm />

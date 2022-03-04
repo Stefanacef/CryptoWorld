@@ -10,6 +10,7 @@ import CommentList from './comments/CommentList'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { postAtom } from './state'
+import { useIntl } from 'react-intl'
 
 interface IPostProps {
   content: IPost
@@ -17,6 +18,7 @@ interface IPostProps {
 
 const Post = ({ content }: IPostProps) => {
   const setContentPost = useSetRecoilState(postAtom)
+  const intl = useIntl()
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
   const [date, setDate] = useState<string>('')
@@ -78,10 +80,16 @@ const Post = ({ content }: IPostProps) => {
           onClick={() => setEditStatus(previous => !previous)}
         >
           {!editStatus ? (
-            <Button text="Edit" border="border-edit" />
+            <Button
+              text={intl.formatMessage({ id: 'button.edit' })}
+              border="border-edit"
+            />
           ) : (
             <div onClick={() => handleEdit(content.id)}>
-              <Button text="Save" border="border-edit" />
+              <Button
+                text={intl.formatMessage({ id: 'button.save' })}
+                border="border-edit"
+              />
             </div>
           )}
         </div>

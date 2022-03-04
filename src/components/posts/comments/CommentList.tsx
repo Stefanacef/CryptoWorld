@@ -4,6 +4,7 @@ import Comment from './Comment'
 import Textarea from '../../textarea/Textarea'
 import { useRecoilState } from 'recoil'
 import { commentsAtom } from '../state'
+import { useIntl } from 'react-intl'
 
 interface ICommentList {
   setCommentNumber: React.Dispatch<React.SetStateAction<number>>
@@ -14,6 +15,7 @@ const CommentList = (props: ICommentList) => {
   const [comments, setComments] = useRecoilState(commentsAtom(props.parentId))
   const [textComments, setTextComments] = useState<string>('')
   const { setCommentNumber } = props
+  const intl = useIntl()
 
   useEffect(
     () => setCommentNumber(comments.length),
@@ -29,7 +31,10 @@ const CommentList = (props: ICommentList) => {
 
   return (
     <div className="comments">
-      <Textarea setContent={setTextComments} placeholder="Leave a comment..." />
+      <Textarea
+        setContent={setTextComments}
+        placeholder={intl.formatMessage({ id: 'comment.textarea.placeholder' })}
+      />
       <div className="comments-list">
         <Comment comments={comments} />
       </div>

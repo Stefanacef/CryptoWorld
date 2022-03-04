@@ -1,11 +1,39 @@
 import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
+import LanguageSelector from './LanguageSelector'
 
 const NavigationLinks = () => {
   const links = [
-    { name: 'Coins', path: '/' },
-    { name: 'Research', path: '/research' },
-    { name: 'Exchanges', path: '/exchanges' },
-    { name: 'Feed', path: '/feed' },
+    {
+      name: (
+        <FormattedMessage id="navigation.link.coins" defaultMessage="Coins" />
+      ),
+      path: '/',
+    },
+    {
+      name: (
+        <FormattedMessage
+          id="navigation.link.research"
+          defaultMessage="Research"
+        />
+      ),
+      path: '/research',
+    },
+    {
+      name: (
+        <FormattedMessage
+          id="navigation.link.exchanges"
+          defaultMessage="Exchanges"
+        />
+      ),
+      path: '/exchanges',
+    },
+    {
+      name: (
+        <FormattedMessage id="navigation.link.feed" defaultMessage="Feed" />
+      ),
+      path: '/feed',
+    },
   ]
 
   return (
@@ -17,9 +45,13 @@ const NavigationLinks = () => {
       ))}
       <Link to="/signup">
         <button type="submit" className="navigation-button">
-          Sign up
+          <FormattedMessage
+            id="navigation.link.signup"
+            defaultMessage="Sign up"
+          />
         </button>
       </Link>
+      <LanguageSelector />
     </div>
   )
 }

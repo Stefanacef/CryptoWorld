@@ -1,17 +1,14 @@
 import { FC } from 'react'
-import { IntlProvider, MessageFormatElement } from 'react-intl'
-import en from './languages/en.json'
-import ro from './languages/ro.json'
-
-interface IntlConfig {
-  locale: string
-  messages: Record<string, string> | Record<string, MessageFormatElement[]>
-}
+import { IntlProvider } from 'react-intl'
+import { useRecoilValue } from 'recoil'
+import { languageAtom, languageSelector } from './state'
 
 const TranslationProvider: FC = ({ children }) => {
-  const local = navigator.language
+  const language = useRecoilValue(languageAtom)
+  const messages = useRecoilValue(languageSelector)
+
   return (
-    <IntlProvider locale={local} messages={ro}>
+    <IntlProvider locale={language} messages={messages}>
       {children}
     </IntlProvider>
   )

@@ -1,6 +1,19 @@
 {
-  "feed.title": "Feed",
+  "navigation.link.coins": "Monede",
+  "navigation.link.research": "Documentatie",
+  "navigation.link.exchanges": "Schimb valutar",
+  "navigation.link.feed": "Feed",
+  "navigation.link.signup": "Inregistreaza-te",
+  "carousel.title": "Monedele noastre favorite",
+  "feed.page.title": "Feed",
   "feed.search.placeholder": "Cauta...",
   "feed.textarea.placeholder": "La ce te gandesti?",
-  "feed.button.text": "Posteaza"
+  "comment.textarea.placeholder": "Lasa un comentariu...",
+  "button.post": "Postati",
+  "button.save": "Salvati",
+  "button.edit": "Editati",
+  "button.why": "De ce?",
+  "research.page.title": "Documentatie",
+  "signup.page.title": "Inregistreaza-te",
+  "exchanges.page.title": "Schimb valutar"
 }

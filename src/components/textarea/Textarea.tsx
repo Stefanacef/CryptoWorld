@@ -33,7 +33,7 @@ function Textarea(props: ITextarea) {
         <div className="form-btn">
           {' '}
           <Button
-            text={intl.formatMessage({ id: 'feed.button.text' })}
+            text={intl.formatMessage({ id: 'button.post' })}
             border="border-send"
           />
         </div>

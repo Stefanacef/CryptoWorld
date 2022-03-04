@@ -1,6 +1,19 @@
 {
-  "feed.title": "Feed",
+  "navigation.link.coins": "Coins",
+  "navigation.link.research": "Research",
+  "navigation.link.exchanges": "Exchanges",
+  "navigation.link.feed": "Feed",
+  "navigation.link.signup": "Sign up",
+  "carousel.title": "Our favorite coins",
+  "feed.page.title": "Feed",
   "feed.search.placeholder": "Search...",
   "feed.textarea.placeholder": "What's on your mind?",
-  "feed.button.text": "Post"
+  "comment.textarea.placeholder": "Leave a comment...",
+  "button.post": "Post",
+  "button.save": "Save",
+  "button.edit": "Edit",
+  "button.why": "Why?",
+  "research.page.title": "Research",
+  "signup.page.title": "Sign up Page",
+  "exchanges.page.title": "Exchanges"
 }
