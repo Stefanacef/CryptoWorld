@@ -10,7 +10,7 @@ import CommentList from './comments/CommentList'
 import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { postsAtom } from './state'
-import { FormattedDate, useIntl } from 'react-intl'
+import { FormattedDate, FormattedTime, useIntl } from 'react-intl'
 
 interface IPostProps {
   post: IPost
@@ -32,16 +32,7 @@ const Post = ({ post }: IPostProps) => {
           ? {
               content: editComment,
               id: id,
-              lastEditAt: (
-                <FormattedDate
-                  value={new Date()}
-                  hour="numeric"
-                  minute="numeric"
-                  year="numeric"
-                  month="long"
-                  day="numeric"
-                />
-              ),
+              lastEditAt: new Date(),
             }
           : {
               content: post.content,
@@ -79,7 +70,12 @@ const Post = ({ post }: IPostProps) => {
           <Comment className="post-comments" />
         </div>
 
-        <span className="post-date">{post.lastEditAt}</span>
+        <span className="post-date">
+          <span className="post-time">
+            <FormattedTime value={post.lastEditAt} />
+          </span>
+          <FormattedDate value={post.lastEditAt} />
+        </span>
         <div
           className="post-edit"
           onClick={() => setEditStatus(previous => !previous)}

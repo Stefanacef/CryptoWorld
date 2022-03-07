@@ -1,7 +1,7 @@
 export interface IPost {
   id: number
   content: string
-  lastEditAt: {}
+  lastEditAt: Date
 }
 export interface IComment {
   id: number

@@ -13,9 +13,9 @@ import TopNavigation from './components/navigation/TopNavigation'
 function App() {
   return (
     <div className="App">
-      <Router>
-        <RecoilRoot>
-          <TranslationProvider>
+      <RecoilRoot>
+        <TranslationProvider>
+          <Router>
             <MainStatsBar />
             <TopNavigation />
             <Routes>
@@ -25,9 +25,9 @@ function App() {
               <Route path="/exchanges" element={<Exchanges />} />
               <Route path="/signup" element={<SignUpPage />} />
             </Routes>
-          </TranslationProvider>
-        </RecoilRoot>
-      </Router>
+          </Router>
+        </TranslationProvider>
+      </RecoilRoot>
     </div>
   )
 }

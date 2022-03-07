@@ -15,16 +15,7 @@ const AddPostForm = () => {
         {
           content: textContent,
           id: Math.floor(Math.random() * 100 + 1),
-          lastEditAt: (
-            <FormattedDate
-              value={new Date()}
-              hour="numeric"
-              minute="numeric"
-              year="numeric"
-              month="long"
-              day="numeric"
-            />
-          ),
+          lastEditAt: new Date(),
         },
       ])
     },
