@@ -4,7 +4,6 @@ interface ITable {
   id: string
   name: string
   image: string
-  symbol: string
   price: string
   current_price: string
   market_cap: string
@@ -27,14 +26,14 @@ function Table(props: { data: any }) {
         {props.data.map((crypto: ITable) => (
           <tr className="table-body-row" key={crypto.id} id={crypto.id}>
             <td className="table-body-name">
-              <Link to={`/coins/${crypto.id}`}>
+              <Link to={`/coins/${crypto.id}`} className="table-link">
                 {' '}
                 <img
                   className="table-body-symbol"
                   src={crypto.image}
                   alt="crypto symbol"
                 />
-                {crypto.name} {crypto.symbol}
+                {crypto.name}
               </Link>
             </td>
             <td>{crypto.current_price}</td>

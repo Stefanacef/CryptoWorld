@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 interface ICoin {
-  id?: string
-  image?: string
-  last_updated?: string
+  id: string
+  last_updated: string
+  name: string
+  image: { small: string }
 }
+
 const Coin = () => {
-  const [coin, setCoin] = useState<ICoin>({})
+  const [coin, setCoin] = useState<ICoin>()
   const { id } = useParams()
   const URL: string = `https://api.coingecko.com/api/v3/coins/${id}`
 
@@ -22,8 +24,8 @@ const Coin = () => {
 
   return (
     <div>
-      {coin.id}
-      {coin.last_updated}
+      <img src={coin?.image.small} alt="coin" />
+      {coin?.name}
     </div>
   )
 }

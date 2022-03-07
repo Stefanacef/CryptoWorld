@@ -14,12 +14,13 @@ import {
 import MainStatsBar from './components/navigation/MainStatsBar'
 import TopNavigation from './components/navigation/TopNavigation'
 import CoinDetails from './pages/CoinDetailsPage'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <RecoilRoot>
+      <RecoilRoot>
+        <Router>
           <MainStatsBar />
           <TopNavigation />
           <Routes>
@@ -30,9 +31,10 @@ function App() {
             <Route path="/research" element={<ExplorationPage />} />
             <Route path="/exchanges" element={<Exchanges />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </RecoilRoot>
-      </Router>
+        </Router>
+      </RecoilRoot>
     </div>
   )
 }
