@@ -34,7 +34,7 @@ const PostList = () => {
         />
       </div>
       {filterPosts.map(post => (
-        <Post key={post.id} content={post} />
+        <Post key={post.id} post={post} />
       ))}
     </div>
   )

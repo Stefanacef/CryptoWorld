@@ -8,20 +8,20 @@ import {
 import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
 import { useEffect, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { postAtom } from './state'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { commentsSelector, postAtom } from './state'
 
 interface IPostProps {
-  content: IPost
+  post: IPost
 }
 
-const Post = ({ content }: IPostProps) => {
+const Post = ({ post: { id, content } }: IPostProps) => {
   const setContentPost = useSetRecoilState(postAtom)
+  const comments = useRecoilValue(commentsSelector(id))
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
   const [date, setDate] = useState<string>('')
   const [dateUpdate, setDateUpdate] = useState<boolean>(false)
-  const [commentNumber, setCommentNumber] = useState<number>(0)
   const [editComment, setEditComment] = useState<string>('')
   const [editStatus, setEditStatus] = useState<boolean>(false)
 
@@ -50,25 +50,24 @@ const Post = ({ content }: IPostProps) => {
       <div className="post-header">
         <div className="post-avatar"> AV</div>
         {!editStatus ? (
-          <p> {content.content}</p>
+          <p> {content}</p>
         ) : (
           <textarea
             className="post-textarea"
-            defaultValue={content.content}
+            defaultValue={content}
             onChange={e => {
               setEditComment(e.target.value)
             }}
           ></textarea>
         )}
-        <Delete
-          onClick={() => handleDelete(content.id)}
-          className="post-delete"
-        />
+        <Delete onClick={() => handleDelete(id)} className="post-delete" />
       </div>
       <div className="post-interaction">
         <EmptyHeart className="post-like" />
         <div onClick={() => setCommentStatus(previous => !previous)}>
-          <span className="post-comments-span">{commentNumber}</span>
+          <span className="post-comments-span">
+            {comments.length.toString()}
+          </span>
           <Comment className="post-comments" />
         </div>
 
@@ -80,18 +79,13 @@ const Post = ({ content }: IPostProps) => {
           {!editStatus ? (
             <Button text="Edit" border="border-edit" />
           ) : (
-            <div onClick={() => handleEdit(content.id)}>
+            <div onClick={() => handleEdit(id)}>
               <Button text="Save" border="border-edit" />
             </div>
           )}
         </div>
       </div>
-      {commentStatus && (
-        <CommentList
-          parentId={content.id}
-          setCommentNumber={setCommentNumber}
-        />
-      )}
+      {commentStatus && <CommentList parentId={id} />}
     </div>
   )
 }
