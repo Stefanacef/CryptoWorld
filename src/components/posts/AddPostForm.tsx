@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import Textarea from '../textarea/Textarea'
 import { useSetRecoilState } from 'recoil'
 import { postsAtom } from './state'
-import { FormattedDate, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 const AddPostForm = () => {
   const setContentPost = useSetRecoilState(postsAtom)
