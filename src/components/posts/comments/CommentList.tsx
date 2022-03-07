@@ -1,0 +1,37 @@
+import { useEffect, useState } from 'react'
+import '../../../assets/styles/Comments/Comments.css'
+import Comment from './Comment'
+import Textarea from '../../textarea/Textarea'
+import { useRecoilState } from 'recoil'
+import { commentsAtom } from '../state'
+
+interface ICommentList {
+  parentId: number
+}
+
+const CommentList = (props: ICommentList) => {
+  const [comments, setComments] = useRecoilState(commentsAtom(props.parentId))
+  const [textComments, setTextComments] = useState<string>('')
+
+  useEffect(() => {
+    textComments &&
+      setComments(previous => [
+        ...previous,
+        {
+          content: textComments,
+          id: Math.floor(Math.random() * 100 + 1),
+        },
+      ])
+  }, [textComments, setComments])
+
+  return (
+    <div className="comments">
+      <Textarea setContent={setTextComments} placeholder="Leave a comment..." />
+      <div className="comments-list">
+        <Comment comments={comments} />
+      </div>
+    </div>
+  )
+}
+
+export default CommentList

@@ -1,14 +1,14 @@
-import "../../assets/styles/Table/Table.css";
+import '../../assets/styles/Table/Table.css'
 interface ITable {
-  id: string;
-  name: string;
-  image: string;
-  symbol: string;
-  price: string;
-  current_price: string;
-  market_cap: string;
-  total_volume: string;
-  low_24h: string;
+  id: string
+  name: string
+  image: string
+  symbol: string
+  price: string
+  current_price: string
+  market_cap: string
+  total_volume: string
+  low_24h: string
 }
 function Table(props: { data: any }) {
   return (
@@ -41,7 +41,7 @@ function Table(props: { data: any }) {
         ))}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default Table;
+export default Table

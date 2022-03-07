@@ -1,12 +1,25 @@
-import "../../assets/styles/Posts/Posts.css";
-import Post from "./Post";
-import { useState, useContext } from "react";
-import { AiOutlineSearch as Search } from "react-icons/ai";
-import { PostsContent } from "../../pages/FeedPage";
+import '../../assets/styles/Posts/Posts.css'
+import Post from './Post'
+import { useMemo, useState } from 'react'
+import { AiOutlineSearch as Search } from 'react-icons/ai'
+import { postAtom } from './state'
+import { useRecoilValue } from 'recoil'
 
-function PostList() {
-  const [searchValue, setSearchValue] = useState<string>("");
-  const { content } = useContext(PostsContent);
+const PostList = () => {
+  const [searchValue, setSearchValue] = useState<string>('')
+  const contentPost = useRecoilValue(postAtom)
+
+  const filterPosts = useMemo(() => {
+    return contentPost.filter(post => {
+      const display =
+        searchValue === '' ||
+        post.content
+          .toLocaleLowerCase()
+          .includes(searchValue.toLocaleLowerCase())
+      return display
+    })
+  }, [searchValue, contentPost])
+
   return (
     <div className="post-list">
       <div className="post-list-container">
@@ -20,23 +33,11 @@ function PostList() {
           }
         />
       </div>
-      {content
-        .filter((post) => {
-          if (searchValue === "") return post;
-          else if (
-            post.content
-              .toLocaleLowerCase()
-              .includes(searchValue.toLocaleLowerCase())
-          ) {
-            return post;
-          }
-          return;
-        })
-        .map((post) => (
-          <Post key={post.id} content={post} />
-        ))}
+      {filterPosts.map(post => (
+        <Post key={post.id} post={post} />
+      ))}
     </div>
-  );
+  )
 }
 
-export default PostList;
+export default PostList

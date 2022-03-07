@@ -1,92 +1,93 @@
-import "../../assets/styles/Posts/Posts.css";
-import { IPost } from "../../pages/FeedPage";
+import '../../assets/styles/Posts/Posts.css'
+import { IPost } from './types'
 import {
   AiOutlineHeart as EmptyHeart,
   AiFillCloseCircle as Delete,
   AiFillMessage as Comment,
-} from "react-icons/ai";
-import Button from "../buttons/Button";
-import CommentList from "../comments/CommentList";
-import { useEffect, useState, useContext } from "react";
-import { PostsContent } from "../../pages/FeedPage";
+} from 'react-icons/ai'
+import Button from '../buttons/Button'
+import CommentList from './comments/CommentList'
+import { useEffect, useState } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { commentsSelector, postAtom } from './state'
+
 interface IPostProps {
-  content: IPost;
+  post: IPost
 }
 
-function Post({ content }: IPostProps) {
-  const { setContentPost } = useContext(PostsContent);
+const Post = ({ post: { id, content } }: IPostProps) => {
+  const setContentPost = useSetRecoilState(postAtom)
+  const comments = useRecoilValue(commentsSelector(id))
 
-  const [commentStatus, setCommentStatus] = useState<boolean>(false);
-  const [date, setDate] = useState<string>("");
-  const [commentNumber, setCommentNumber] = useState<number>(0);
-  const [editStatus, setEditStatus] = useState<boolean>(false);
-  const [editComment, setEditComment] = useState<string>("");
+  const [commentStatus, setCommentStatus] = useState<boolean>(false)
+  const [date, setDate] = useState<string>('')
+  const [dateUpdate, setDateUpdate] = useState<boolean>(false)
+  const [editComment, setEditComment] = useState<string>('')
+  const [editStatus, setEditStatus] = useState<boolean>(false)
 
   useEffect(() => {
-    const currentDate = new Date();
-    const time = currentDate.getHours() + ":" + currentDate.getMinutes();
-    setDate(`${time} - ${currentDate.toLocaleDateString()}`);
-  }, [editStatus]);
+    const currentDate = new Date()
+    const time = currentDate.getHours() + ':' + currentDate.getMinutes()
+    setDate(`${time} - ${currentDate.toLocaleDateString()}`)
+  }, [dateUpdate])
 
   const handleEdit = (id: number) => {
-    setContentPost((previous) =>
-      [...previous].map((post) =>
+    setContentPost(previous =>
+      previous.map(post =>
         post.id === id
           ? { content: editComment, id: id }
           : { content: post.content, id: post.id }
       )
-    );
-  };
+    )
+    setDateUpdate(previous => !previous)
+  }
   const handleDelete = (id: number) => {
-    setContentPost((previous) =>
-      [...previous].filter((post) => post.id !== id)
-    );
-  };
+    setContentPost(previous => previous.filter(post => post.id !== id))
+  }
 
   return (
     <div className="post">
       <div className="post-header">
         <div className="post-avatar"> AV</div>
         {!editStatus ? (
-          <p> {content.content}</p>
+          <p> {content}</p>
         ) : (
           <textarea
             className="post-textarea"
-            defaultValue={content.content}
-            onChange={(e) => {
-              setEditComment(e.target.value);
+            defaultValue={content}
+            onChange={e => {
+              setEditComment(e.target.value)
             }}
           ></textarea>
         )}
-        <Delete
-          onClick={() => handleDelete(content.id)}
-          className="post-delete"
-        />
+        <Delete onClick={() => handleDelete(id)} className="post-delete" />
       </div>
       <div className="post-interaction">
         <EmptyHeart className="post-like" />
-        <div onClick={() => setCommentStatus((previous) => !previous)}>
-          <span className="post-comments-span">{commentNumber}</span>
+        <div onClick={() => setCommentStatus(previous => !previous)}>
+          <span className="post-comments-span">
+            {comments.length.toString()}
+          </span>
           <Comment className="post-comments" />
         </div>
 
         <span className="post-date">{date}</span>
         <div
           className="post-edit"
-          onClick={() => setEditStatus((previous) => !previous)}
+          onClick={() => setEditStatus(previous => !previous)}
         >
           {!editStatus ? (
             <Button text="Edit" border="border-edit" />
           ) : (
-            <div onClick={() => handleEdit(content.id)}>
+            <div onClick={() => handleEdit(id)}>
               <Button text="Save" border="border-edit" />
             </div>
           )}
         </div>
       </div>
-      {commentStatus && <CommentList setCommentNumber={setCommentNumber} />}
+      {commentStatus && <CommentList parentId={id} />}
     </div>
-  );
+  )
 }
 
-export default Post;
+export default Post

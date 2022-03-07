@@ -1,11 +1,11 @@
-import "../../assets/styles/Button/Button.css";
+import '../../assets/styles/Button/Button.css'
 interface IButton {
-  border?: string;
-  backgroundColor?: string;
-  text: string;
+  border?: string
+  backgroundColor?: string
+  text: string
 }
 function Button({ text, border }: IButton) {
-  return <button className={`button ${border}`}>{text}</button>;
+  return <button className={`button ${border}`}>{text}</button>
 }
 
-export default Button;
+export default Button
