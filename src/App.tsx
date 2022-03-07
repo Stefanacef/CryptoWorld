@@ -13,6 +13,8 @@ import {
 } from 'react-router-dom'
 import MainStatsBar from './components/navigation/MainStatsBar'
 import TopNavigation from './components/navigation/TopNavigation'
+import CoinDetails from './pages/CoinDetailsPage'
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate replace to="/coins" />} />
             <Route path="/coins" element={<HomePage />} />
+            <Route path="/coins/:id" element={<CoinDetails />} />
             <Route path="/feed" element={<FeedPage />} />
             <Route path="/research" element={<ExplorationPage />} />
             <Route path="/exchanges" element={<Exchanges />} />

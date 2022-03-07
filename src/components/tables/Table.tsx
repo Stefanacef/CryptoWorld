@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
 interface ITable {
   id: string
@@ -24,14 +25,17 @@ function Table(props: { data: any }) {
       </thead>
       <tbody>
         {props.data.map((crypto: ITable) => (
-          <tr className="table-body-row" key={crypto.id}>
+          <tr className="table-body-row" key={crypto.id} id={crypto.id}>
             <td className="table-body-name">
-              <img
-                className="table-body-symbol"
-                src={crypto.image}
-                alt="crypto symbol"
-              />
-              {crypto.name} {crypto.symbol}
+              <Link to={`/coins/${crypto.id}`}>
+                {' '}
+                <img
+                  className="table-body-symbol"
+                  src={crypto.image}
+                  alt="crypto symbol"
+                />
+                {crypto.name} {crypto.symbol}
+              </Link>
             </td>
             <td>{crypto.current_price}</td>
             <td>{crypto.market_cap}</td>

@@ -16,7 +16,7 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch(URL)
-      .then(date => date.json())
+      .then(data => data.json())
       .then(setData)
       .catch(err => {
         console.error(err)
