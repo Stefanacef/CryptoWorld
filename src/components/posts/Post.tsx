@@ -8,20 +8,20 @@ import {
 import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { postsAtom } from './state'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { commentsSelector, postsAtom } from './state'
 import { FormattedDate, FormattedTime, useIntl } from 'react-intl'
 
 interface IPostProps {
   post: IPost
 }
 
-const Post = ({ post }: IPostProps) => {
+const Post = ({ post: { id, content, lastEditAt } }: IPostProps) => {
   const setPost = useSetRecoilState(postsAtom)
+  const comments = useRecoilValue(commentsSelector(id))
   const intl = useIntl()
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
-  const [commentNumber, setCommentNumber] = useState<number>(0)
   const [editComment, setEditComment] = useState<string>('')
   const [editStatus, setEditStatus] = useState<boolean>(false)
 
@@ -51,30 +51,32 @@ const Post = ({ post }: IPostProps) => {
       <div className="post-header">
         <div className="post-avatar"> AV</div>
         {!editStatus ? (
-          <p> {post.content}</p>
+          <p> {content}</p>
         ) : (
           <textarea
             className="post-textarea"
-            defaultValue={post.content}
+            defaultValue={content}
             onChange={e => {
               setEditComment(e.target.value)
             }}
           ></textarea>
         )}
-        <Delete onClick={() => handleDelete(post.id)} className="post-delete" />
+        <Delete onClick={() => handleDelete(id)} className="post-delete" />
       </div>
       <div className="post-interaction">
         <EmptyHeart className="post-like" />
         <div onClick={() => setCommentStatus(previous => !previous)}>
-          <span className="post-comments-span">{commentNumber}</span>
+          <span className="post-comments-span">
+            {comments.length.toString()}
+          </span>
           <Comment className="post-comments" />
         </div>
 
         <span className="post-date">
           <span className="post-time">
-            <FormattedTime value={post.lastEditAt} />
+            <FormattedTime value={lastEditAt} />
           </span>
-          <FormattedDate value={post.lastEditAt} />
+          <FormattedDate value={lastEditAt} />
         </span>
         <div
           className="post-edit"
@@ -86,7 +88,7 @@ const Post = ({ post }: IPostProps) => {
               border="border-edit"
             />
           ) : (
-            <div onClick={() => handleEdit(post.id)}>
+            <div onClick={() => handleEdit(id)}>
               <Button
                 text={intl.formatMessage({ id: 'button.save' })}
                 border="border-edit"
@@ -95,9 +97,7 @@ const Post = ({ post }: IPostProps) => {
           )}
         </div>
       </div>
-      {commentStatus && (
-        <CommentList parentId={post.id} setCommentNumber={setCommentNumber} />
-      )}
+      {commentStatus && <CommentList parentId={id} />}
     </div>
   )
 }

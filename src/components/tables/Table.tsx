@@ -1,10 +1,10 @@
 import { FormattedMessage } from 'react-intl'
+import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
 interface ITable {
   id: string
   name: string
   image: string
-  symbol: string
   price: string
   current_price: string
   market_cap: string
@@ -50,14 +50,17 @@ function Table(props: { data: any }) {
       </thead>
       <tbody>
         {props.data.map((crypto: ITable) => (
-          <tr className="table-body-row" key={crypto.id}>
+          <tr className="table-body-row" key={crypto.id} id={crypto.id}>
             <td className="table-body-name">
-              <img
-                className="table-body-symbol"
-                src={crypto.image}
-                alt="crypto symbol"
-              />
-              {crypto.name} {crypto.symbol}
+              <Link to={`/coins/${crypto.id}`} className="table-link">
+                {' '}
+                <img
+                  className="table-body-symbol"
+                  src={crypto.image}
+                  alt="crypto symbol"
+                />
+                {crypto.name}
+              </Link>
             </td>
             <td>{crypto.current_price}</td>
             <td>{crypto.market_cap}</td>
