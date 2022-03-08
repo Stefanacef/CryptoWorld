@@ -3,6 +3,7 @@ import Card from '../components/cards/Card'
 import Table from '../components/tables/Table'
 import '../assets/styles/HomePage/HomePage.css'
 import { useEffect, useState } from 'react'
+
 interface ICryptoCoin {
   id: string
   name: string

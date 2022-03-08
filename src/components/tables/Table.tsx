@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl'
 import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
 interface ITable {
@@ -15,11 +16,36 @@ function Table(props: { data: any }) {
     <table className="table">
       <thead className="table-head">
         <tr className="table-head-row">
-          <th>NAME</th>
-          <th>PRICE</th>
-          <th>MARKET CAP</th>
-          <th>VOLUME 24H</th>
-          <th>LOW 24H </th>
+          <th>
+            <FormattedMessage
+              id="table.header.cell.name"
+              defaultMessage="NAME "
+            />
+          </th>
+          <th>
+            <FormattedMessage
+              id="table.header.cell.price"
+              defaultMessage="PRICE "
+            />
+          </th>
+          <th>
+            <FormattedMessage
+              id="table.header.cell.market.cap"
+              defaultMessage="MARKET CAP "
+            />
+          </th>
+          <th>
+            <FormattedMessage
+              id="table.header.cell.volume"
+              defaultMessage="VOLUME 24H"
+            />
+          </th>
+          <th>
+            <FormattedMessage
+              id="table.header.cell.low"
+              defaultMessage="LOW 24H  "
+            />
+          </th>
         </tr>
       </thead>
       <tbody>

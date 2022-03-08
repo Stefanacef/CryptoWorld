@@ -94,6 +94,9 @@
   position: absolute;
   bottom: 4px;
 }
+.post-time {
+  margin-right: 10px;
+}
 .post-textarea {
   border-width: 1px;
   border-style: solid;

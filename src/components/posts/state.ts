@@ -2,8 +2,8 @@ import { atom, atomFamily, selectorFamily } from 'recoil'
 import { IComment } from './types'
 import { IPost } from './types'
 
-export const postAtom = atom<IPost[]>({
-  key: 'post',
+export const postsAtom = atom<IPost[]>({
+  key: 'posts',
   default: [],
 })
 

@@ -7,42 +7,43 @@ import {
 } from 'react-icons/ai'
 import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { commentsSelector, postAtom } from './state'
+import { commentsSelector, postsAtom } from './state'
+import { FormattedDate, FormattedTime, useIntl } from 'react-intl'
 
 interface IPostProps {
   post: IPost
 }
 
-const Post = ({ post: { id, content } }: IPostProps) => {
-  const setContentPost = useSetRecoilState(postAtom)
+const Post = ({ post: { id, content, lastEditAt } }: IPostProps) => {
+  const setPost = useSetRecoilState(postsAtom)
   const comments = useRecoilValue(commentsSelector(id))
+  const intl = useIntl()
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
-  const [date, setDate] = useState<string>('')
-  const [dateUpdate, setDateUpdate] = useState<boolean>(false)
   const [editComment, setEditComment] = useState<string>('')
   const [editStatus, setEditStatus] = useState<boolean>(false)
 
-  useEffect(() => {
-    const currentDate = new Date()
-    const time = currentDate.getHours() + ':' + currentDate.getMinutes()
-    setDate(`${time} - ${currentDate.toLocaleDateString()}`)
-  }, [dateUpdate])
-
   const handleEdit = (id: number) => {
-    setContentPost(previous =>
+    setPost(previous =>
       previous.map(post =>
         post.id === id
-          ? { content: editComment, id: id }
-          : { content: post.content, id: post.id }
+          ? {
+              content: editComment,
+              id: id,
+              lastEditAt: new Date(),
+            }
+          : {
+              content: post.content,
+              id: post.id,
+              lastEditAt: post.lastEditAt,
+            }
       )
     )
-    setDateUpdate(previous => !previous)
   }
   const handleDelete = (id: number) => {
-    setContentPost(previous => previous.filter(post => post.id !== id))
+    setPost(previous => previous.filter(post => post.id !== id))
   }
 
   return (
@@ -71,16 +72,27 @@ const Post = ({ post: { id, content } }: IPostProps) => {
           <Comment className="post-comments" />
         </div>
 
-        <span className="post-date">{date}</span>
+        <span className="post-date">
+          <span className="post-time">
+            <FormattedTime value={lastEditAt} />
+          </span>
+          <FormattedDate value={lastEditAt} />
+        </span>
         <div
           className="post-edit"
           onClick={() => setEditStatus(previous => !previous)}
         >
           {!editStatus ? (
-            <Button text="Edit" border="border-edit" />
+            <Button
+              text={intl.formatMessage({ id: 'button.edit' })}
+              border="border-edit"
+            />
           ) : (
             <div onClick={() => handleEdit(id)}>
-              <Button text="Save" border="border-edit" />
+              <Button
+                text={intl.formatMessage({ id: 'button.save' })}
+                border="border-edit"
+              />
             </div>
           )}
         </div>

@@ -1,22 +1,33 @@
 import { useCallback } from 'react'
 import Textarea from '../textarea/Textarea'
 import { useSetRecoilState } from 'recoil'
-import { postAtom } from './state'
+import { postsAtom } from './state'
+import { useIntl } from 'react-intl'
 
 const AddPostForm = () => {
-  const setContentPost = useSetRecoilState(postAtom)
+  const setContentPost = useSetRecoilState(postsAtom)
+  const intl = useIntl()
 
   const addPost = useCallback(
     textContent => {
       setContentPost(previous => [
         ...previous,
-        { content: textContent, id: Math.floor(Math.random() * 100 + 1) },
+        {
+          content: textContent,
+          id: Math.floor(Math.random() * 100 + 1),
+          lastEditAt: new Date(),
+        },
       ])
     },
     [setContentPost]
   )
 
-  return <Textarea setContent={addPost} placeholder="What's on your mind?" />
+  return (
+    <Textarea
+      setContent={addPost}
+      placeholder={intl.formatMessage({ id: 'feed.textarea.placeholder' })}
+    />
+  )
 }
 
 export default AddPostForm

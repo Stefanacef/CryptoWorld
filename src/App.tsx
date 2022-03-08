@@ -5,6 +5,7 @@ import ExplorationPage from './pages/ExplorationPage'
 import Exchanges from './pages/Exchanges'
 import SignUpPage from './pages/SignUpPage'
 import { RecoilRoot } from 'recoil'
+import TranslationProvider from './i18n/TranslationProvider'
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,20 +21,22 @@ function App() {
   return (
     <div className="App">
       <RecoilRoot>
-        <Router>
-          <MainStatsBar />
-          <TopNavigation />
-          <Routes>
-            <Route path="/" element={<Navigate replace to="/coins" />} />
-            <Route path="/coins" element={<HomePage />} />
-            <Route path="/coins/:id" element={<CoinDetails />} />
-            <Route path="/feed" element={<FeedPage />} />
-            <Route path="/research" element={<ExplorationPage />} />
-            <Route path="/exchanges" element={<Exchanges />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
+        <TranslationProvider>
+          <Router>
+            <MainStatsBar />
+            <TopNavigation />
+            <Routes>
+              <Route path="/" element={<Navigate replace to="/coins" />} />
+              <Route path="/coins" element={<HomePage />} />
+              <Route path="/coins/:id" element={<CoinDetails />} />
+              <Route path="/feed" element={<FeedPage />} />
+              <Route path="/research" element={<ExplorationPage />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </TranslationProvider>
       </RecoilRoot>
     </div>
   )
