@@ -3,7 +3,7 @@ import Card from '../components/cards/Card'
 import Table from '../components/tables/Table'
 import '../assets/styles/HomePage/HomePage.css'
 import { useEffect, useState } from 'react'
-
+import { Grid } from '@mui/material'
 interface ICryptoCoin {
   id: string
   name: string
@@ -26,18 +26,24 @@ export default function HomePage() {
 
   return (
     <div className="home">
-      <Carousel>
-        {topFiveCoins.map((crypto: ICryptoCoin) => (
-          <Card
-            key={crypto.id}
-            border=" border border-purple"
-            title={crypto.name}
-            icon={crypto.image}
-            price={crypto.current_price}
-          />
-        ))}
-      </Carousel>
-      <Table data={data} />
+      <Grid container direction="column" px={10}>
+        <Grid item container>
+          <Carousel>
+            {topFiveCoins.map((crypto: ICryptoCoin) => (
+              <Card
+                key={crypto.id}
+                border=" border border-purple"
+                title={crypto.name}
+                icon={crypto.image}
+                price={crypto.current_price}
+              />
+            ))}
+          </Carousel>
+        </Grid>
+        <Grid item>
+          <Table data={data} />
+        </Grid>
+      </Grid>
     </div>
   )
 }
