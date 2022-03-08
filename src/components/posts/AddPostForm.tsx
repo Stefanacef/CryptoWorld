@@ -1,23 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import Textarea from '../textarea/Textarea'
 import { useSetRecoilState } from 'recoil'
-import postAtom from './State'
+import { postAtom } from './state'
 
 const AddPostForm = () => {
-  const [textContent, setTextContent] = useState<string>('')
   const setContentPost = useSetRecoilState(postAtom)
 
-  useEffect(() => {
-    textContent &&
+  const addPost = useCallback(
+    textContent => {
       setContentPost(previous => [
         ...previous,
         { content: textContent, id: Math.floor(Math.random() * 100 + 1) },
       ])
-  }, [textContent, setContentPost])
-
-  return (
-    <Textarea setContent={setTextContent} placeholder="What's on your mind?" />
+    },
+    [setContentPost]
   )
+
+  return <Textarea setContent={addPost} placeholder="What's on your mind?" />
 }
 
 export default AddPostForm

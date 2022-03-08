@@ -1,6 +1,7 @@
-import { IComment } from './CommentList'
+import { IComment } from '../types'
 import { AiOutlineStar as CommentIcon } from 'react-icons/ai'
-function Comment(props: { comments: IComment[] }) {
+
+const Comment = (props: { comments: IComment[] }) => {
   return (
     <div>
       {props.comments.map(el => (
