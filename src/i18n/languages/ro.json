@@ -20,5 +20,8 @@
   "table.header.cell.price": "PRET",
   "table.header.cell.market.cap": "CAPITALUL PIETEI",
   "table.header.cell.volume": "VOLUM 24H",
-  "table.header.cell.low": "CEL MAI MIC PRET 24H "
+  "table.header.cell.low": "CEL MAI MIC PRET 24H ",
+  "language": "limba",
+  "language-english": "Engleza",
+  "language-romanian": "Romana"
 }

@@ -1,12 +1,24 @@
-import '../../assets/styles/Navigation/Navigation.css'
 import NavigationLinks from './NavigationLinks'
+import { AppBar, Toolbar, Typography } from '@mui/material'
+import MainStatsBar from './MainStatsBar'
 
-function TopNavigation() {
+const TopNavigation = () => {
   return (
-    <nav className="navigation-top">
-      <h3>LOGO</h3>
-      <NavigationLinks />
-    </nav>
+    <AppBar>
+      <MainStatsBar />
+      <Toolbar>
+        <Typography
+          px={10}
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+        >
+          LOGO
+        </Typography>
+        <NavigationLinks />
+      </Toolbar>
+    </AppBar>
   )
 }
 

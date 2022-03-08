@@ -1,9 +1,9 @@
 import Carousel from '../components/carousel/Carousel'
 import Card from '../components/cards/Card'
 import Table from '../components/tables/Table'
-import '../assets/styles/HomePage/HomePage.css'
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
+
 interface ICryptoCoin {
   id: string
   name: string
@@ -25,8 +25,9 @@ export default function HomePage() {
   const topFiveCoins = data.slice(-5)
 
   return (
-    <div className="home">
-      <Grid container direction="column" px={10}>
+    <Grid container>
+      <Grid item xs={0} sm={1} md={2} />
+      <Grid item container xs={12} sm={10} md={8} direction="column">
         <Grid item container>
           <Carousel>
             {topFiveCoins.map((crypto: ICryptoCoin) => (
@@ -44,6 +45,7 @@ export default function HomePage() {
           <Table data={data} />
         </Grid>
       </Grid>
-    </div>
+      <Grid item xs={0} sm={1} md={2} />
+    </Grid>
   )
 }

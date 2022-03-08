@@ -20,5 +20,8 @@
   "table.header.cell.price": "PRICE",
   "table.header.cell.market.cap": "MARKET CAP",
   "table.header.cell.volume": "VOLUME 24H",
-  "table.header.cell.low": "LOW 24H "
+  "table.header.cell.low": "LOW 24H ",
+  "language": "language",
+  "language-english": "English",
+  "language-romanian": "Romanian"
 }
