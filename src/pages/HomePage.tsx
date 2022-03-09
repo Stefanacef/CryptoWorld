@@ -1,5 +1,5 @@
 import Carousel from '../components/carousel/Carousel'
-import Card from '../components/cards/Card'
+import CoinCard from '../components/cards/Card'
 import Table from '../components/tables/Table'
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
@@ -31,7 +31,7 @@ export default function HomePage() {
         <Grid item container>
           <Carousel>
             {topFiveCoins.map((crypto: ICryptoCoin) => (
-              <Card
+              <CoinCard
                 key={crypto.id}
                 border=" border border-purple"
                 title={crypto.name}

@@ -1,32 +1,40 @@
-import '../../assets/styles/Carousel/Carousel.css'
 import { FC } from 'react'
-import Button from '../buttons/Button'
-import { useNavigate } from 'react-router-dom'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
+import { Typography, Button, Grid } from '@mui/material'
 
 type Props = {
   children?: JSX.Element[]
 }
-const Carousel: FC<Props> = ({ children }) => {
-  const navigate = useNavigate()
-  const intl = useIntl()
 
+const Carousel: FC<Props> = ({ children }) => {
   return (
-    <div className="carousel">
-      <h2 className="carousel-title">
-        <FormattedMessage
-          id="carousel.title"
-          defaultMessage="Our favorite coins"
-        />
-      </h2>
-      <div className="carousel-content">{children}</div>
-      <div className="carousel-button" onClick={() => navigate('/research')}>
-        <Button
-          text={intl.formatMessage({ id: 'button.why' })}
-          border="border-send"
-        />
-      </div>
-    </div>
+    <Grid container marginTop={20} direction="column" rowGap={3}>
+      <Grid item alignSelf="flex-start">
+        <Typography variant="h4" color="white">
+          <FormattedMessage
+            id="carousel.title"
+            defaultMessage="Our favorite coins"
+          />
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        container
+        justifyContent="space-around"
+        rowGap={2}
+        flexWrap="wrap"
+      >
+        {children}
+      </Grid>
+      <Grid item alignSelf="flex-start">
+        <Link to="/research">
+          <Button variant="contained">
+            <FormattedMessage id="button.why" defaultMessage="Sign up" />
+          </Button>
+        </Link>
+      </Grid>
+    </Grid>
   )
 }
 

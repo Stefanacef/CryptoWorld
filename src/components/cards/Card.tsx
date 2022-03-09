@@ -1,4 +1,12 @@
 import '../../assets/styles/Cards/Card.css'
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Avatar,
+  Typography,
+} from '@mui/material'
+
 interface ICard {
   border?: string
   height?: number
@@ -8,13 +16,26 @@ interface ICard {
   icon?: string
   price?: string
 }
-function Card({ border, title, price, icon }: ICard) {
+
+function CoinCard({ title, price, icon }: ICard) {
   return (
-    <div className={`card ${border}`}>
-      <img className=" card-icon" src={icon} alt="icon of the coin" />
-      <h3>{title}</h3>
-      <p>{price} USD</p>
-    </div>
+    <Card sx={{ width: 170 }}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe">
+            <img className=" card-icon" src={icon} alt="icon of the coin" />
+          </Avatar>
+        }
+      />
+      <CardContent>
+        <Typography variant="body1" color="text.secondary">
+          {title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {price}$
+        </Typography>
+      </CardContent>
+    </Card>
   )
 }
-export default Card
+export default CoinCard
