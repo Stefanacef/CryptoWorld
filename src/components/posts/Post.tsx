@@ -1,16 +1,24 @@
 import '../../assets/styles/Posts/Posts.css'
 import { IPost } from './types'
-import {
-  AiOutlineHeart as EmptyHeart,
-  AiFillCloseCircle as Delete,
-  AiFillMessage as Comment,
-} from 'react-icons/ai'
-import Button from '../buttons/Button'
 import CommentList from './comments/CommentList'
 import { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { commentsSelector, postsAtom } from './state'
-import { FormattedDate, FormattedTime, useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
+import {
+  Box,
+  TextareaAutosize,
+  Card,
+  CardHeader,
+  Avatar,
+  CardContent,
+  Typography,
+  IconButton,
+  CardActions,
+  Button,
+} from '@mui/material'
+
+import { Clear, Favorite, Message } from '@mui/icons-material'
 
 interface IPostProps {
   post: IPost
@@ -47,58 +55,65 @@ const Post = ({ post: { id, content, lastEditAt } }: IPostProps) => {
   }
 
   return (
-    <div className="post">
-      <div className="post-header">
-        <div className="post-avatar"> AV</div>
-        {!editStatus ? (
-          <p> {content}</p>
-        ) : (
-          <textarea
-            className="post-textarea"
-            defaultValue={content}
-            onChange={e => {
-              setEditComment(e.target.value)
-            }}
-          ></textarea>
-        )}
-        <Delete onClick={() => handleDelete(id)} className="post-delete" />
-      </div>
-      <div className="post-interaction">
-        <EmptyHeart className="post-like" />
-        <div onClick={() => setCommentStatus(previous => !previous)}>
-          <span className="post-comments-span">
-            {comments.length.toString()}
-          </span>
-          <Comment className="post-comments" />
-        </div>
-
-        <span className="post-date">
-          <span className="post-time">
-            <FormattedTime value={lastEditAt} />
-          </span>
-          <FormattedDate value={lastEditAt} />
-        </span>
-        <div
-          className="post-edit"
-          onClick={() => setEditStatus(previous => !previous)}
-        >
+    <>
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          avatar={<Avatar aria-label="avatar">AV</Avatar>}
+          action={
+            <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
+              <Clear />
+            </IconButton>
+          }
+          title="Alexandru"
+          subheader={`${intl.formatTime(lastEditAt)} ${intl.formatDate(
+            lastEditAt
+          )}`}
+        />
+        <CardContent>
           {!editStatus ? (
-            <Button
-              text={intl.formatMessage({ id: 'button.edit' })}
-              border="border-edit"
-            />
+            <Typography variant="body2" color="text.secondary">
+              {content}
+            </Typography>
           ) : (
-            <div onClick={() => handleEdit(id)}>
-              <Button
-                text={intl.formatMessage({ id: 'button.save' })}
-                border="border-edit"
-              />
-            </div>
+            <TextareaAutosize
+              maxRows={4}
+              defaultValue={content}
+              style={{ width: 200, height: 50 }}
+              onChange={e => {
+                setEditComment(e.target.value)
+              }}
+            />
           )}
-        </div>
-      </div>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="like">
+            <Favorite />
+          </IconButton>
+          <IconButton aria-label="comment">
+            <Message onClick={() => setCommentStatus(previous => !previous)} />
+            <span className="post-comments-span">
+              {comments.length.toString()}
+            </span>
+          </IconButton>
+          <Box onClick={() => setEditStatus(previous => !previous)}>
+            {!editStatus ? (
+              <Button variant="outlined">
+                <FormattedMessage id="button.edit" defaultMessage="Edit" />
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={() => handleEdit(id)}
+              >
+                <FormattedMessage id="button.save" defaultMessage="Save" />
+              </Button>
+            )}
+          </Box>
+        </CardActions>
+      </Card>
       {commentStatus && <CommentList parentId={id} />}
-    </div>
+    </>
   )
 }
 

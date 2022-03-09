@@ -1,66 +1,3 @@
-.post-list {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.post-list-container {
-  align-items: center;
-  display: flex;
-  position: absolute;
-  top: -250px;
-  left: 10px;
-}
-.post-list-search {
-  background-color: #eaa47a;
-  border: none;
-  height: 32px;
-  outline: none;
-  padding: 5px 25px;
-  width: 190px;
-}
-.post-list-search-icon {
-  color: wheat;
-  left: 5px;
-  position: absolute;
-}
-.post {
-  border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
-    1;
-  color: wheat;
-  display: flex;
-  flex-direction: column;
-  min-height: 120px;
-  margin: 20px 0;
-  padding: 20px 18px 0px 20px;
-  position: relative;
-  text-align: left;
-  width: 80%;
-}
-.post-header {
-  margin-bottom: 70px;
-}
-.post-header,
-.post-interaction {
-  position: relative;
-  width: 100%;
-}
-.post-avatar {
-  text-align: center;
-  background-color: rgb(134, 131, 127);
-  border-radius: 50%;
-  height: 30px;
-  margin-bottom: 10px;
-  padding-top: 2.5px;
-  width: 30px;
-}
-.post-like {
-  bottom: 10px;
-  font-size: 25px;
-  position: absolute;
-}
 .post-comments {
   bottom: 10px;
   cursor: pointer;
@@ -70,38 +7,9 @@
 }
 .post-comments-span {
   z-index: 1;
-  color: wheat;
+  color: rgb(70, 38, 214);
   bottom: 22px;
-  left: 70px;
+  left: 24px;
   font-size: 15px;
   position: absolute;
-}
-.post-delete {
-  font-size: 20px;
-  right: 8px;
-  position: absolute;
-  top: 5px;
-}
-.post-edit {
-  font-size: 20px;
-  right: 8px;
-  position: absolute;
-  bottom: 5px;
-}
-.post-date {
-  font-size: 15px;
-  right: 110px;
-  position: absolute;
-  bottom: 4px;
-}
-.post-time {
-  margin-right: 10px;
-}
-.post-textarea {
-  border-width: 1px;
-  border-style: solid;
-  border-image: linear-gradient(90deg, #efddad 0%, #eaa47a 46.88%, #e87a60 100%)
-    1;
-  background-color: #222222;
-  color: white;
 }

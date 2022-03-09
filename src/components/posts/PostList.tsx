@@ -1,10 +1,10 @@
-import '../../assets/styles/Posts/Posts.css'
 import Post from './Post'
 import { useMemo, useState } from 'react'
-import { AiOutlineSearch as Search } from 'react-icons/ai'
+import SearchIcon from '@mui/icons-material/Search'
 import { postsAtom } from './state'
 import { useRecoilValue } from 'recoil'
 import { useIntl } from 'react-intl'
+import { TextField, InputAdornment, Grid } from '@mui/material'
 
 const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
@@ -23,22 +23,31 @@ const PostList = () => {
   }, [searchValue, posts])
 
   return (
-    <div className="post-list">
-      <div className="post-list-container">
-        <Search className="post-list-search-icon" />
-        <input
-          className="post-list-search"
-          type="text"
-          placeholder={intl.formatMessage({ id: 'feed.search.placeholder' })}
+    <Grid container direction="column" px="10%" marginTop="50px">
+      <Grid item alignSelf="flex-start">
+        <TextField
+          size="small"
+          type="search"
+          label={intl.formatMessage({ id: 'feed.search.placeholder' })}
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearchValue(e.target.value)
           }
         />
-      </div>
-      {filteredPosts.map(post => (
-        <Post key={post.id} post={post} />
-      ))}
-    </div>
+      </Grid>
+      <Grid item container rowGap={4} justifyContent="center" marginTop={5}>
+        {filteredPosts.map(post => (
+          <Post key={post.id} post={post} />
+        ))}
+      </Grid>
+    </Grid>
   )
 }
 

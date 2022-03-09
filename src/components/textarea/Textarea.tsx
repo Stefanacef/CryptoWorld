@@ -1,7 +1,7 @@
-import Button from '../buttons/Button'
 import '../../assets/styles/Textarea/Textarea.css'
 import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
+import { Grid, TextareaAutosize, Button } from '@mui/material'
 
 export interface ITextarea {
   setContent: React.Dispatch<React.SetStateAction<string>>
@@ -10,7 +10,6 @@ export interface ITextarea {
 
 function Textarea(props: ITextarea) {
   const [content, setContent] = useState<string>('')
-  const intl = useIntl()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,25 +18,26 @@ function Textarea(props: ITextarea) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          className="form-textarea"
-          required
-          value={content}
-          placeholder={props.placeholder}
-          onChange={e => {
-            setContent(e.target.value)
-          }}
-        ></textarea>
-        <div className="form-btn">
-          <Button
-            text={intl.formatMessage({ id: 'button.post' })}
-            border="border-send"
+    <form onSubmit={handleSubmit}>
+      <Grid container direction="column" px="10%" rowGap={2}>
+        <Grid item>
+          <TextareaAutosize
+            maxRows={4}
+            value={content}
+            style={{ width: ' 100%', height: 100, padding: 20 }}
+            onChange={e => {
+              setContent(e.target.value)
+            }}
+            placeholder={props.placeholder}
           />
-        </div>
-      </form>
-    </div>
+        </Grid>
+        <Grid item alignSelf="flex-start">
+          <Button variant="outlined" type="submit">
+            <FormattedMessage id="button.post" defaultMessage="Save" />
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
   )
 }
 

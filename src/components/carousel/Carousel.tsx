@@ -11,7 +11,7 @@ const Carousel: FC<Props> = ({ children }) => {
   return (
     <Grid container marginTop={20} direction="column" rowGap={3}>
       <Grid item alignSelf="flex-start">
-        <Typography variant="h4" color="white">
+        <Typography variant="h4" color="black">
           <FormattedMessage
             id="carousel.title"
             defaultMessage="Our favorite coins"
