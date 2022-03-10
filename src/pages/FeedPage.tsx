@@ -1,4 +1,3 @@
-import '../assets/styles/FeedPage/feed.css'
 import PostList from '../components/posts/PostList'
 import AddPostForm from '../components/posts/AddPostForm'
 import { FormattedMessage } from 'react-intl'

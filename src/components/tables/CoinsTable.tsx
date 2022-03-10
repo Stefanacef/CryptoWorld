@@ -11,7 +11,7 @@ interface ITable {
   total_volume: string
   low_24h: string
 }
-function Table(props: { data: any }) {
+function CoinsTable(props: { data: any }) {
   return (
     <table className="table">
       <thead className="table-head">
@@ -73,4 +73,4 @@ function Table(props: { data: any }) {
   )
 }
 
-export default Table
+export default CoinsTable

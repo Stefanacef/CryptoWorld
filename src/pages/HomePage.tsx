@@ -1,6 +1,6 @@
 import Carousel from '../components/carousel/Carousel'
-import CoinCard from '../components/cards/Card'
-import Table from '../components/tables/Table'
+import CoinCard from '../components/cards/CoinCard'
+import CoinsTable from '../components/tables/CoinsTable'
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
 
@@ -25,8 +25,7 @@ export default function HomePage() {
   const topFiveCoins = data.slice(-5)
 
   return (
-    <Grid container>
-      <Grid item xs={0} sm={1} md={2} />
+    <Grid container px="10%" justifyContent="center">
       <Grid item container xs={12} sm={10} md={8} direction="column">
         <Grid item container>
           <Carousel>
@@ -42,10 +41,9 @@ export default function HomePage() {
           </Carousel>
         </Grid>
         <Grid item>
-          <Table data={data} />
+          <CoinsTable data={data} />
         </Grid>
       </Grid>
-      <Grid item xs={0} sm={1} md={2} />
     </Grid>
   )
 }

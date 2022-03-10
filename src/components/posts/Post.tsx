@@ -16,6 +16,7 @@ import {
   IconButton,
   CardActions,
   Button,
+  Tooltip,
 } from '@mui/material'
 
 import { Clear, Favorite, Message } from '@mui/icons-material'
@@ -60,11 +61,12 @@ const Post = ({ post: { id, content, lastEditAt } }: IPostProps) => {
         <CardHeader
           avatar={<Avatar aria-label="avatar">AV</Avatar>}
           action={
-            <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
-              <Clear />
-            </IconButton>
+            <Tooltip title="Delete" arrow>
+              <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
+                <Clear />
+              </IconButton>
+            </Tooltip>
           }
-          title="Alexandru"
           subheader={`${intl.formatTime(lastEditAt)} ${intl.formatDate(
             lastEditAt
           )}`}
@@ -86,15 +88,22 @@ const Post = ({ post: { id, content, lastEditAt } }: IPostProps) => {
           )}
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="like">
-            <Favorite />
-          </IconButton>
-          <IconButton aria-label="comment">
-            <Message onClick={() => setCommentStatus(previous => !previous)} />
-            <span className="post-comments-span">
-              {comments.length.toString()}
-            </span>
-          </IconButton>
+          <Tooltip title="Like" arrow>
+            <IconButton aria-label="like">
+              <Favorite />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title=" Add Comment" arrow>
+            <IconButton aria-label="comment">
+              <Message
+                onClick={() => setCommentStatus(previous => !previous)}
+              />
+              <span className="post-comments-span">
+                {comments.length.toString()}
+              </span>
+            </IconButton>
+          </Tooltip>
+
           <Box onClick={() => setEditStatus(previous => !previous)}>
             {!editStatus ? (
               <Button variant="outlined">

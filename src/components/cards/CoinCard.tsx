@@ -6,6 +6,7 @@ import {
   Avatar,
   Typography,
 } from '@mui/material'
+import { FormattedNumber } from 'react-intl'
 
 interface ICard {
   border?: string
@@ -14,7 +15,7 @@ interface ICard {
   title?: string
   description?: string
   icon?: string
-  price?: string
+  price: string
 }
 
 function CoinCard({ title, price, icon }: ICard) {
@@ -32,7 +33,11 @@ function CoinCard({ title, price, icon }: ICard) {
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {price}$
+          <FormattedNumber
+            value={parseFloat(price)}
+            style={`currency`}
+            currency="USD"
+          />
         </Typography>
       </CardContent>
     </Card>
