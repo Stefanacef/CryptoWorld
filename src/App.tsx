@@ -12,7 +12,6 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom'
-import MainStatsBar from './components/navigation/MainStatsBar'
 import TopNavigation from './components/navigation/TopNavigation'
 import CoinDetails from './pages/CoinDetailsPage'
 import NotFound from './pages/NotFound'

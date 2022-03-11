@@ -47,15 +47,9 @@ const NavigationLinks = () => {
   ]
 
   return (
-    <Grid
-      container
-      columnGap={4}
-      alignItems="center"
-      justifyContent="flex-end"
-      px={10}
-    >
+    <Grid container columnGap={4} alignItems="center" justifyContent="flex-end">
       {links.map((link, index) => (
-        <Grid item>
+        <Grid item key={index}>
           <Link to={link.path} key={index} className={className.linkStyle}>
             {link.name}
           </Link>

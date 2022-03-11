@@ -20,7 +20,7 @@ interface ICard {
 
 function CoinCard({ title, price, icon }: ICard) {
   return (
-    <Card sx={{ width: 170 }}>
+    <Card sx={{ width: 170, height: 170 }}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">

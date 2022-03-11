@@ -23,14 +23,9 @@ export default function MainStatsBar() {
   const className = useStyle()
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      columnGap={4}
-      borderBottom="1px solid white"
-    >
+    <Grid container justifyContent="center" columnGap={4}>
       {content.map((value, index) => (
-        <Grid item>
+        <Grid item key={index}>
           <span key={index} className={className.span}>
             {value.name} : {value.value}
           </span>
