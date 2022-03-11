@@ -23,7 +23,6 @@ function App() {
       <RecoilRoot>
         <TranslationProvider>
           <Router>
-            <MainStatsBar />
             <TopNavigation />
             <Routes>
               <Route path="/" element={<Navigate replace to="/coins" />} />

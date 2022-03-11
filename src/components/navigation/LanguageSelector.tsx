@@ -8,34 +8,27 @@ import {
   SelectChangeEvent,
 } from '@mui/material'
 import { FormattedMessage } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-
-const useStyle = makeStyles(() => ({
-  menuItem: {
-    fontSize: '12px',
-  },
-}))
 
 const LanguageSelector = () => {
   const [language, setLanguage] = useRecoilState(languageAtom)
-  const className = useStyle()
+
   return (
     <FormControl size="small">
       <InputLabel id="select-language">
         <FormattedMessage id="language" defaultMessage="Language" />
       </InputLabel>
       <Select
-        className={className.menuItem}
+        sx={{ fontSize: '12px' }}
         labelId="select-language"
         id="select-language"
         value={language}
         label="Language"
         onChange={(e: SelectChangeEvent) => setLanguage(e.target.value)}
       >
-        <MenuItem value="en" className={className.menuItem}>
+        <MenuItem value="en" sx={{ fontSize: '12px' }}>
           <FormattedMessage id="language-english" defaultMessage="English" />
         </MenuItem>
-        <MenuItem value="ro" className={className.menuItem}>
+        <MenuItem value="ro" sx={{ fontSize: '12px' }}>
           <FormattedMessage id="language-romanian" defaultMessage="Romanian" />
         </MenuItem>
       </Select>
