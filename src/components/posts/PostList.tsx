@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { postsAtom } from './state'
 import { useRecoilValue } from 'recoil'
 import { useIntl } from 'react-intl'
-import { TextField, InputAdornment, Grid } from '@mui/material'
+import { TextField, InputAdornment, Box, Grid } from '@mui/material'
 
 const PostList = () => {
   const [searchValue, setSearchValue] = useState<string>('')
@@ -23,8 +23,8 @@ const PostList = () => {
   }, [searchValue, posts])
 
   return (
-    <Grid container direction="column" px="10%" marginTop="50px">
-      <Grid item alignSelf="flex-start">
+    <Box mt="30px" textAlign="left">
+      <Box>
         <TextField
           size="small"
           type="search"
@@ -41,13 +41,15 @@ const PostList = () => {
             setSearchValue(e.target.value)
           }
         />
-      </Grid>
-      <Grid item container rowGap={4} justifyContent="center" marginTop={5}>
+      </Box>
+      <Grid container mt="30px" direction="column-reverse" rowGap="16px">
         {filteredPosts.map(post => (
-          <Post key={post.id} post={post} />
+          <Grid item key={post.id}>
+            <Post post={post} />
+          </Grid>
         ))}
       </Grid>
-    </Grid>
+    </Box>
   )
 }
 

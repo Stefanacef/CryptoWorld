@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import '../../../assets/styles/Comments/Comments.css'
 import Comment from './Comment'
 import Textarea from '../../textarea/Textarea'
 import { useRecoilState } from 'recoil'
 import { commentsAtom } from '../state'
 import { useIntl } from 'react-intl'
+import { Box } from '@mui/material'
 
 interface ICommentList {
   parentId: number
@@ -21,21 +21,19 @@ const CommentList = (props: ICommentList) => {
         ...previous,
         {
           content: textComments,
-          id: Math.floor(Math.random() * 100 + 1),
+          id: previous.length + 1,
         },
       ])
   }, [textComments, setComments])
 
   return (
-    <div className="comments">
+    <Box>
       <Textarea
         setContent={setTextComments}
         placeholder={intl.formatMessage({ id: 'comment.textarea.placeholder' })}
       />
-      <div className="comments-list">
-        <Comment comments={comments} />
-      </div>
-    </div>
+      <Comment comments={comments} />
+    </Box>
   )
 }
 

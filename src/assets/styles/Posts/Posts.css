@@ -1,13 +1,6 @@
-.post-comments {
-  bottom: 10px;
-  cursor: pointer;
-  left: 50px;
-  font-size: 25px;
-  position: absolute;
-}
 .post-comments-span {
   z-index: 1;
-  color: rgb(70, 38, 214);
+  color: rgb(0, 0, 0);
   bottom: 22px;
   left: 24px;
   font-size: 15px;

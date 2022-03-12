@@ -1,16 +1,17 @@
 import { IComment } from '../types'
-import { AiOutlineStar as CommentIcon } from 'react-icons/ai'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import { Grid } from '@mui/material'
 
 const Comment = (props: { comments: IComment[] }) => {
   return (
-    <div>
+    <Grid container direction="column-reverse" rowGap="8px" mt="15px">
       {props.comments.map(el => (
-        <div className="comment" key={el.id}>
-          <CommentIcon className="comment-icon" />
+        <Grid item key={el.id} borderBottom="1px solid #e87a60">
+          <StarBorderIcon />
           {el.content}
-        </div>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   )
 }
 

@@ -1,7 +1,6 @@
-import '../../assets/styles/Textarea/Textarea.css'
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Grid, TextareaAutosize, Button } from '@mui/material'
+import { TextareaAutosize, Button, Box } from '@mui/material'
 
 export interface ITextarea {
   setContent: React.Dispatch<React.SetStateAction<string>>
@@ -19,24 +18,22 @@ function Textarea(props: ITextarea) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container direction="column" px="10%" rowGap={2}>
-        <Grid item>
-          <TextareaAutosize
-            maxRows={4}
-            value={content}
-            style={{ width: ' 100%', height: 100, padding: 20 }}
-            onChange={e => {
-              setContent(e.target.value)
-            }}
-            placeholder={props.placeholder}
-          />
-        </Grid>
-        <Grid item alignSelf="flex-start">
-          <Button variant="outlined" type="submit">
-            <FormattedMessage id="button.post" defaultMessage="Save" />
-          </Button>
-        </Grid>
-      </Grid>
+      <Box>
+        <TextareaAutosize
+          maxRows={4}
+          value={content}
+          style={{ width: ' 100%', height: 100, padding: 20 }}
+          onChange={e => {
+            setContent(e.target.value)
+          }}
+          placeholder={props.placeholder}
+        />
+      </Box>
+      <Box mt="15px">
+        <Button variant="outlined" type="submit">
+          <FormattedMessage id="button.post" defaultMessage="Save" />
+        </Button>
+      </Box>
     </form>
   )
 }
