@@ -1,75 +1,46 @@
-import { FormattedMessage } from 'react-intl'
-import { Link } from 'react-router-dom'
+// import { FormattedMessage } from 'react-intl'
+// import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
-interface ITable {
-  id: string
-  name: string
-  image: string
-  price: string
-  current_price: string
-  market_cap: string
-  total_volume: string
-  low_24h: string
-}
+import { useTable } from 'react-table'
+import { columnsData } from './Columns'
+import { useMemo } from 'react'
+
 function Table(props: { data: any }) {
+  const data = useMemo(() => props.data, [props.data])
+  const columns = useMemo(() => columnsData, [])
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns,
+      data: data,
+    })
+
   return (
-    <table className="table">
-      <thead className="table-head">
-        <tr className="table-head-row">
-          <th>
-            <FormattedMessage
-              id="table.header.cell.name"
-              defaultMessage="NAME "
-            />
-          </th>
-          <th>
-            <FormattedMessage
-              id="table.header.cell.price"
-              defaultMessage="PRICE "
-            />
-          </th>
-          <th>
-            <FormattedMessage
-              id="table.header.cell.market.cap"
-              defaultMessage="MARKET CAP "
-            />
-          </th>
-          <th>
-            <FormattedMessage
-              id="table.header.cell.volume"
-              defaultMessage="VOLUME 24H"
-            />
-          </th>
-          <th>
-            <FormattedMessage
-              id="table.header.cell.low"
-              defaultMessage="LOW 24H  "
-            />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.data.map((crypto: ITable) => (
-          <tr className="table-body-row" key={crypto.id} id={crypto.id}>
-            <td className="table-body-name">
-              <Link to={`/coins/${crypto.id}`} className="table-link">
-                {' '}
-                <img
-                  className="table-body-symbol"
-                  src={crypto.image}
-                  alt="crypto symbol"
-                />
-                {crypto.name}
-              </Link>
-            </td>
-            <td>{crypto.current_price}</td>
-            <td>{crypto.market_cap}</td>
-            <td>{crypto.total_volume}</td>
-            <td>{crypto.low_24h}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <table {...getTableProps()}>
+        <thead className="table-head">
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getFooterProps()}>{column.render('Header')}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => (
+                  <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+                ))}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </>
   )
 }
 
