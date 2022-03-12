@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 import { TextareaAutosize, Button, Box, Grid } from '@mui/material'
 import { Formik } from 'formik'
 import { IPost } from '../posts/types'
@@ -11,7 +11,6 @@ export interface ITextarea {
 }
 
 function Textarea(props: ITextarea) {
-  const intl = useIntl()
   const [count, setCount] = useState(0)
   const initialValue = useMemo<Partial<IPost>>(() => ({ content: '' }), [])
 
