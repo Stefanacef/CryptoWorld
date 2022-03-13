@@ -1,10 +1,11 @@
-import { FormattedMessage } from 'react-intl'
+import { Box } from '@mui/material'
+import SignUpCard from '../components/signup/SignUpCard'
 
 const SignUpPage = () => {
   return (
-    <div>
-      <FormattedMessage id="signup.page.title" defaultMessage="SignupPage" />
-    </div>
+    <Box display="flex" justifyContent="center" p="30px">
+      <SignUpCard />
+    </Box>
   )
 }
 

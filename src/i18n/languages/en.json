@@ -20,5 +20,21 @@
   "table.header.cell.price": "PRICE",
   "table.header.cell.market.cap": "MARKET CAP",
   "table.header.cell.volume": "VOLUME 24H",
-  "table.header.cell.low": "LOW 24H "
+  "table.header.cell.low": "LOW 24H ",
+  "language": "language",
+  "language-english": "English",
+  "language-romanian": "Romanian",
+  "edit": "Edit",
+  "signUp.title": "Create an account",
+  "signUp.firstName": "Add your first name",
+  "signUp.lastName": "Add your last name",
+  "signUp.email.valid": "Enter a valid email",
+  "signUp.email.required": "Email is required",
+  "signUp.password.valid": "Password should be of minimum 8 characters length",
+  "signUp.password.required": "Password is required",
+  "button.create": "Create",
+  "first.name": "First Name",
+  "last.name": "Last Name",
+  "email": "Email",
+  "password": "Password"
 }

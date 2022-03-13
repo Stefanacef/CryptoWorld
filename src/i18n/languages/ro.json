@@ -20,5 +20,21 @@
   "table.header.cell.price": "PRET",
   "table.header.cell.market.cap": "CAPITALUL PIETEI",
   "table.header.cell.volume": "VOLUM 24H",
-  "table.header.cell.low": "CEL MAI MIC PRET 24H "
+  "table.header.cell.low": "CEL MAI MIC PRET 24H ",
+  "language": "limba",
+  "language-english": "Engleza",
+  "language-romanian": "Romana",
+  "edit": "Editat",
+  "signUp.title": "Creeaza un cont",
+  "signUp.firstName": "Completati cu prenumele dvs",
+  "signUp.lastName": "Completati cu  numele dvs",
+  "signUp.email.valid": "Adaugati un email valid",
+  "signUp.email.required": "Emailul este necesar",
+  "signUp.password.valid": "Parola trebuie sa fie mai lunga de 8 caractere",
+  "signUp.password.required": "Parola este necesara",
+  "button.create": "Creeaza",
+  "first.name": "Prenume",
+  "last.name": "Nume",
+  "email": "Email",
+  "password": "Parola"
 }
