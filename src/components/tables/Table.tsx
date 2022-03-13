@@ -1,21 +1,35 @@
 // import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, usePagination } from 'react-table'
 import { columnsData } from './Columns'
 import { useMemo } from 'react'
 function Table(props: { data: any }) {
   const data = useMemo(() => props.data, [props.data])
   const columns = useMemo(() => columnsData, [])
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      {
-        columns,
-        data: data,
-      },
-      useSortBy
-    )
-
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    prepareRow,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    state,
+  } = useTable(
+    {
+      columns,
+      data: data,
+    },
+    useSortBy,
+    usePagination
+  )
+  const { pageIndex } = state
   return (
     <>
       <table {...getTableProps()}>
@@ -38,7 +52,7 @@ function Table(props: { data: any }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {page.map(row => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
@@ -50,6 +64,50 @@ function Table(props: { data: any }) {
           })}
         </tbody>
       </table>
+      <div>
+        <span style={{ color: 'white', margin: '15px' }}>
+          Go To Page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(pageNumber)
+            }}
+          ></input>
+        </span>
+        <button
+          onClick={() => gotoPage(0)}
+          disabled={!canPreviousPage}
+          style={{ margin: '15px' }}
+        >
+          {'<<'}
+        </button>
+        <button
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+          style={{ margin: '15px' }}
+        >
+          {'<'}
+        </button>
+        <button
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+          style={{ margin: '15px' }}
+        >
+          {'>'}
+        </button>
+        <button
+          onClick={() => gotoPage(pageCount - 1)}
+          disabled={!canNextPage}
+          style={{ margin: '15px' }}
+        >
+          {'>>'}
+        </button>
+        <span style={{ color: 'white', margin: '15px' }}>
+          Page : {pageIndex + 1} / {pageOptions.length}
+        </span>
+      </div>
     </>
   )
 }
