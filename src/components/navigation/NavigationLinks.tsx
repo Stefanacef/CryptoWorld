@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import LanguageSelector from './LanguageSelector'
+import { Grid, Button } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+
+const useStyle = makeStyles(() => ({
+  linkStyle: {
+    color: 'white',
+    textDecoration: 'none',
+  },
+}))
 
 const NavigationLinks = () => {
+  const className = useStyle()
   const links = [
     {
       name: (
@@ -37,22 +47,28 @@ const NavigationLinks = () => {
   ]
 
   return (
-    <div className="navigation-links">
+    <Grid container columnGap={4} alignItems="center" justifyContent="flex-end">
       {links.map((link, index) => (
-        <Link to={link.path} key={index}>
-          {link.name}
-        </Link>
+        <Grid item key={index}>
+          <Link to={link.path} key={index} className={className.linkStyle}>
+            {link.name}
+          </Link>
+        </Grid>
       ))}
-      <Link to="/signup">
-        <button type="submit" className="navigation-button">
-          <FormattedMessage
-            id="navigation.link.signup"
-            defaultMessage="Sign up"
-          />
-        </button>
-      </Link>
-      <LanguageSelector />
-    </div>
+      <Grid item>
+        <Link to="/signup" className={className.linkStyle}>
+          <Button variant="contained">
+            <FormattedMessage
+              id="navigation.link.signup"
+              defaultMessage="Sign up"
+            />
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item>
+        <LanguageSelector />
+      </Grid>
+    </Grid>
   )
 }
 

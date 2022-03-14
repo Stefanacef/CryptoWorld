@@ -1,7 +1,6 @@
 .table {
   background-image: linear-gradient(90deg, #38142d88 54%, #000000 64%);
   width: 100%;
-  margin-top: 100px;
   border-spacing: 0;
 }
 .table-head {

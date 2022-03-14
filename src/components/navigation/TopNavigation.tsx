@@ -1,12 +1,23 @@
-import '../../assets/styles/Navigation/Navigation.css'
 import NavigationLinks from './NavigationLinks'
+import { AppBar, Toolbar, Typography, Box, Divider } from '@mui/material'
+import MainStatsBar from './MainStatsBar'
 
-function TopNavigation() {
+const TopNavigation = () => {
   return (
-    <nav className="navigation-top">
-      <h3>LOGO</h3>
-      <NavigationLinks />
-    </nav>
+    <AppBar position="sticky">
+      <Box m=" 5px 30px">
+        <MainStatsBar />
+      </Box>
+      <Divider color="white" />
+      <Box mx="30px">
+        <Toolbar style={{ padding: '0 3px' }}>
+          <Typography variant="h6" component="div">
+            LOGO
+          </Typography>
+          <NavigationLinks />
+        </Toolbar>
+      </Box>
+    </AppBar>
   )
 }
 

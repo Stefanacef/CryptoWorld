@@ -14,8 +14,10 @@ const AddPostForm = () => {
         ...previous,
         {
           content: textContent,
-          id: Math.floor(Math.random() * 100 + 1),
+          id: previous.length + 1,
+          addedAt: new Date(),
           lastEditAt: new Date(),
+          like: false,
         },
       ])
     },

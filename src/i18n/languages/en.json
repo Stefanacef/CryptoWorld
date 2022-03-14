@@ -8,6 +8,9 @@
   "feed.page.title": "Feed",
   "feed.search.placeholder": "Search...",
   "feed.textarea.placeholder": "What's on your mind?",
+  "feed.textarea.toShort": "Too short, please add more than 3 characters",
+  "feed.textarea.toLong": "Maximum characters is 100",
+  "feed.textarea.required": "Required",
   "comment.textarea.placeholder": "Leave a comment...",
   "button.post": "Post",
   "button.save": "Save",
@@ -36,5 +39,8 @@
   "first.name": "First Name",
   "last.name": "Last Name",
   "email": "Email",
-  "password": "Password"
+  "password": "Password",
+  "delete": "Delete",
+  "like": "Like",
+  "comment": "Add comment"
 }
