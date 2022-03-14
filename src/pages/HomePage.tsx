@@ -1,8 +1,8 @@
 import Carousel from '../components/carousel/Carousel'
-import Card from '../components/cards/Card'
-import Table from '../components/tables/Table'
-import '../assets/styles/HomePage/HomePage.css'
+import CoinCard from '../components/cards/CoinCard'
+import CoinsTable from '../components/tables/CoinsTable'
 import { useEffect, useState } from 'react'
+import { Grid, Box, Card } from '@mui/material'
 
 interface ICryptoCoin {
   id: string
@@ -22,22 +22,32 @@ export default function HomePage() {
         console.error(err)
       })
   }, [URL])
+
   const topFiveCoins = data.slice(-5)
 
   return (
-    <div className="home">
-      <Carousel>
-        {topFiveCoins.map((crypto: ICryptoCoin) => (
-          <Card
-            key={crypto.id}
-            border=" border border-purple"
-            title={crypto.name}
-            icon={crypto.image}
-            price={crypto.current_price}
-          />
-        ))}
-      </Carousel>
-      <Table data={data} />
-    </div>
+    <Box m="30px">
+      <Card>
+        <Box p="30px">
+          <Carousel>
+            <Grid container columnGap="15px" rowGap="15px">
+              {topFiveCoins.map((crypto: ICryptoCoin) => (
+                <Grid item key={crypto.id}>
+                  <CoinCard
+                    border=" border border-purple"
+                    title={crypto.name}
+                    icon={crypto.image}
+                    price={crypto.current_price}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Carousel>
+        </Box>
+      </Card>
+      <Box mt="30px">
+        <CoinsTable data={data} />
+      </Box>
+    </Box>
   )
 }

@@ -3,7 +3,7 @@ import { useTable, useSortBy, usePagination } from 'react-table'
 import { columnsData } from './Columns'
 import { useMemo } from 'react'
 
-function Table(props: { data: any }) {
+function CoinsTable(props: { data: any }) {
   const data = useMemo(() => props.data, [props.data])
   const columns = useMemo(() => columnsData, [])
 
@@ -112,4 +112,4 @@ function Table(props: { data: any }) {
   )
 }
 
-export default Table
+export default CoinsTable
