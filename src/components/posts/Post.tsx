@@ -34,7 +34,7 @@ const Post = ({
   const intl = useIntl()
 
   const [commentStatus, setCommentStatus] = useState<boolean>(false)
-  const [editComment, setEditComment] = useState<string>('')
+  const [editContent, setEditContent] = useState<string>('')
   const [editStatus, setEditStatus] = useState<boolean>(false)
   const [edited, setEdited] = useState<boolean>(false)
 
@@ -45,7 +45,7 @@ const Post = ({
         post.id === id
           ? {
               ...post,
-              content: editComment,
+              content: !editContent ? content : editContent,
               lastEditAt: new Date(),
             }
           : post
@@ -102,7 +102,7 @@ const Post = ({
                 defaultValue={content}
                 style={{ width: 200, height: 50 }}
                 onChange={e => {
-                  setEditComment(e.target.value)
+                  setEditContent(e.target.value)
                 }}
               />
             )}
