@@ -15,7 +15,6 @@ import {
 import { Box } from '@mui/system'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import GetTranslate from '../shared/utilities/GetTranslate'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 const SignUpCard = () => {
@@ -38,10 +37,12 @@ const SignUpCard = () => {
   })
 
   const handleSubmit = (values: IUser) => {
-    values.email &&
+    if (
+      values.email &&
       values.password &&
       values.firstName &&
-      values.lastName &&
+      values.lastName
+    ) {
       setUser(previous => [
         ...previous,
         {
@@ -51,6 +52,7 @@ const SignUpCard = () => {
           lastName: values.lastName,
         },
       ])
+    }
   }
   return (
     <Formik
@@ -95,7 +97,10 @@ const SignUpCard = () => {
                 <Box>
                   {errors.lastName && touched.lastName ? (
                     <span style={{ color: '#FC4F4F' }}>
-                      {<GetTranslate message={errors.lastName} />}
+                      <FormattedMessage
+                        id={errors.lastName}
+                        defaultMessage="This filed is required"
+                      />
                     </span>
                   ) : null}
                 </Box>
@@ -118,7 +123,10 @@ const SignUpCard = () => {
                 <Box>
                   {errors.firstName && touched.firstName ? (
                     <span style={{ color: '#FC4F4F' }}>
-                      {<GetTranslate message={errors.firstName} />}
+                      <FormattedMessage
+                        id={errors.firstName}
+                        defaultMessage="This filed is required"
+                      />
                     </span>
                   ) : null}
                 </Box>
@@ -141,7 +149,10 @@ const SignUpCard = () => {
                 <Box>
                   {errors.email && touched.email ? (
                     <span style={{ color: '#FC4F4F' }}>
-                      {<GetTranslate message={errors.email} />}
+                      <FormattedMessage
+                        id={errors.email}
+                        defaultMessage="This filed is required"
+                      />
                     </span>
                   ) : null}
                 </Box>
@@ -165,7 +176,10 @@ const SignUpCard = () => {
                 <Box>
                   {errors.password && touched.password ? (
                     <span style={{ color: '#FC4F4F' }}>
-                      {<GetTranslate message={errors.password} />}
+                      <FormattedMessage
+                        id={errors.password}
+                        defaultMessage="This filed is required"
+                      />
                     </span>
                   ) : null}
                 </Box>
