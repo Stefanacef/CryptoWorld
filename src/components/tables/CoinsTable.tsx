@@ -1,20 +1,24 @@
 import '../../assets/styles/Table/Table.css'
-import { useTable, useSortBy, usePagination } from 'react-table'
+import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
 import { columnsData } from './Columns'
 import { useMemo } from 'react'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
-import { Button, Grid, TextField, Tooltip } from '@mui/material'
+import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Box } from '@mui/system'
 
 function CoinsTable(props: { data: any }) {
   const data = useMemo(() => props.data, [props.data])
   const columns = useMemo(() => columnsData, [])
   const intl = useIntl()
-
+  const defaultColumn = useMemo(
+    () => ({
+      Filter: '',
+    }),
+    []
+  )
   const {
     getTableProps,
     getTableBodyProps,
@@ -31,9 +35,11 @@ function CoinsTable(props: { data: any }) {
     state,
   } = useTable(
     {
+      defaultColumn,
       columns,
       data: data,
     },
+    useFilters,
     useSortBy,
     usePagination
   )
@@ -58,6 +64,7 @@ function CoinsTable(props: { data: any }) {
                       ''
                     )}
                   </span>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
             </tr>
