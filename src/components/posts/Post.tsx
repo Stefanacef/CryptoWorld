@@ -76,7 +76,7 @@ const Post = ({
         <CardHeader
           avatar={<Avatar aria-label="avatar">AV</Avatar>}
           action={
-            <Tooltip title="Delete" arrow>
+            <Tooltip title={intl.formatMessage({ id: 'delete' })} arrow>
               <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
                 <Clear />
               </IconButton>
@@ -109,12 +109,12 @@ const Post = ({
           </CardContent>
         </Box>
         <CardActions disableSpacing>
-          <Tooltip title="Like" arrow>
+          <Tooltip title={intl.formatMessage({ id: 'like' })} arrow>
             <IconButton aria-label="like" onClick={() => handleLiked(id)}>
               <Favorite sx={{ color: `${like && '#FC4F4F'} ` }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title=" Add Comment" arrow>
+          <Tooltip title={intl.formatMessage({ id: 'comment' })} arrow>
             <IconButton
               aria-label="comment"
               onClick={() => setCommentStatus(previous => !previous)}

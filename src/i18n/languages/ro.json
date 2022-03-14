@@ -27,5 +27,8 @@
   "language": "limba",
   "language-english": "Engleza",
   "language-romanian": "Romana",
-  "edit": "Editat"
+  "edit": "Editat",
+  "delete": "Sterge",
+  "like": "Apreciază",
+  "comment": "Adauga commentariu"
 }
