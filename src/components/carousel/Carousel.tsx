@@ -18,7 +18,7 @@ const Carousel: FC = ({ children }) => {
       <Box m="30px 0"> {children}</Box>
       <Box textAlign="left">
         <Button variant="contained" onClick={() => navigate('/research')}>
-          <FormattedMessage id="button.why" defaultMessage="Sign up" />
+          <FormattedMessage id="generic.label.why" defaultMessage="Sign up" />
         </Button>
       </Box>
     </>

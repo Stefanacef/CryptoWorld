@@ -26,13 +26,13 @@ const SignUpCard = () => {
     []
   )
   const validationSchema = Yup.object({
-    firstName: Yup.string().required('signUp.firstName'),
-    lastName: Yup.string().required('signUp.lastName'),
+    firstName: Yup.string().required('signUp.firstName.required'),
+    lastName: Yup.string().required('signUp.lastName.required'),
     email: Yup.string()
       .email('signUp.email.valid')
       .required('signUp.email.required'),
     password: Yup.string()
-      .min(8, 'signUp.password.valid')
+      .min(8, 'signUp.password.minimum.characters')
       .required('signUp.password.required'),
   })
 
@@ -84,7 +84,7 @@ const SignUpCard = () => {
                   id="lastName"
                   name="lastName"
                   label={intl.formatMessage({
-                    id: 'last.name',
+                    id: 'signUp.last.name.label',
                   })}
                   type="text"
                   variant="filled"
@@ -110,7 +110,7 @@ const SignUpCard = () => {
                   id="firstName"
                   name="firstName"
                   label={intl.formatMessage({
-                    id: 'first.name',
+                    id: 'signUp.first.name.label',
                   })}
                   type="text"
                   variant="filled"
@@ -137,7 +137,7 @@ const SignUpCard = () => {
                   id="email"
                   name="email"
                   label={intl.formatMessage({
-                    id: 'email',
+                    id: 'signUp.email.label',
                   })}
                   variant="filled"
                   fullWidth
@@ -162,7 +162,7 @@ const SignUpCard = () => {
                   id="password"
                   name="password"
                   label={intl.formatMessage({
-                    id: 'password',
+                    id: 'signUp.password.label',
                   })}
                   type="password"
                   autoComplete="current-password"
@@ -191,7 +191,10 @@ const SignUpCard = () => {
             sx={{ paddingLeft: '16px', marginTop: '15px' }}
           >
             <Button variant="outlined" onClick={() => submitForm()}>
-              <FormattedMessage id="button.create" defaultMessage="Create" />
+              <FormattedMessage
+                id="signUp.button.create"
+                defaultMessage="Create"
+              />
             </Button>
           </CardActions>
           <Typography variant="body2" color="text.secondary"></Typography>
