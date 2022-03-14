@@ -15,7 +15,10 @@ const LanguageSelector = () => {
   return (
     <FormControl size="small">
       <InputLabel id="select-language">
-        <FormattedMessage id="language" defaultMessage="Language" />
+        <FormattedMessage
+          id="generic.label.language"
+          defaultMessage="Language"
+        />
       </InputLabel>
       <Select
         sx={{ fontSize: '12px' }}
@@ -26,10 +29,16 @@ const LanguageSelector = () => {
         onChange={(e: SelectChangeEvent) => setLanguage(e.target.value)}
       >
         <MenuItem value="en" sx={{ fontSize: '12px' }}>
-          <FormattedMessage id="language-english" defaultMessage="English" />
+          <FormattedMessage
+            id="language.selector.english"
+            defaultMessage="English"
+          />
         </MenuItem>
         <MenuItem value="ro" sx={{ fontSize: '12px' }}>
-          <FormattedMessage id="language-romanian" defaultMessage="Romanian" />
+          <FormattedMessage
+            id="language.selector.romanian"
+            defaultMessage="Romanian"
+          />
         </MenuItem>
       </Select>
     </FormControl>

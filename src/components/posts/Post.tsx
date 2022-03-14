@@ -76,7 +76,10 @@ const Post = ({
         <CardHeader
           avatar={<Avatar aria-label="avatar">AV</Avatar>}
           action={
-            <Tooltip title={intl.formatMessage({ id: 'delete' })} arrow>
+            <Tooltip
+              title={intl.formatMessage({ id: 'generic.label.delete' })}
+              arrow
+            >
               <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
                 <Clear />
               </IconButton>
@@ -87,7 +90,7 @@ const Post = ({
               ? `${intl.formatTime(addedAt)} ${intl.formatDate(addedAt)}`
               : `${intl.formatTime(lastEditAt)} ${intl.formatDate(
                   lastEditAt
-                )} ${intl.formatMessage({ id: 'edit' })} `
+                )} ${intl.formatMessage({ id: 'generic.label.edit' })} `
           }
         />
         <Box px="5px">
@@ -109,12 +112,18 @@ const Post = ({
           </CardContent>
         </Box>
         <CardActions disableSpacing>
-          <Tooltip title={intl.formatMessage({ id: 'like' })} arrow>
+          <Tooltip
+            title={intl.formatMessage({ id: 'generic.label.like' })}
+            arrow
+          >
             <IconButton aria-label="like" onClick={() => handleLiked(id)}>
               <Favorite sx={{ color: `${like && '#FC4F4F'} ` }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title={intl.formatMessage({ id: 'comment' })} arrow>
+          <Tooltip
+            title={intl.formatMessage({ id: 'generic.label.comment' })}
+            arrow
+          >
             <IconButton
               aria-label="comment"
               onClick={() => setCommentStatus(previous => !previous)}
@@ -129,7 +138,10 @@ const Post = ({
           <Box onClick={() => setEditStatus(previous => !previous)}>
             {!editStatus ? (
               <Button variant="outlined">
-                <FormattedMessage id="button.edit" defaultMessage="Edit" />
+                <FormattedMessage
+                  id="generic.label.edit"
+                  defaultMessage="Edit"
+                />
               </Button>
             ) : (
               <Button
@@ -137,7 +149,10 @@ const Post = ({
                 color="success"
                 onClick={() => handleEdit(id)}
               >
-                <FormattedMessage id="button.save" defaultMessage="Save" />
+                <FormattedMessage
+                  id="generic.label.save"
+                  defaultMessage="Save"
+                />
               </Button>
             )}
           </Box>
