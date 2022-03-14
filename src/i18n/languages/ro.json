@@ -8,6 +8,9 @@
   "feed.page.title": "Feed",
   "feed.search.placeholder": "Cauta...",
   "feed.textarea.placeholder": "La ce te gandesti?",
+  "feed.textarea.toShort": "Prea scurt, te rog sa introduci mai mult de 3 caractere",
+  "feed.textarea.toLong": "Numarul maxim de carcatere este 100",
+  "feed.textarea.required": "Necesar",
   "comment.textarea.placeholder": "Lasa un comentariu...",
   "button.post": "Postati",
   "button.save": "Salvati",
@@ -20,5 +23,12 @@
   "table.header.cell.price": "PRET",
   "table.header.cell.market.cap": "CAPITALUL PIETEI",
   "table.header.cell.volume": "VOLUM 24H",
-  "table.header.cell.low": "CEL MAI MIC PRET 24H "
+  "table.header.cell.low": "CEL MAI MIC PRET 24H ",
+  "language": "limba",
+  "language-english": "Engleza",
+  "language-romanian": "Romana",
+  "edit": "Editat",
+  "delete": "Sterge",
+  "like": "Apreciază",
+  "comment": "Adauga commentariu"
 }
