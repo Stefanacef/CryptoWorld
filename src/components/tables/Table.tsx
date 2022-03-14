@@ -1,8 +1,8 @@
-// import { Link } from 'react-router-dom'
 import '../../assets/styles/Table/Table.css'
 import { useTable, useSortBy, usePagination } from 'react-table'
 import { columnsData } from './Columns'
 import { useMemo } from 'react'
+
 function Table(props: { data: any }) {
   const data = useMemo(() => props.data, [props.data])
   const columns = useMemo(() => columnsData, [])
