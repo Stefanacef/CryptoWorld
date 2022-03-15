@@ -1,11 +1,6 @@
 import { Box } from '@mui/system'
 import { Link } from 'react-router-dom'
-
-interface IFirstColumn {
-  image: string
-  value: string
-  path: string
-}
+import { IFirstColumn } from './types'
 
 const CoinColumnHeader = (props: IFirstColumn) => {
   return (

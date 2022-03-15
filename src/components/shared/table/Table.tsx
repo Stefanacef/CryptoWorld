@@ -1,4 +1,4 @@
-import '../../assets/styles/Table/Table.css'
+import '../../../assets/styles/Table/Table.css'
 import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
 import { useMemo } from 'react'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
@@ -7,60 +7,18 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import FilterByCoinName from './FilterByCoinName'
-import CoinColumnHeader from './CoinColumnHeader'
+import { ITableData } from './types'
 
-function CoinsTable(props: { data: any }) {
+function Table(props: { data: ITableData[]; columns: any }) {
   const intl = useIntl()
   const data = useMemo(() => props.data, [props.data])
-  const columns = useMemo(
-    () => [
-      {
-        Header: intl.formatMessage({ id: 'table.header.cell.name' }),
-        accessor: 'name',
-        Cell: ({ cell }: { cell: { row: any; value: string } }) => (
-          <CoinColumnHeader
-            path={`/coins/${cell?.row?.original.id}`}
-            image={cell?.row?.original.image}
-            value={cell?.value}
-          />
-        ),
-        Filter: FilterByCoinName,
-      },
-      {
-        Header: intl.formatMessage({ id: 'table.header.cell.price' }),
-        accessor: 'current_price',
-        Cell: ({ cell }: any) =>
-          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
-      },
-      {
-        Header: intl.formatMessage({ id: 'table.header.cell.market.cap' }),
-        accessor: 'market_cap',
-        Cell: ({ cell }: any) =>
-          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
-      },
-      {
-        Header: intl.formatMessage({ id: 'table.header.cell.volume' }),
-        accessor: 'total_volume',
-        Cell: ({ cell }: any) =>
-          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
-      },
-      {
-        Header: intl.formatMessage({ id: 'table.header.cell.low' }),
-        accessor: 'low_24h',
-        Cell: ({ cell }: any) =>
-          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
-      },
-    ],
-    [intl]
-  )
-
   const defaultColumn = useMemo(
     () => ({
       Filter: <span></span>,
     }),
     []
   )
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -78,8 +36,8 @@ function CoinsTable(props: { data: any }) {
   } = useTable(
     {
       defaultColumn,
-      columns,
-      data: data,
+      columns: props.columns,
+      data,
     },
     useFilters,
     useSortBy,
@@ -230,4 +188,4 @@ function CoinsTable(props: { data: any }) {
   )
 }
 
-export default CoinsTable
+export default Table
