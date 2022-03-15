@@ -1,6 +1,5 @@
 import '../../assets/styles/Table/Table.css'
 import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
-import { columnsData } from './Columns'
 import { useMemo } from 'react'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
@@ -8,14 +7,57 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
+import FilterByCoinName from './FilterByCoinName'
+import FirsColumn from './FirsColumn'
 
 function CoinsTable(props: { data: any }) {
-  const data = useMemo(() => props.data, [props.data])
-  const columns = useMemo(() => columnsData, [])
   const intl = useIntl()
+  const data = useMemo(() => props.data, [props.data])
+  const columns = useMemo(
+    () => [
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.name' }),
+        accessor: 'name',
+        Cell: ({ cell }: { cell: { row: any; value: string } }) => (
+          <FirsColumn
+            path={`/coins/${cell?.row?.original.id}`}
+            image={cell?.row?.original.image}
+            value={cell?.value}
+          />
+        ),
+        Filter: FilterByCoinName,
+      },
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.price' }),
+        accessor: 'current_price',
+        Cell: ({ cell }: any) =>
+          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
+      },
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.market.cap' }),
+        accessor: 'market_cap',
+        Cell: ({ cell }: any) =>
+          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
+      },
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.volume' }),
+        accessor: 'total_volume',
+        Cell: ({ cell }: any) =>
+          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
+      },
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.low' }),
+        accessor: 'low_24h',
+        Cell: ({ cell }: any) =>
+          intl.formatNumber(cell.value, { style: 'currency', currency: 'USD' }),
+      },
+    ],
+    [intl]
+  )
+
   const defaultColumn = useMemo(
     () => ({
-      Filter: '',
+      Filter: <span></span>,
     }),
     []
   )
@@ -44,45 +86,50 @@ function CoinsTable(props: { data: any }) {
     usePagination
   )
   const { pageIndex } = state
+
   return (
     <>
-      <table {...getTableProps()}>
-        <thead className="table-head">
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <span style={{ marginLeft: '10px' }}>
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <ArrowDownwardIcon sx={{ fontSize: '17px' }} />
+      <Box className="horizontal-scroll ">
+        <table {...getTableProps()}>
+          <thead className="table-head">
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    <span style={{ marginLeft: '10px' }}>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <ArrowDownwardIcon sx={{ fontSize: '17px' }} />
+                        ) : (
+                          <ArrowUpwardIcon sx={{ fontSize: '17px' }} />
+                        )
                       ) : (
-                        <ArrowUpwardIcon sx={{ fontSize: '17px' }} />
-                      )
-                    ) : (
-                      ''
-                    )}
-                  </span>
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map(row => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+                        ''
+                      )}
+                    </span>
+                    <div>
+                      {column.canFilter ? column.render('Filter') : null}
+                    </div>
+                  </th>
                 ))}
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map(row => {
+              prepareRow(row)
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+                  ))}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </Box>
       <Box>
         <Grid
           container
@@ -112,53 +159,61 @@ function CoinsTable(props: { data: any }) {
                 title={intl.formatMessage({ id: 'table.button.first.page' })}
                 arrow
               >
-                <Button
-                  variant="outlined"
-                  onClick={() => gotoPage(0)}
-                  disabled={!canPreviousPage}
-                >
-                  <NavigateBeforeIcon />
-                  <NavigateBeforeIcon />
-                </Button>
+                <span>
+                  <Button
+                    variant="outlined"
+                    onClick={() => gotoPage(0)}
+                    disabled={!canPreviousPage}
+                  >
+                    <NavigateBeforeIcon />
+                    <NavigateBeforeIcon />
+                  </Button>
+                </span>
               </Tooltip>
               <Tooltip
                 title={intl.formatMessage({ id: 'table.button.previous.page' })}
                 arrow
               >
-                <Button
-                  variant="outlined"
-                  onClick={() => previousPage()}
-                  disabled={!canPreviousPage}
-                  sx={{ margin: '0 10px' }}
-                >
-                  <NavigateBeforeIcon />
-                </Button>
+                <span>
+                  <Button
+                    variant="outlined"
+                    onClick={() => previousPage()}
+                    disabled={!canPreviousPage}
+                    sx={{ margin: '0 10px' }}
+                  >
+                    <NavigateBeforeIcon />
+                  </Button>
+                </span>
               </Tooltip>
               <Tooltip
                 title={intl.formatMessage({ id: 'table.button.next.page' })}
                 arrow
               >
-                <Button
-                  variant="outlined"
-                  onClick={() => nextPage()}
-                  disabled={!canNextPage}
-                  sx={{ margin: '0 10px' }}
-                >
-                  <NavigateNextIcon />
-                </Button>
+                <span>
+                  <Button
+                    variant="outlined"
+                    onClick={() => nextPage()}
+                    disabled={!canNextPage}
+                    sx={{ margin: '0 10px' }}
+                  >
+                    <NavigateNextIcon />
+                  </Button>
+                </span>
               </Tooltip>
               <Tooltip
                 title={intl.formatMessage({ id: 'table.button.last.page' })}
                 arrow
               >
-                <Button
-                  variant="outlined"
-                  onClick={() => gotoPage(pageCount - 1)}
-                  disabled={!canNextPage}
-                >
-                  <NavigateNextIcon />
-                  <NavigateNextIcon />
-                </Button>
+                <span>
+                  <Button
+                    variant="outlined"
+                    onClick={() => gotoPage(pageCount - 1)}
+                    disabled={!canNextPage}
+                  >
+                    <NavigateNextIcon />
+                    <NavigateNextIcon />
+                  </Button>
+                </span>
               </Tooltip>
             </Box>
           </Grid>

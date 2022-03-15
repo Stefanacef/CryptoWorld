@@ -36,3 +36,10 @@ table th {
   text-decoration: none;
   color: rgb(133, 132, 132);
 }
+
+.horizontal-scroll {
+  overflow: hidden;
+  overflow-x: auto;
+  clear: both;
+  width: 100%;
+}
