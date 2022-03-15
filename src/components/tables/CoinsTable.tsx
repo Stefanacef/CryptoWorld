@@ -49,7 +49,7 @@ function CoinsTable(props: { data: any }) {
         </tr>
       </thead>
       <tbody>
-        {props.data.map((crypto: ITable) => (
+        {props.data?.map((crypto: ITable) => (
           <tr className="table-body-row" key={crypto.id} id={crypto.id}>
             <td className="table-body-name">
               <Link to={`/coins/${crypto.id}`} className="table-link">
