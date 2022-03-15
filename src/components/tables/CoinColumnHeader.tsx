@@ -7,7 +7,7 @@ interface IFirstColumn {
   path: string
 }
 
-const FirsColumn = (props: IFirstColumn) => {
+const CoinColumnHeader = (props: IFirstColumn) => {
   return (
     <Link to={props.path} className="table-link">
       <Box>
@@ -18,4 +18,4 @@ const FirsColumn = (props: IFirstColumn) => {
   )
 }
 
-export default FirsColumn
+export default CoinColumnHeader

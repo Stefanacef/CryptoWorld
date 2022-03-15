@@ -9,6 +9,7 @@ const FilterByCoinName = ({ column }: any) => {
       value={filterValue || ''}
       variant="standard"
       onChange={e => setFilter(e.target.value)}
+      onClick={e => e.stopPropagation()}
     />
   )
 }

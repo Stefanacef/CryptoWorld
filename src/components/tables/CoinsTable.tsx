@@ -8,7 +8,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
 import FilterByCoinName from './FilterByCoinName'
-import FirsColumn from './FirsColumn'
+import CoinColumnHeader from './CoinColumnHeader'
 
 function CoinsTable(props: { data: any }) {
   const intl = useIntl()
@@ -19,7 +19,7 @@ function CoinsTable(props: { data: any }) {
         Header: intl.formatMessage({ id: 'table.header.cell.name' }),
         accessor: 'name',
         Cell: ({ cell }: { cell: { row: any; value: string } }) => (
-          <FirsColumn
+          <CoinColumnHeader
             path={`/coins/${cell?.row?.original.id}`}
             image={cell?.row?.original.image}
             value={cell?.value}
@@ -144,13 +144,14 @@ function CoinsTable(props: { data: any }) {
               label={intl.formatMessage({ id: 'table.search.page' })}
               variant="filled"
               type="number"
-              defaultValue={pageIndex + 1}
+              defaultValue=""
               onChange={e => {
                 const pageNumber = e.target.value
                   ? Number(e.target.value) - 1
                   : 0
                 gotoPage(pageNumber)
               }}
+              onBlur={e => (e.target.value = '')}
             />
           </Grid>
           <Grid item>
@@ -218,7 +219,7 @@ function CoinsTable(props: { data: any }) {
             </Box>
           </Grid>
           <Grid item alignSelf="flex-start">
-            <Box color="white">
+            <Box color="black">
               <FormattedMessage id="table.page" defaultMessage="Page" /> :
               {pageIndex + 1} / {pageOptions.length}
             </Box>
