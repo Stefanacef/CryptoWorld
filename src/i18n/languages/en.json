@@ -40,5 +40,6 @@
   "generic.label.edit": "Edit",
   "generic.label.why": "Why?",
   "generic.label.delete": "Delete",
-  "generic.label.like": "Like"
+  "generic.label.like": "Like",
+  "generic.label.error": "Error"
 }
