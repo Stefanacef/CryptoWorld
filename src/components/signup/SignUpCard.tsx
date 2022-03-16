@@ -16,12 +16,12 @@ import { Box } from '@mui/system'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
-import TextInput from '../shared/textField/TextField'
+import TextInput from '../shared/textField/TextInput'
 
 const SignUpCard = () => {
   const setUser = useSetRecoilState(usersAtom)
   const intl = useIntl()
-  const user = useRecoilValue(usersAtom)
+
   const initialValue = useMemo<IUser>(
     () => ({ email: '', password: '', firstName: '', lastName: '' }),
     []
@@ -85,7 +85,6 @@ const SignUpCard = () => {
                   id="lastName"
                   name="lastName"
                   label="signUp.last.name.label"
-                  fullWidth={true}
                   value={values.lastName}
                   onChange={e => {
                     setFieldValue('lastName', e.target.value)
@@ -107,7 +106,6 @@ const SignUpCard = () => {
                   id="firstName"
                   name="firstName"
                   label="signUp.first.name.label"
-                  fullWidth={true}
                   value={values.firstName}
                   onChange={e => {
                     setFieldValue('firstName', e.target.value)

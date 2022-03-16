@@ -15,7 +15,7 @@ const TextInput = (props: ITextInput) => {
       variant={props.variant ? props.variant : 'filled'}
       value={props.value}
       onChange={props.onChange}
-      fullWidth={props.fullWidth}
+      fullWidth={props.fullWidth ? props.fullWidth : true}
     />
   )
 }
