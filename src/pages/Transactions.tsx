@@ -1,13 +1,11 @@
-import { FormattedMessage } from 'react-intl'
+import { Box } from '@mui/material'
+import TransactionsForm from '../components/transactions/TransactionsForm'
 
 const Transactions = () => {
   return (
-    <div>
-      <FormattedMessage
-        id="transactions.page.title"
-        defaultMessage="Transactions"
-      />
-    </div>
+    <Box m="30px" display="flex" justifyContent="center">
+      <TransactionsForm />
+    </Box>
   )
 }
 

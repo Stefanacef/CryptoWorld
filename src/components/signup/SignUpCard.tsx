@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { IUser } from './types'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { usersAtom } from './state'
 import {
   Card,

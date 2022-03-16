@@ -39,6 +39,7 @@
   "signUp.last.name.label": "Nume",
   "signUp.email.label": "Email",
   "signUp.password.label": "Parola",
+  "transaction.title": "Adauga o noua tranzactie",
   "generic.label.language": "Limba",
   "generic.label.post": "Postati",
   "generic.label.comment": "Adauga commentariu",
@@ -46,5 +47,6 @@
   "generic.label.edit": "Editati",
   "generic.label.why": "De ce?",
   "generic.label.delete": "Sterge",
-  "generic.label.like": "Apreciază"
+  "generic.label.like": "Apreciază",
+  "generic.label.coins": "Monede"
 }
