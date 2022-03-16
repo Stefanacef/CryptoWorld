@@ -49,5 +49,6 @@
   "generic.label.delete": "Sterge",
   "generic.label.like": "Apreciază",
   "generic.label.coins": "Monede",
-  "generic.label.error": "Eroare"
+  "generic.label.error": "Eroare",
+  "generic.label.submit": "Trimite"
 }

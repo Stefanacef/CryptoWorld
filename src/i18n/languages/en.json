@@ -49,5 +49,6 @@
   "generic.label.delete": "Delete",
   "generic.label.like": "Like",
   "generic.label.coins": "Coins",
-  "generic.label.error": "Error"
+  "generic.label.error": "Error",
+  "generic.label.submit": "Submit"
 }

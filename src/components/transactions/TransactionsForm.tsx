@@ -4,67 +4,71 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Grid,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
+  Skeleton,
 } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import TextInput from '../shared/textField/TextInput'
+import { useQuery } from 'react-query'
+import CoinSelector from './CoinSelector'
+import { ICoinSelector } from './types'
 
 const TransactionsForm = () => {
   const intl = useIntl()
+  const URL: string = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+
+  const fetchCoins = async () => {
+    const response = await fetch(URL)
+    return response.json()
+  }
+  const { data, isLoading, isError, error } = useQuery<ICoinSelector[], Error>(
+    'coins',
+    fetchCoins
+  )
+
   return (
-    <Card
-      sx={{
-        width: '500px',
-        minHeight: '550px',
-        padding: '30px',
-        textAlign: 'left',
-      }}
-    >
-      <CardHeader
-        title={intl.formatMessage({
-          id: 'transaction.title',
-        })}
-      />
-      <CardContent>
-        <Grid container direction="column" rowGap="30px">
-          <Grid item>
-            <FormControl fullWidth>
-              <InputLabel id="coin-selector-label">
-                <FormattedMessage
-                  id="generic.label.coins"
-                  defaultMessage="Coin"
-                />
-              </InputLabel>
-              <Select
-                labelId="coin-selector-label"
-                id="coin-selector"
-                value="{"
-                label={intl.formatMessage({
-                  id: 'generic.label.coins',
-                })}
-                onChange={() => {
-                  console.log('buna')
-                }}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions
-        disableSpacing
-        sx={{ paddingLeft: '16px', marginTop: '15px' }}
-      >
-        <Button variant="outlined" onClick={() => console.log('buna')}>
-          <FormattedMessage id="signUp.button.create" defaultMessage="Create" />
-        </Button>
-      </CardActions>
-    </Card>
+    <>
+      {isError ? (
+        <span>
+          <FormattedMessage id="generic.label.error" defaultMessage="Error" />
+          {error?.message}
+        </span>
+      ) : isLoading ? (
+        <Skeleton
+          variant="rectangular"
+          width="50%"
+          height="500px"
+          animation="wave"
+        />
+      ) : (
+        <Card
+          sx={{
+            width: '500px',
+            minHeight: '550px',
+            padding: '30px',
+            textAlign: 'left',
+          }}
+        >
+          <CardHeader
+            title={intl.formatMessage({
+              id: 'transaction.title',
+            })}
+          />
+          <CardContent>
+            <CoinSelector data={data} />
+          </CardContent>
+          <CardActions
+            disableSpacing
+            sx={{ paddingLeft: '16px', marginTop: '15px' }}
+          >
+            <Button variant="outlined" onClick={() => console.log('buna')}>
+              <FormattedMessage
+                id="generic.label.submit"
+                defaultMessage="Submit"
+              />
+            </Button>
+          </CardActions>
+        </Card>
+      )}
+    </>
   )
 }
 
