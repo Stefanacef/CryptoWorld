@@ -1,6 +1,6 @@
 {
   "navigation.link.coins": "Coins",
-  "navigation.link.research": "Research",
+  "navigation.link.transactions": "Transactions",
   "navigation.link.exchanges": "Exchanges",
   "navigation.link.feed": "Feed",
   "navigation.link.signup": "Sign up",
@@ -14,7 +14,7 @@
   "feed.textarea.toLong": "Maximum characters is 100",
   "feed.textarea.required": "Required",
   "comment.textarea.placeholder": "Leave a comment...",
-  "research.page.title": "Research",
+  "transactions.page.title": "Transactions",
   "exchanges.page.title": "Exchanges",
   "table.header.cell.name": "NAME",
   "table.header.cell.price": "PRICE",

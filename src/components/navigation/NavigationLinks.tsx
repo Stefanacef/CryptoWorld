@@ -23,11 +23,11 @@ const NavigationLinks = () => {
     {
       name: (
         <FormattedMessage
-          id="navigation.link.research"
-          defaultMessage="Research"
+          id="navigation.link.transactions"
+          defaultMessage="Transactions"
         />
       ),
-      path: '/research',
+      path: '/transactions',
     },
     {
       name: (

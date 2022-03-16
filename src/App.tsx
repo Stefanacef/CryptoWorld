@@ -1,7 +1,7 @@
 import './App.css'
 import FeedPage from './pages/FeedPage'
 import HomePage from './pages/HomePage'
-import ExplorationPage from './pages/ExplorationPage'
+import Transactions from './pages/Transactions'
 import Exchanges from './pages/Exchanges'
 import SignUpPage from './pages/SignUpPage'
 import { RecoilRoot } from 'recoil'
@@ -28,7 +28,7 @@ function App() {
               <Route path="/coins" element={<HomePage />} />
               <Route path="/coins/:id" element={<CoinDetails />} />
               <Route path="/feed" element={<FeedPage />} />
-              <Route path="/research" element={<ExplorationPage />} />
+              <Route path="/transactions" element={<Transactions />} />
               <Route path="/exchanges" element={<Exchanges />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="*" element={<NotFound />} />

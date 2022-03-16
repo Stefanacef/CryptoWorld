@@ -1,6 +1,6 @@
 {
   "navigation.link.coins": "Monede",
-  "navigation.link.research": "Documentatie",
+  "navigation.link.transactions": "Tranzactii",
   "navigation.link.exchanges": "Schimb valutar",
   "navigation.link.feed": "Feed",
   "navigation.link.signup": "Inregistreaza-te",
@@ -14,7 +14,7 @@
   "feed.textarea.toLong": "Numarul maxim de carcatere este 100",
   "feed.textarea.required": "Necesar",
   "comment.textarea.placeholder": "Lasa un comentariu...",
-  "research.page.title": "Documentatie",
+  "transactions.page.title": "Tranzactii",
   "exchanges.page.title": "Schimb valutar",
   "table.header.cell.name": "NUME",
   "table.header.cell.price": "PRET",
