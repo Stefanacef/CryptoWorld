@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { IUser } from './types'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { usersAtom } from './state'
 import {
   Card,
@@ -16,11 +16,12 @@ import { Box } from '@mui/system'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
+import TextInput from '../shared/textField/TextField'
 
 const SignUpCard = () => {
   const setUser = useSetRecoilState(usersAtom)
   const intl = useIntl()
-
+  const user = useRecoilValue(usersAtom)
   const initialValue = useMemo<IUser>(
     () => ({ email: '', password: '', firstName: '', lastName: '' }),
     []
@@ -80,15 +81,11 @@ const SignUpCard = () => {
           <CardContent>
             <Grid container direction="column" rowGap="30px">
               <Grid item>
-                <TextField
+                <TextInput
                   id="lastName"
                   name="lastName"
-                  label={intl.formatMessage({
-                    id: 'signUp.last.name.label',
-                  })}
-                  type="text"
-                  variant="filled"
-                  fullWidth
+                  label="signUp.last.name.label"
+                  fullWidth={true}
                   value={values.lastName}
                   onChange={e => {
                     setFieldValue('lastName', e.target.value)
@@ -106,15 +103,11 @@ const SignUpCard = () => {
                 </Box>
               </Grid>
               <Grid item>
-                <TextField
+                <TextInput
                   id="firstName"
                   name="firstName"
-                  label={intl.formatMessage({
-                    id: 'signUp.first.name.label',
-                  })}
-                  type="text"
-                  variant="filled"
-                  fullWidth
+                  label="signUp.first.name.label"
+                  fullWidth={true}
                   value={values.firstName}
                   onChange={e => {
                     setFieldValue('firstName', e.target.value)
