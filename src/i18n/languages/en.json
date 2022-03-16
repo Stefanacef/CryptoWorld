@@ -48,5 +48,6 @@
   "generic.label.why": "Why?",
   "generic.label.delete": "Delete",
   "generic.label.like": "Like",
-  "generic.label.coins": "Coins"
+  "generic.label.coins": "Coins",
+  "generic.label.error": "Error"
 }

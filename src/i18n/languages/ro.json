@@ -48,5 +48,6 @@
   "generic.label.why": "De ce?",
   "generic.label.delete": "Sterge",
   "generic.label.like": "Apreciază",
-  "generic.label.coins": "Monede"
+  "generic.label.coins": "Monede",
+  "generic.label.error": "Eroare"
 }

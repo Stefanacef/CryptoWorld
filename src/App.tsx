@@ -15,6 +15,9 @@ import {
 import TopNavigation from './components/navigation/TopNavigation'
 import CoinDetails from './pages/CoinDetailsPage'
 import NotFound from './pages/NotFound'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
@@ -22,17 +25,19 @@ function App() {
       <RecoilRoot>
         <TranslationProvider>
           <Router>
-            <TopNavigation />
-            <Routes>
-              <Route path="/" element={<Navigate replace to="/coins" />} />
-              <Route path="/coins" element={<HomePage />} />
-              <Route path="/coins/:id" element={<CoinDetails />} />
-              <Route path="/feed" element={<FeedPage />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/exchanges" element={<Exchanges />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <QueryClientProvider client={queryClient}>
+              <TopNavigation />
+              <Routes>
+                <Route path="/" element={<Navigate replace to="/coins" />} />
+                <Route path="/coins" element={<HomePage />} />
+                <Route path="/coins/:id" element={<CoinDetails />} />
+                <Route path="/feed" element={<FeedPage />} />
+                <Route path="/transactions" element={<Transactions />} />
+                <Route path="/exchanges" element={<Exchanges />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </QueryClientProvider>
           </Router>
         </TranslationProvider>
       </RecoilRoot>
