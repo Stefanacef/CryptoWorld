@@ -46,5 +46,6 @@
   "generic.label.edit": "Editati",
   "generic.label.why": "De ce?",
   "generic.label.delete": "Sterge",
-  "generic.label.like": "Apreciază"
+  "generic.label.like": "Apreciază",
+  "generic.label.error": "Eroare"
 }

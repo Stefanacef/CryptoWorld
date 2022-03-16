@@ -1,8 +1,9 @@
 import Carousel from '../components/carousel/Carousel'
 import CoinCard from '../components/cards/CoinCard'
-import { useEffect, useState } from 'react'
-import { Grid, Box, Card } from '@mui/material'
-import CoinsTable from '../components/coin/table/CoinsTable'
+import CoinsTable from '../components/tables/CoinsTable'
+import { Grid, Box, Card, Skeleton } from '@mui/material'
+import { useQuery } from 'react-query'
+import { FormattedMessage } from 'react-intl'
 
 interface ICryptoCoin {
   id: string
@@ -12,42 +13,70 @@ interface ICryptoCoin {
 }
 
 export default function HomePage() {
-  const [data, setData] = useState<ICryptoCoin[]>([])
   const URL: string = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-  useEffect(() => {
-    fetch(URL)
-      .then(date => date.json())
-      .then(setData)
-      .catch(err => {
-        console.error(err)
-      })
-  }, [URL])
 
-  const topFiveCoins = data.slice(-5)
+  const fetchCoins = async () => {
+    const response = await fetch(URL)
+    return response.json()
+  }
+  const { data, isLoading, isError, error } = useQuery<ICryptoCoin[], Error>(
+    'coins',
+    fetchCoins
+  )
+
+  const topFiveCoins = data?.slice(-5)
 
   return (
     <Box m="30px">
-      <Card>
-        <Box p="30px">
-          <Carousel>
-            <Grid container columnGap="15px" rowGap="15px">
-              {topFiveCoins.map((crypto: ICryptoCoin) => (
-                <Grid item key={crypto.id}>
-                  <CoinCard
-                    border=" border border-purple"
-                    title={crypto.name}
-                    icon={crypto.image}
-                    price={crypto.current_price}
-                  />
+      {isError ? (
+        <span>
+          <FormattedMessage id="generic.label.error" defaultMessage="Error" />
+          {error?.message}
+        </span>
+      ) : (
+        <>
+          <Card>
+            <Box p="30px">
+              <Carousel>
+                <Grid container columnGap="15px" rowGap="15px">
+                  {isLoading
+                    ? Array.from(new Array(5)).map((skeletonCoin, index) => (
+                        <Skeleton
+                          key={index}
+                          variant="rectangular"
+                          width={170}
+                          height={170}
+                          animation="wave"
+                        />
+                      ))
+                    : topFiveCoins?.map((crypto: ICryptoCoin) => (
+                        <Grid item key={crypto.id}>
+                          <CoinCard
+                            border=" border border-purple"
+                            title={crypto.name}
+                            icon={crypto.image}
+                            price={crypto.current_price}
+                          />
+                        </Grid>
+                      ))}
                 </Grid>
-              ))}
-            </Grid>
-          </Carousel>
-        </Box>
-      </Card>
-      <Box mt="30px">
-        <CoinsTable data={data} />
-      </Box>
+              </Carousel>
+            </Box>
+          </Card>
+          <Box mt="30px">
+            {isLoading ? (
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height="500px"
+                animation="wave"
+              />
+            ) : (
+              <CoinsTable data={data} />
+            )}
+          </Box>
+        </>
+      )}
     </Box>
   )
 }
