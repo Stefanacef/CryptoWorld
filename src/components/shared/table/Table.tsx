@@ -11,7 +11,7 @@ import { ITableData } from './types'
 
 function Table(props: { data: ITableData[]; columns: any }) {
   const intl = useIntl()
-  const data = useMemo(() => props.data, [props.data])
+  const data = useMemo(() => props?.data, [props.data])
   const defaultColumn = useMemo(
     () => ({
       Filter: <span></span>,

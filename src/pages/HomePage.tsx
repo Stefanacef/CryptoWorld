@@ -1,6 +1,6 @@
 import Carousel from '../components/carousel/Carousel'
 import CoinCard from '../components/cards/CoinCard'
-import CoinsTable from '../components/tables/CoinsTable'
+import CoinsTable from '../components/coin/table/CoinsTable'
 import { Grid, Box, Card, Skeleton } from '@mui/material'
 import { useQuery } from 'react-query'
 import { FormattedMessage } from 'react-intl'
@@ -72,7 +72,7 @@ export default function HomePage() {
                 animation="wave"
               />
             ) : (
-              <CoinsTable data={data} />
+              data && <CoinsTable data={data} />
             )}
           </Box>
         </>

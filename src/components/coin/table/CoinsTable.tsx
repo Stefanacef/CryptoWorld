@@ -54,7 +54,7 @@ function CoinsTable(props: { data: ICryptoCoin[] }) {
 
   return (
     <>
-      <Table data={props.data} columns={columns} />
+      <Table data={props?.data} columns={columns} />
     </>
   )
 }
