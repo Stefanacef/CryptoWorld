@@ -5,5 +5,7 @@ export interface ITextInput {
   value: string
   variant?: 'standard' | 'filled' | 'outlined' | undefined
   onChange: (e: any) => void
-  fullWidth?: boolean
+  fullwidth?: boolean
+  messageError?: string | undefined
+  touched?: boolean | undefined
 }

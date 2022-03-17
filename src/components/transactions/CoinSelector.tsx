@@ -1,19 +1,12 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useQuery } from 'react-query'
-import { ICoinSelector, ICoinSelectorPros } from './types'
+import useCoins from '../../api/useCoins'
+import { ICoinSelectorPros } from './types'
 
 const CoinSelector = (props: ICoinSelectorPros) => {
   const intl = useIntl()
-  const URL: string = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-  const fetchCoins = async () => {
-    const response = await fetch(URL)
-    return response.json()
-  }
-  const { data, isError, error } = useQuery<ICoinSelector[], Error>(
-    'coins',
-    fetchCoins
-  )
+  const { data, isError, error } = useCoins()
+
   return (
     <>
       {isError ? (
@@ -65,16 +58,9 @@ const CoinSelector = (props: ICoinSelectorPros) => {
               ))}
             </Select>
           </FormControl>
-          <Box>
-            {props.errors.coin && props.touched.coin ? (
-              <span style={{ color: '#FC4F4F' }}>
-                <FormattedMessage
-                  id={props.errors.coin}
-                  defaultMessage="This filed is required"
-                />
-              </span>
-            ) : null}
-          </Box>
+          {props.messageError && props.touched ? (
+            <span style={{ color: '#FC4F4F' }}>{props.messageError}</span>
+          ) : null}
         </Box>
       )}
     </>

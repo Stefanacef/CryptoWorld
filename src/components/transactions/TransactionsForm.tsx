@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
@@ -15,70 +14,39 @@ import {
   Typography,
   TextField,
 } from '@mui/material'
-import { useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import CoinSelector from './CoinSelector'
 import { ITransaction } from './types'
 import { Formik } from 'formik'
-import * as Yup from 'yup'
 import { useRecoilState } from 'recoil'
 import { transactionsAtom } from './state'
 import TextInput from '../shared/textField/TextInput'
+import useInitialValue from './useInitialValue'
+import useValidationSchema from './useValidationSchema'
 
 const TransactionsForm = () => {
+  const intl = useIntl()
   const [transaction, setTransaction] = useRecoilState(transactionsAtom)
   console.log(transaction)
-  const intl = useIntl()
 
-  const initialValue = useMemo<ITransaction>(
-    () => ({
-      id: '',
-      coin: '',
-      amount: '',
-      date: '',
-      currency: '',
-      type: '',
-      price: '',
-      description: '',
-      pinOnTop: false,
-    }),
-    []
-  )
-  const validationSchema = Yup.object({
-    coin: Yup.string().required('transaction.text.input.required'),
-    amount: Yup.string().required('transaction.text.input.required'),
-    date: Yup.string().required('transaction.text.input.required'),
-    currency: Yup.string().required('transaction.text.input.required'),
-    type: Yup.string().required('transaction.text.input.required'),
-    price: Yup.string().required('transaction.text.input.required'),
-    description: Yup.string()
-      .min(10, 'transaction.description.minimum.characters')
-      .notRequired(),
-  })
+  const initialValue = useInitialValue()
+  const validationSchema = useValidationSchema()
+
   const handleSubmit = (values: ITransaction) => {
-    if (
-      values.coin &&
-      values.amount &&
-      values.date &&
-      values.currency &&
-      values.type &&
-      values.price
-    ) {
-      return setTransaction(previous => [
-        ...previous,
-        {
-          id: String(transaction.length + 1),
-          coin: values.coin,
-          amount: values.amount,
-          date: values.date,
-          currency: values.currency,
-          type: values.type,
-          price: values.price,
-          description: values.description ? values.description : '',
-          pinOnTop: values.pinOnTop,
-        },
-      ])
-    }
+    setTransaction(previous => [
+      ...previous,
+      {
+        id: String(transaction.length + 1),
+        coin: values.coin,
+        amount: values.amount,
+        date: values.date,
+        currency: values.currency,
+        type: values.type,
+        price: values.price,
+        description: values.description ? values.description : '',
+        pinOnTop: values.pinOnTop,
+      },
+    ])
   }
 
   return (
@@ -110,8 +78,8 @@ const TransactionsForm = () => {
                 <Grid item>
                   <CoinSelector
                     setFieldValue={setFieldValue}
-                    errors={errors}
-                    touched={touched}
+                    messageError={errors.amount}
+                    touched={touched.amount}
                   />
                 </Grid>
                 <Grid item>
@@ -124,17 +92,9 @@ const TransactionsForm = () => {
                     onChange={e => {
                       setFieldValue('amount', e.target.value)
                     }}
+                    messageError={errors.amount}
+                    touched={touched.amount}
                   />
-                  <Box>
-                    {errors.amount && touched.amount ? (
-                      <span style={{ color: '#FC4F4F' }}>
-                        <FormattedMessage
-                          id={errors.amount}
-                          defaultMessage="This filed is required"
-                        />
-                      </span>
-                    ) : null}
-                  </Box>
                 </Grid>
                 <Grid item>
                   <TextInput
@@ -146,19 +106,10 @@ const TransactionsForm = () => {
                     onChange={e => {
                       setFieldValue('price', e.target.value)
                     }}
+                    messageError={errors.price}
+                    touched={touched.price}
                   />
-                  <Box>
-                    {errors.price && touched.price ? (
-                      <span style={{ color: '#FC4F4F' }}>
-                        <FormattedMessage
-                          id={errors.price}
-                          defaultMessage="This filed is required"
-                        />
-                      </span>
-                    ) : null}
-                  </Box>
                 </Grid>
-
                 <Grid item>
                   <TextInput
                     id="currency"
@@ -169,17 +120,9 @@ const TransactionsForm = () => {
                     onChange={e => {
                       setFieldValue('currency', e.target.value)
                     }}
+                    messageError={errors.currency}
+                    touched={touched.currency}
                   />
-                  <Box>
-                    {errors.currency && touched.currency ? (
-                      <span style={{ color: '#FC4F4F' }}>
-                        <FormattedMessage
-                          id={errors.currency}
-                          defaultMessage="This filed is required"
-                        />
-                      </span>
-                    ) : null}
-                  </Box>
                 </Grid>
                 <Grid item>
                   <TextField
@@ -196,18 +139,10 @@ const TransactionsForm = () => {
                     onChange={e => {
                       setFieldValue('date', e.target.value)
                     }}
-                    fullWidth
                   />
-                  <Box>
-                    {errors.date && touched.date ? (
-                      <span style={{ color: '#FC4F4F' }}>
-                        <FormattedMessage
-                          id={errors.date}
-                          defaultMessage="This filed is required"
-                        />
-                      </span>
-                    ) : null}
-                  </Box>
+                  {errors.date && touched.date ? (
+                    <span style={{ color: '#FC4F4F' }}>{errors.date}</span>
+                  ) : null}
                 </Grid>
                 <Grid item>
                   <Typography variant="body1" color="text.secondary">
@@ -237,16 +172,9 @@ const TransactionsForm = () => {
                           defaultMessage="Sell"
                         />
                       </ToggleButton>
-                      <Box>
-                        {errors.type && touched.type ? (
-                          <span style={{ color: '#FC4F4F' }}>
-                            <FormattedMessage
-                              id={errors.type}
-                              defaultMessage="This filed is required"
-                            />
-                          </span>
-                        ) : null}
-                      </Box>
+                      {errors.type && touched.type ? (
+                        <span style={{ color: '#FC4F4F' }}>{errors.type}</span>
+                      ) : null}
                     </ToggleButtonGroup>
                   </Stack>
                 </Grid>
@@ -268,16 +196,12 @@ const TransactionsForm = () => {
                       setFieldValue('description', e.target.value)
                     }}
                   ></TextareaAutosize>
-                  <Box>
-                    {errors.description && touched.description ? (
-                      <span style={{ color: '#FC4F4F' }}>
-                        <FormattedMessage
-                          id={errors.description}
-                          defaultMessage="This filed is required"
-                        />
-                      </span>
-                    ) : null}
-                  </Box>
+
+                  {errors.description && touched.description ? (
+                    <span style={{ color: '#FC4F4F' }}>
+                      {errors.description}
+                    </span>
+                  ) : null}
                 </Grid>
                 <Grid item>
                   <FormControlLabel

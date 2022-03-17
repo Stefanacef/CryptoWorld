@@ -1,4 +1,3 @@
-import { FormikErrors, FormikTouched } from 'formik'
 export interface ITransaction {
   id: string
   coin: string
@@ -22,6 +21,6 @@ export interface ICoinSelectorPros {
     value: any,
     shouldValidate?: boolean | undefined
   ) => void
-  errors: FormikErrors<ITransaction>
-  touched: FormikTouched<ITransaction>
+  messageError?: string | undefined
+  touched?: boolean | undefined
 }
