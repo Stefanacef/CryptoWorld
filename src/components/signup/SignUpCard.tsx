@@ -11,8 +11,8 @@ import {
   Button,
   CardActions,
   Grid,
+  Box,
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -133,7 +133,7 @@ const SignUpCard = () => {
                   variant="filled"
                   fullWidth
                   value={values.email}
-                  onChange={e => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('email', e.target.value)
                   }}
                 />
@@ -160,7 +160,7 @@ const SignUpCard = () => {
                   variant="filled"
                   fullWidth
                   value={values.password}
-                  onChange={e => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('password', e.target.value)
                   }}
                 />

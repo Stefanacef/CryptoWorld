@@ -1,18 +1,27 @@
+import { FormikErrors, FormikTouched } from 'formik'
 export interface ITransaction {
   id: string
   coin: string
-  amount: number
-  date: Date
+  amount: string
+  date: string
   currency: string
-  buy: boolean
-  sell: boolean
-  price: number
+  type: string
+  price: string
   description?: string
-  pinOnTop: boolean
+  pinOnTop?: boolean
 }
 
 export interface ICoinSelector {
   id: number
   image: string
   name: string
+}
+export interface ICoinSelectorPros {
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => void
+  errors: FormikErrors<ITransaction>
+  touched: FormikTouched<ITransaction>
 }
