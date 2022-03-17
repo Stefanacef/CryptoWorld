@@ -51,6 +51,7 @@
   "transaction.description": "Adauga o descriere",
   "transaction.date": "Data",
   "transaction.pin.on.top": "Primul",
+  "transactions.add": "Adauga o noua tranzactie",
   "generic.label.language": "Limba",
   "generic.label.post": "Postati",
   "generic.label.comment": "Adauga commentariu",
@@ -61,5 +62,6 @@
   "generic.label.like": "Apreciază",
   "generic.label.coins": "Monede",
   "generic.label.error": "Eroare",
-  "generic.label.submit": "Trimite"
+  "generic.label.submit": "Trimite",
+  "generic.label.close": "Inchide"
 }

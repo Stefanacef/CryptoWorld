@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
-import TransactionsForm from '../components/transactions/TransactionsForm'
+import AddNewTransaction from '../components/transactions/AddNewTransaction'
 
 const Transactions = () => {
   return (
     <Box m="30px" display="flex" justifyContent="center">
-      <TransactionsForm />
+      <AddNewTransaction />
     </Box>
   )
 }

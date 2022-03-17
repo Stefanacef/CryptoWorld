@@ -13,6 +13,8 @@ import {
   ToggleButtonGroup,
   Typography,
   TextField,
+  Tooltip,
+  IconButton,
 } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
 import CoinSelector from './CoinSelector'
@@ -23,8 +25,13 @@ import { transactionsAtom } from './state'
 import TextInput from '../shared/textField/TextInput'
 import useInitialValue from './useInitialValue'
 import useValidationSchema from './useValidationSchema'
+import { Clear } from '@mui/icons-material'
 
-const TransactionsForm = () => {
+interface ITransactionsForm {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
   const [transaction, setTransaction] = useRecoilState(transactionsAtom)
   console.log(transaction)
@@ -47,6 +54,7 @@ const TransactionsForm = () => {
         pinOnTop: values.pinOnTop,
       },
     ])
+    props.setOpen(false)
   }
 
   return (
@@ -72,6 +80,19 @@ const TransactionsForm = () => {
               title={intl.formatMessage({
                 id: 'transaction.title',
               })}
+              action={
+                <Tooltip
+                  title={intl.formatMessage({ id: 'generic.label.close' })}
+                  arrow
+                >
+                  <IconButton
+                    aria-label="close"
+                    onClick={() => props.setOpen(false)}
+                  >
+                    <Clear />
+                  </IconButton>
+                </Tooltip>
+              }
             />
             <CardContent>
               <Grid container direction="column" rowGap="10px">
@@ -224,7 +245,12 @@ const TransactionsForm = () => {
               disableSpacing
               sx={{ paddingLeft: '16px', marginTop: '15px' }}
             >
-              <Button variant="outlined" onClick={() => submitForm()}>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  submitForm()
+                }}
+              >
                 <FormattedMessage
                   id="generic.label.submit"
                   defaultMessage="Submit"

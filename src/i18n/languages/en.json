@@ -51,6 +51,7 @@
   "transaction.description": "Add a description",
   "transaction.date": "Date",
   "transaction.pin.on.top": "Pin on Top",
+  "transactions.add": "Add new transaction",
   "generic.label.language": "Language",
   "generic.label.post": "Post",
   "generic.label.comment": "Add comment",
@@ -61,5 +62,6 @@
   "generic.label.like": "Like",
   "generic.label.coins": "Coins",
   "generic.label.error": "Error",
-  "generic.label.submit": "Submit"
+  "generic.label.submit": "Submit",
+  "generic.label.close": "Close"
 }
