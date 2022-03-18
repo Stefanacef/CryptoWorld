@@ -44,7 +44,11 @@ const TransactionsTable = () => {
 
   return (
     <>
-      <Table data={transactions} columns={columns} />
+      <Table
+        data={transactions}
+        columns={columns}
+        message={intl.formatMessage({ id: 'transactions.no.transaction' })}
+      />
     </>
   )
 }

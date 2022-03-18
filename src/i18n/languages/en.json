@@ -59,6 +59,7 @@
   "transactions.cell.date": "DATE",
   "transactions.cell.type": "TYPE",
   "transactions.cell.description": "DESCRIPTION",
+  "transactions.no.transaction": "No transaction yet, add a new transaction :)",
   "generic.label.language": "Language",
   "generic.label.post": "Post",
   "generic.label.comment": "Add comment",
