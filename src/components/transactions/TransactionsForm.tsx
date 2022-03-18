@@ -54,7 +54,6 @@ const TransactionsForm = (props: ITransactionsForm) => {
         pinOnTop: values.pinOnTop,
       },
     ])
-    props.setOpen(false)
   }
 
   return (
