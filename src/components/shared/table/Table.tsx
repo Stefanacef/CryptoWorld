@@ -7,9 +7,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { ITableData } from './types'
 
-function Table(props: { data: ITableData[]; columns: any }) {
+function Table(props: { data: any; columns: any }) {
   const intl = useIntl()
   const data = useMemo(() => props?.data, [props.data])
   const defaultColumn = useMemo(
