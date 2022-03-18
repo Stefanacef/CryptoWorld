@@ -54,14 +54,14 @@ const TransactionsForm = (props: ITransactionsForm) => {
         pinOnTop: values.pinOnTop,
       },
     ])
+    props.setOpen(false)
   }
 
   return (
     <>
       <Formik
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={values => {
           handleSubmit(values)
-          resetForm()
         }}
         initialValues={initialValue}
         validationSchema={validationSchema}
@@ -171,32 +171,31 @@ const TransactionsForm = (props: ITransactionsForm) => {
                       defaultMessage="Type of transaction"
                     />
                   </Typography>
-                  <Stack>
-                    <ToggleButtonGroup
-                      value={values.type}
-                      exclusive
-                      onChange={(e: any) => {
-                        setFieldValue('type', e.target.value)
-                      }}
-                      aria-label="text alignment"
-                    >
-                      <ToggleButton value="Buy" aria-label="left aligned">
-                        <FormattedMessage
-                          id="transaction.buy"
-                          defaultMessage="Bui"
-                        />
-                      </ToggleButton>
-                      <ToggleButton value="Sell" aria-label="centered">
-                        <FormattedMessage
-                          id="transaction.sell"
-                          defaultMessage="Sell"
-                        />
-                      </ToggleButton>
-                      {errors.type && touched.type ? (
-                        <span style={{ color: '#FC4F4F' }}>{errors.type}</span>
-                      ) : null}
-                    </ToggleButtonGroup>
-                  </Stack>
+
+                  <ToggleButtonGroup
+                    value={values.type}
+                    exclusive
+                    onChange={(e: any) => {
+                      setFieldValue('type', e.target.value)
+                    }}
+                    aria-label="text alignment"
+                  >
+                    <ToggleButton value="Buy" aria-label="left aligned">
+                      <FormattedMessage
+                        id="transaction.buy"
+                        defaultMessage="Bui"
+                      />
+                    </ToggleButton>
+                    <ToggleButton value="Sell" aria-label="centered">
+                      <FormattedMessage
+                        id="transaction.sell"
+                        defaultMessage="Sell"
+                      />
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                  {errors.type && touched.type ? (
+                    <span style={{ color: '#FC4F4F' }}>{errors.type}</span>
+                  ) : null}
                 </Grid>
 
                 <Grid item>
