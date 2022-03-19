@@ -9,10 +9,12 @@ import DescriptionColumnHeader from './DescriptionColumnHeader'
 import TypeColumnHeader from './TypeColumnHeader'
 import FilterByType from './FilterByType'
 import FilterByName from '../../shared/table/FilterByName'
+import ActionsColumnHeader from './ActionsColumnHeader'
 
 const TransactionsTable = () => {
   const intl = useIntl()
   const transactions = useRecoilValue(transactionsAtom)
+  console.log(transactions)
 
   const columns = useMemo(
     () => [
@@ -51,6 +53,11 @@ const TransactionsTable = () => {
         Cell: ({ cell }: any) => (
           <DescriptionColumnHeader description={cell.value} />
         ),
+      },
+      {
+        Header: intl.formatMessage({ id: 'table.header.cell.actions' }),
+        id: 'action',
+        Cell: ({ cell }: any) => <ActionsColumnHeader cell={cell} />,
       },
     ],
     [intl]

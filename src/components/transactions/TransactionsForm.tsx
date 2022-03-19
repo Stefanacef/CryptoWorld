@@ -32,17 +32,15 @@ interface ITransactionsForm {
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
-  const [transaction, setTransaction] = useRecoilState(transactionsAtom)
-  console.log(transaction)
-
+  const [transactions, setTransactions] = useRecoilState(transactionsAtom)
   const initialValue = useInitialValue()
   const validationSchema = useValidationSchema()
 
   const handleSubmit = (values: ITransaction) => {
-    setTransaction(previous => [
+    setTransactions(previous => [
       ...previous,
       {
-        id: String(transaction.length + 1),
+        id: String(transactions.length + 1),
         coin: values.coin,
         amount: values.amount,
         date: values.date,

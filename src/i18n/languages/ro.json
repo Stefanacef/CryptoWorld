@@ -60,6 +60,7 @@
   "transactions.cell.date": "DATA",
   "transactions.cell.type": "TIPUL",
   "transactions.cell.description": "DESCRIEREA",
+  "table.header.cell.actions": "ACTIUNI",
   "transactions.no.transaction": "Nu exista inca tranzactii, adaugati o noua trnzactie :)",
   "generic.label.language": "Limba",
   "generic.label.post": "Postati",
