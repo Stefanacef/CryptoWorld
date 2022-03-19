@@ -8,7 +8,6 @@
   "language.selector.romanian": "Romanian",
   "carousel.title": "Our favorite coins",
   "feed.page.title": "Feed",
-  "feed.search.placeholder": "Search...",
   "feed.textarea.placeholder": "What's on your mind?",
   "feed.textarea.toShort": "Too short, please add more than 3 characters",
   "feed.textarea.toLong": "Maximum characters is 100",
@@ -48,6 +47,7 @@
   "transaction.type": "Transaction type",
   "transaction.buy": "Buy",
   "transaction.sell": "Sell",
+  "transaction.all": "All",
   "transaction.description": "Add a description",
   "transaction.date": "Date",
   "transaction.pin.on.top": "Pin on Top",
@@ -73,5 +73,6 @@
   "generic.label.submit": "Submit",
   "generic.label.close": "Close",
   "generic.label.see.more": "See more",
-  "generic.label.hide": "Hide"
+  "generic.label.hide": "Hide",
+  "generic.label.search": "Search..."
 }

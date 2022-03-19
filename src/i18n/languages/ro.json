@@ -48,6 +48,7 @@
   "transaction.type": "Tipul tranzactiei",
   "transaction.buy": "Cumparat",
   "transaction.sell": "Vandut",
+  "transaction.all": "Tot",
   "transaction.description": "Adauga o descriere",
   "transaction.date": "Data",
   "transaction.pin.on.top": "Primul",
@@ -73,5 +74,6 @@
   "generic.label.submit": "Trimite",
   "generic.label.close": "Inchide",
   "generic.label.see.more": "Vezi mai mult",
-  "generic.label.hide": "Ascunde"
+  "generic.label.hide": "Ascunde",
+  "generic.label.search": "Cauta..."
 }

@@ -28,7 +28,7 @@ const PostList = () => {
         <TextField
           size="small"
           type="search"
-          label={intl.formatMessage({ id: 'feed.search.placeholder' })}
+          label={intl.formatMessage({ id: 'generic.label.search' })}
           variant="outlined"
           InputProps={{
             startAdornment: (

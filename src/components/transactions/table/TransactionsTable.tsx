@@ -1,13 +1,14 @@
 import { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
-import FilterByCoinName from '../../shared/table/FilterByCoinName'
 import Table from '../../shared/table/Table'
 import { transactionsAtom } from '../state'
 import CoinColumnHeader from './CoinColumnHeader'
 import DateColumnHeader from './DateColumnHeader'
 import DescriptionColumnHeader from './DescriptionColumnHeader'
 import TypeColumnHeader from './TypeColumnHeader'
+import FilterByType from './FilterByType'
+import FilterByName from '../../shared/table/FilterByName'
 
 const TransactionsTable = () => {
   const intl = useIntl()
@@ -19,7 +20,7 @@ const TransactionsTable = () => {
         Header: intl.formatMessage({ id: 'transactions.cell.coin' }),
         accessor: 'coin',
         Cell: ({ cell }: any) => <CoinColumnHeader coin={cell.value} />,
-        Filter: FilterByCoinName,
+        Filter: FilterByName,
       },
       {
         Header: intl.formatMessage({ id: 'transactions.cell.amount' }),
@@ -42,6 +43,7 @@ const TransactionsTable = () => {
         Header: intl.formatMessage({ id: 'transactions.cell.type' }),
         accessor: 'type',
         Cell: ({ cell }: any) => <TypeColumnHeader type={cell.value} />,
+        Filter: FilterByType,
       },
       {
         Header: intl.formatMessage({ id: 'transactions.cell.description' }),

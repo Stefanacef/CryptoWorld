@@ -70,7 +70,7 @@ function Textarea(props: ITextarea) {
           </Grid>
           <Box mt="15px">
             <Button variant="outlined" onClick={() => submitForm()}>
-              <FormattedMessage id="button.post" defaultMessage="Save" />
+              <FormattedMessage id="generic.label.post" defaultMessage="Post" />
             </Button>
           </Box>
         </Box>
