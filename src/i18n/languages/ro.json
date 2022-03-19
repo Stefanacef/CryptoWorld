@@ -71,5 +71,7 @@
   "generic.label.coins": "Monede",
   "generic.label.error": "Eroare",
   "generic.label.submit": "Trimite",
-  "generic.label.close": "Inchide"
+  "generic.label.close": "Inchide",
+  "generic.label.see.more": "Vezi mai mult",
+  "generic.label.hide": "Ascunde"
 }

@@ -71,5 +71,7 @@
   "generic.label.coins": "Coins",
   "generic.label.error": "Error",
   "generic.label.submit": "Submit",
-  "generic.label.close": "Close"
+  "generic.label.close": "Close",
+  "generic.label.see.more": "See more",
+  "generic.label.hide": "Hide"
 }

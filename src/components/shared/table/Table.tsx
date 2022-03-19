@@ -188,7 +188,9 @@ function Table(props: ITable) {
           </Grid>
         </Box>
       ) : (
-        <Box sx={{ paddingTop: '30px' }}>{props.message}</Box>
+        data.length < 1 && (
+          <Box sx={{ paddingTop: '30px' }}>{props.message}</Box>
+        )
       )}
     </>
   )

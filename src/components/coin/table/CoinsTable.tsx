@@ -1,10 +1,11 @@
 import '../../../assets/styles/Table/Table.css'
 import { useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import FilterByCoinName from './FilterByCoinName'
+
 import CoinColumnHeader from './CoinColumnHeader'
 import Table from '../../shared/table/Table'
 import { ICryptoCoin } from './types'
+import FilterByCoinName from '../../shared/table/FilterByCoinName'
 
 function CoinsTable(props: { data: ICryptoCoin[] }) {
   const intl = useIntl()
