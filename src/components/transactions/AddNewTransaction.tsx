@@ -1,41 +1,34 @@
-import { Button, Modal } from '@mui/material'
-import { Box } from '@mui/system'
+import { Box, Dialog, IconButton, Tooltip, Typography } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import TransactionsForm from './TransactionsForm'
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-}
-
 const AddNewTransaction = () => {
+  const intl = useIntl()
   const [open, setOpen] = useState(false)
 
   return (
-    <div>
-      <Button onClick={() => setOpen(true)}>
+    <Box textAlign="left">
+      <Typography variant="body1" color="text.secondary">
         <FormattedMessage
           id="transactions.add"
-          defaultMessage="Add transactions"
+          defaultMessage="Add new transaction"
         />
-      </Button>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <TransactionsForm setOpen={setOpen} />
-        </Box>
-      </Modal>
-    </div>
+      </Typography>
+      <Tooltip title={intl.formatMessage({ id: 'transactions.add' })} arrow>
+        <IconButton
+          aria-label="add"
+          onClick={() => setOpen(true)}
+          sx={{ background: '#2196f3 ', marginBottom: '30px' }}
+        >
+          <AddIcon />
+        </IconButton>
+      </Tooltip>
+      <Dialog onClose={() => setOpen(false)} open={open}>
+        <TransactionsForm setOpen={setOpen} />
+      </Dialog>
+    </Box>
   )
 }
 

@@ -40,6 +40,7 @@
   "signUp.email.label": "Email",
   "signUp.password.label": "Parola",
   "transaction.title": "Adauga o noua tranzactie",
+  "transaction.title.edit": "Editati Transaction",
   "transaction.text.input.required": "Acest camp este necesar",
   "transaction.description.minimum.characters": "Descrierea trebuie sa contina minimum 10 caractere",
   "transaction.amount": "Cantitatea",

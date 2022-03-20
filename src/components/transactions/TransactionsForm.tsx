@@ -17,7 +17,7 @@ import {
 } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
 import CoinSelector from './CoinSelector'
-import { ITransaction } from './types'
+import { ITransaction, ITransactionsForm } from './types'
 import { Formik } from 'formik'
 import { useRecoilState } from 'recoil'
 import { transactionsAtom } from './state'
@@ -25,10 +25,6 @@ import TextInput from '../shared/textField/TextInput'
 import useInitialValue from './useInitialValue'
 import useValidationSchema from './useValidationSchema'
 import { Clear } from '@mui/icons-material'
-
-interface ITransactionsForm {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
@@ -58,9 +54,11 @@ const TransactionsForm = (props: ITransactionsForm) => {
     <>
       <Formik
         onSubmit={values => {
-          handleSubmit(values)
+          props?.editStatus && props?.handleEdit
+            ? props?.handleEdit(props.data?.id, values)
+            : handleSubmit(values)
         }}
-        initialValues={initialValue}
+        initialValues={props.editStatus ? props?.data : initialValue}
         validationSchema={validationSchema}
       >
         {({ values, setFieldValue, submitForm, errors, touched }) => (
@@ -73,9 +71,15 @@ const TransactionsForm = (props: ITransactionsForm) => {
             }}
           >
             <CardHeader
-              title={intl.formatMessage({
-                id: 'transaction.title',
-              })}
+              title={
+                !props?.editStatus
+                  ? intl.formatMessage({
+                      id: 'transaction.title',
+                    })
+                  : intl.formatMessage({
+                      id: 'transaction.title.edit',
+                    })
+              }
               action={
                 <Tooltip
                   title={intl.formatMessage({ id: 'generic.label.close' })}
@@ -240,17 +244,31 @@ const TransactionsForm = (props: ITransactionsForm) => {
               disableSpacing
               sx={{ paddingLeft: '16px', marginTop: '15px' }}
             >
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  submitForm()
-                }}
-              >
-                <FormattedMessage
-                  id="generic.label.submit"
-                  defaultMessage="Submit"
-                />
-              </Button>
+              {!props.editStatus ? (
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    submitForm()
+                  }}
+                >
+                  <FormattedMessage
+                    id="generic.label.submit"
+                    defaultMessage="Submit"
+                  />
+                </Button>
+              ) : (
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    submitForm()
+                  }}
+                >
+                  <FormattedMessage
+                    id="generic.label.save"
+                    defaultMessage="Save"
+                  />
+                </Button>
+              )}
             </CardActions>
           </Card>
         )}

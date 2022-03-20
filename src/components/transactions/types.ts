@@ -1,3 +1,4 @@
+import { FormikErrors, FormikTouched } from 'formik'
 export interface ITransaction {
   id: string
   coin: string
@@ -10,17 +11,27 @@ export interface ITransaction {
   pinOnTop?: boolean
 }
 
-export interface ICoinSelector {
-  id: number
-  image: string
-  name: string
+export interface IValidation {
+  messageError?:
+    | string
+    | string[]
+    | FormikErrors<any>
+    | FormikErrors<any>[]
+    | undefined
+  touched?: boolean | FormikTouched<any> | FormikTouched<any>[] | undefined
 }
-export interface ICoinSelectorPros {
+
+export interface ICoinSelectorPros extends IValidation {
   setFieldValue: (
     field: string,
     value: any,
     shouldValidate?: boolean | undefined
   ) => void
-  messageError?: string | undefined
-  touched?: boolean | undefined
+}
+
+export interface ITransactionsForm {
+  setOpen: (value: boolean) => void
+  editStatus?: boolean
+  data?: any
+  handleEdit?: (id: string, values: ITransaction) => void
 }

@@ -39,6 +39,7 @@
   "signUp.email.label": "Email",
   "signUp.password.label": "Password",
   "transaction.title": "Add a new Transaction",
+  "transaction.title.edit": "Edit Transaction",
   "transaction.text.input.required": "This field is necessary",
   "transaction.description.minimum.characters": "Description should be of minimum 10 characters length",
   "transaction.amount": "Amount",
