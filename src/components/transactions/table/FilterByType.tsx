@@ -31,7 +31,16 @@ const FilterByType = ({ column }: any) => {
           <FormattedMessage id="transaction.all" defaultMessage="All" />
         </MenuItem>
         {options.map((option, i) => (
-          <MenuItem key={i} value={option}>
+          <MenuItem
+            key={i}
+            value={
+              option === 'Cumparat'
+                ? 'Buy'
+                : option === 'Vandut'
+                ? 'Sell'
+                : option
+            }
+          >
             {option}
           </MenuItem>
         ))}
