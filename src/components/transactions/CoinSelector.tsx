@@ -1,4 +1,5 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import useCoins from '../../api/useCoins'
 import { ICoinSelectorPros } from './types'
@@ -6,6 +7,13 @@ import { ICoinSelectorPros } from './types'
 const CoinSelector = (props: ICoinSelectorPros) => {
   const intl = useIntl()
   const { data, isError, error } = useCoins()
+  const initialValue = props.coin ? props.coin : ''
+  const [value, setValue] = useState(initialValue)
+
+  const handleChange = (value: string) => {
+    props.setFieldValue('coin', value)
+    setValue(value)
+  }
 
   return (
     <>
@@ -37,14 +45,14 @@ const CoinSelector = (props: ICoinSelectorPros) => {
                 id: 'generic.label.coins',
               })}
               onChange={e => {
-                props.setFieldValue('coin', e.target.value)
+                handleChange(e.target.value)
               }}
               MenuProps={{
                 style: {
                   maxHeight: '300px',
                 },
               }}
-              defaultValue=""
+              value={value}
             >
               {data?.map(coin => (
                 <MenuItem value={coin.id} key={coin.id}>

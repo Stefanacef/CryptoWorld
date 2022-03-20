@@ -27,6 +27,7 @@ export interface ICoinSelectorPros extends IValidation {
     value: any,
     shouldValidate?: boolean | undefined
   ) => void
+  coin?: string
 }
 
 export interface ITransactionsForm {

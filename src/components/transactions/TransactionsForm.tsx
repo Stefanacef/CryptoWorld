@@ -101,6 +101,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
                     setFieldValue={setFieldValue}
                     messageError={errors.amount}
                     touched={touched.amount}
+                    coin={props?.data?.coin}
                   />
                 </Grid>
                 <Grid item>
