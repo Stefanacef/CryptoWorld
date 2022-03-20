@@ -25,6 +25,7 @@ import TextInput from '../shared/textField/TextInput'
 import useInitialValue from './useInitialValue'
 import useValidationSchema from './useValidationSchema'
 import { Clear } from '@mui/icons-material'
+import sortBy from 'lodash/sortBy'
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
@@ -33,20 +34,25 @@ const TransactionsForm = (props: ITransactionsForm) => {
   const validationSchema = useValidationSchema()
 
   const handleSubmit = (values: ITransaction) => {
-    setTransactions(previous => [
-      ...previous,
-      {
-        id: String(transactions.length + 1),
-        coin: values.coin,
-        amount: values.amount,
-        date: values.date,
-        currency: values.currency,
-        type: values.type,
-        price: values.price,
-        description: values.description ? values.description : '',
-        pinOnTop: values.pinOnTop,
-      },
-    ])
+    setTransactions(previous =>
+      sortBy(
+        [
+          ...previous,
+          {
+            id: String(transactions.length + 1),
+            coin: values.coin,
+            amount: values.amount,
+            date: values.date,
+            currency: values.currency,
+            type: values.type,
+            price: values.price,
+            description: values.description ? values.description : '',
+            pinOnTop: values.pinOnTop,
+          },
+        ],
+        el => !el.pinOnTop
+      )
+    )
     props.setOpen(false)
   }
 

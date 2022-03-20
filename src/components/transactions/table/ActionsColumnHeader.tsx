@@ -1,6 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Dialog, Grid, IconButton, Tooltip } from '@mui/material'
+import { sortBy } from 'lodash'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -20,20 +21,24 @@ const ActionsColumnHeader = ({ cell }: any) => {
   }
   const handleEdit = (id: string, values: ITransaction) => {
     setTransactions(previous =>
-      previous.map(transaction =>
-        transaction.id === id
-          ? {
-              ...transaction,
-              coin: values.coin,
-              amount: values.amount,
-              date: values.date,
-              currency: values.currency,
-              type: values.type,
-              price: values.price,
-              description: values.description ? values.description : '',
-              pinOnTop: values.pinOnTop,
-            }
-          : transaction
+      sortBy(
+        previous.map(transaction =>
+          transaction.id === id
+            ? {
+                ...transaction,
+                coin: values.coin,
+                amount: values.amount,
+                date: values.date,
+                currency: values.currency,
+                type: values.type,
+                price: values.price,
+                description: values.description ? values.description : '',
+                pinOnTop: values.pinOnTop,
+              }
+            : transaction
+        ),
+        el => !el.pinOnTop,
+        'id'
       )
     )
     setOpen(false)

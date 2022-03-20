@@ -77,5 +77,6 @@
   "generic.label.close": "Inchide",
   "generic.label.see.more": "Vezi mai mult",
   "generic.label.hide": "Ascunde",
-  "generic.label.search": "Cauta..."
+  "generic.label.search": "Cauta...",
+  "generic.label.pin": "Fixat"
 }

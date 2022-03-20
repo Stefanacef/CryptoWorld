@@ -76,5 +76,6 @@
   "generic.label.close": "Close",
   "generic.label.see.more": "See more",
   "generic.label.hide": "Hide",
-  "generic.label.search": "Search..."
+  "generic.label.search": "Search...",
+  "generic.label.pin": "Pin"
 }

@@ -21,7 +21,7 @@ const TransactionsTable = () => {
       {
         Header: intl.formatMessage({ id: 'transactions.cell.coin' }),
         accessor: 'coin',
-        Cell: ({ cell }: any) => <CoinColumnHeader coin={cell.value} />,
+        Cell: ({ cell }: any) => <CoinColumnHeader cell={cell} />,
         Filter: FilterByName,
       },
       {
