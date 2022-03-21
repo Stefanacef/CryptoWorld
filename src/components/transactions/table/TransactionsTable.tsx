@@ -1,8 +1,6 @@
 import { useMemo } from 'react'
-import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Table from '../../shared/table/Table'
-import { transactionsAtom } from '../state'
 import CoinColumnHeader from './CoinColumnHeader'
 import DateColumnHeader from './DateColumnHeader'
 import DescriptionColumnHeader from './DescriptionColumnHeader'
@@ -10,10 +8,12 @@ import TypeColumnHeader from './TypeColumnHeader'
 import FilterByType from './FilterByType'
 import FilterByName from '../../shared/table/FilterByName'
 import ActionsColumnHeader from './ActionsColumnHeader'
+import useTransactions from '../../../api/useTransactions'
+import { Skeleton } from '@mui/material'
 
 const TransactionsTable = () => {
   const intl = useIntl()
-  const transactions = useRecoilValue(transactionsAtom)
+  const { data: transactions, isLoading, error, isError } = useTransactions()
   console.log(transactions)
 
   const columns = useMemo(
@@ -65,11 +65,25 @@ const TransactionsTable = () => {
 
   return (
     <>
-      <Table
-        data={transactions}
-        columns={columns}
-        message={intl.formatMessage({ id: 'transactions.no.transaction' })}
-      />
+      {isError ? (
+        <span>
+          <FormattedMessage id="generic.label.error" defaultMessage="Error" />
+          {error?.message}
+        </span>
+      ) : isLoading ? (
+        <Skeleton
+          variant="rectangular"
+          width="100%"
+          height="500px"
+          animation="wave"
+        />
+      ) : (
+        <Table
+          data={transactions}
+          columns={columns}
+          message={intl.formatMessage({ id: 'transactions.no.transaction' })}
+        />
+      )}
     </>
   )
 }
