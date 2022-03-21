@@ -5,11 +5,11 @@ import { sortBy } from 'lodash'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
-import { transactionsAtom } from '../../state'
-import TransactionsForm from '../../TransactionsForm'
-import { ITransaction } from '../../types'
+import { transactionsAtom } from '../state'
+import TransactionsForm from '../TransactionsForm'
+import { ITransaction } from '../types'
 import { useMutation, useQueryClient } from 'react-query'
-import deleteTransaction from './deleteTransaction'
+import deleteTransaction from './actions/deleteTransaction'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const ActionsColumnHeader = ({ cell }: any) => {
@@ -29,7 +29,7 @@ const ActionsColumnHeader = ({ cell }: any) => {
     setTransactions(previous =>
       sortBy(
         previous.map(transaction =>
-          transaction.id === id
+          transaction.id === 1
             ? {
                 ...transaction,
                 coin: values.coin,

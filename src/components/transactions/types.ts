@@ -1,6 +1,6 @@
 import { FormikErrors, FormikTouched } from 'formik'
 export interface ITransaction {
-  id: string
+  id: number
   coin: string
   amount: string
   date: string

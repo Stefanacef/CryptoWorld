@@ -4,7 +4,7 @@ import { ITransaction } from './types'
 const useInitialValue = () => {
   return useMemo<ITransaction>(
     () => ({
-      id: '',
+      id: 0,
       coin: '',
       amount: '',
       date: '',

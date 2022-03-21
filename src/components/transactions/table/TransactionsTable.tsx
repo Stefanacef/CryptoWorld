@@ -7,7 +7,7 @@ import DescriptionColumnHeader from './DescriptionColumnHeader'
 import TypeColumnHeader from './TypeColumnHeader'
 import FilterByType from './FilterByType'
 import FilterByName from '../../shared/table/FilterByName'
-import ActionsColumnHeader from './actions/ActionsColumnHeader'
+import ActionsColumnHeader from './ActionsColumnHeader'
 import useTransactions from '../../../api/useTransactions'
 import { Skeleton } from '@mui/material'
 

@@ -19,40 +19,33 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import CoinSelector from './CoinSelector'
 import { ITransaction, ITransactionsForm } from './types'
 import { Formik } from 'formik'
-import { useRecoilState } from 'recoil'
-import { transactionsAtom } from './state'
 import TextInput from '../shared/textField/TextInput'
 import useInitialValue from './useInitialValue'
 import useValidationSchema from './useValidationSchema'
 import { Clear } from '@mui/icons-material'
-import sortBy from 'lodash/sortBy'
+import { useMutation, useQueryClient } from 'react-query'
+import addNewTransaction from './table/actions/addNewTransaction'
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
-  const [transactions, setTransactions] = useRecoilState(transactionsAtom)
   const initialValue = useInitialValue()
   const validationSchema = useValidationSchema()
+  const { mutateAsync } = useMutation(addNewTransaction)
+  const queryClient = useQueryClient()
 
-  const handleSubmit = (values: ITransaction) => {
-    setTransactions(previous =>
-      sortBy(
-        [
-          ...previous,
-          {
-            id: String(transactions.length + 1),
-            coin: values.coin,
-            amount: values.amount,
-            date: values.date,
-            currency: values.currency,
-            type: values.type,
-            price: values.price,
-            description: values.description ? values.description : '',
-            pinOnTop: values.pinOnTop,
-          },
-        ],
-        el => !el.pinOnTop
-      )
-    )
+  const handleSubmit = async (values: ITransaction) => {
+    await mutateAsync({
+      id: Math.random() * 100 + 1,
+      coin: values.coin,
+      amount: values.amount,
+      date: values.date,
+      currency: values.currency,
+      type: values.type,
+      price: values.price,
+      description: values.description ? values.description : '',
+      pinOnTop: values.pinOnTop,
+    })
+    queryClient.invalidateQueries('transactions')
     props.setOpen(false)
   }
 
