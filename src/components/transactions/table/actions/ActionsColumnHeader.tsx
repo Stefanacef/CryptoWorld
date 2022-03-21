@@ -1,24 +1,30 @@
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
-import { Dialog, Grid, IconButton, Tooltip } from '@mui/material'
+import { Box, Dialog, Grid, IconButton, Tooltip } from '@mui/material'
 import { sortBy } from 'lodash'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
-import { transactionsAtom } from '../state'
-import TransactionsForm from '../TransactionsForm'
-import { ITransaction } from '../types'
+import { transactionsAtom } from '../../state'
+import TransactionsForm from '../../TransactionsForm'
+import { ITransaction } from '../../types'
+import { useMutation, useQueryClient } from 'react-query'
+import deleteTransaction from './deleteTransaction'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const ActionsColumnHeader = ({ cell }: any) => {
   const intl = useIntl()
   const setTransactions = useSetRecoilState(transactionsAtom)
   const [open, setOpen] = useState(false)
 
-  const handleDelete = (id: string) => {
-    setTransactions(previous =>
-      previous.filter(transactionId => transactionId.id !== id)
-    )
+  const { mutateAsync, isLoading } = useMutation(deleteTransaction)
+  const queryClient = useQueryClient()
+
+  const handleDelete = async () => {
+    await mutateAsync(cell.row.original.id)
+    queryClient.invalidateQueries('transactions')
   }
+
   const handleEdit = (id: string, values: ITransaction) => {
     setTransactions(previous =>
       sortBy(
@@ -51,11 +57,14 @@ const ActionsColumnHeader = ({ cell }: any) => {
             title={intl.formatMessage({ id: 'generic.label.delete' })}
             arrow
           >
-            <IconButton
-              aria-label="delete"
-              onClick={() => handleDelete(cell.row.original.id)}
-            >
-              <DeleteIcon />
+            <IconButton aria-label="delete" onClick={() => handleDelete()}>
+              {isLoading ? (
+                <Box height="10px">
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <DeleteIcon />
+              )}
             </IconButton>
           </Tooltip>
         </Grid>
