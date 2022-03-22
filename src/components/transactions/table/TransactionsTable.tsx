@@ -10,11 +10,18 @@ import FilterByName from '../../shared/table/FilterByName'
 import ActionsColumnHeader from './ActionsColumnHeader'
 import useTransactions from '../../../api/useTransactions'
 import { Skeleton } from '@mui/material'
+import { sortBy } from 'lodash'
 
 const TransactionsTable = () => {
   const intl = useIntl()
   const { data: transactions, isLoading, error, isError } = useTransactions()
   console.log(transactions)
+
+  const sortedTransactions = sortBy(
+    transactions,
+    transaction => !transaction.pinOnTop,
+    'id'
+  )
 
   const columns = useMemo(
     () => [
@@ -79,7 +86,7 @@ const TransactionsTable = () => {
         />
       ) : (
         <Table
-          data={transactions}
+          data={sortedTransactions}
           columns={columns}
           message={intl.formatMessage({ id: 'transactions.no.transaction' })}
         />

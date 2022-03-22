@@ -18,9 +18,7 @@ const CoinColumnHeader = (props: any) => {
               title={intl.formatMessage({ id: 'generic.label.pin' })}
               arrow
             >
-              <IconButton aria-label="pin">
-                <PushPinIcon />
-              </IconButton>
+              <PushPinIcon sx={{ color: 'gray' }} />
             </Tooltip>
           </Box>
         )}
