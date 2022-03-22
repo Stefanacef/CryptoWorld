@@ -5,26 +5,23 @@ import { useState } from 'react'
 import { useIntl } from 'react-intl'
 import TransactionsForm from '../TransactionsForm'
 import { ITransaction } from '../types'
-import { useMutation, useQueryClient } from 'react-query'
-import deleteTransaction from './actions/deleteTransaction'
 import CircularProgress from '@mui/material/CircularProgress'
-import { updateTransaction } from './actions/editTransaction'
-import useTransaction from '../../../api/useTransaction'
+import useTransaction from '../../../api/transactions/useTransaction'
+import useEditTransaction from '../../../api/transactions/useEditTansaction'
+import useDeleteTransaction from '../../../api/transactions/useDeleteTransaction'
 
 const ActionsColumn = ({ cell }: any) => {
   const intl = useIntl()
   const [open, setOpen] = useState(false)
 
   const { mutateAsync: mutateAsyncEditDelete, isLoading } =
-    useMutation(deleteTransaction)
-  const { mutateAsync: mutateAsyncEdit } = useMutation(updateTransaction)
+    useDeleteTransaction()
+  const { mutateAsync: mutateAsyncEdit } = useEditTransaction()
 
-  const queryClient = useQueryClient()
   const { data } = useTransaction(cell.row.original.id)
 
   const handleDelete = async () => {
     await mutateAsyncEditDelete(cell.row.original.id)
-    queryClient.invalidateQueries('transactions')
   }
 
   const handleEdit = async (values: ITransaction) => {
@@ -40,7 +37,6 @@ const ActionsColumn = ({ cell }: any) => {
       description: values.description ? values.description : '',
       pinOnTop: values.pinOnTop,
     })
-    queryClient.invalidateQueries('transactions')
   }
 
   return (

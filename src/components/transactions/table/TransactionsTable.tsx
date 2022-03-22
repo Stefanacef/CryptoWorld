@@ -8,7 +8,7 @@ import TypeColumn from './TypeColumnHeader'
 import FilterByType from './FilterByType'
 import FilterByName from '../../shared/table/FilterByName'
 import ActionsColumn from './ActionsColumn'
-import useTransactions from '../../../api/useTransactions'
+import useTransactions from '../../../api/transactions/useTransactions'
 import { Skeleton } from '@mui/material'
 import { sortBy } from 'lodash'
 

@@ -34,6 +34,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
       <Formik
         onSubmit={values => {
           props?.handleSubmit(values)
+          props.setOpen(false)
         }}
         initialValues={initialValue}
         validationSchema={validationSchema}
@@ -216,7 +217,6 @@ const TransactionsForm = (props: ITransactionsForm) => {
                 variant="outlined"
                 onClick={() => {
                   submitForm()
-                  props.setOpen(false)
                 }}
               >
                 {props.buttonText}

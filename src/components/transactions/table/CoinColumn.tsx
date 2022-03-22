@@ -6,7 +6,7 @@ import { Box } from '@mui/system'
 const CoinColumn = (props: any) => {
   const intl = useIntl()
   const coin =
-    props.cell.value.charAt(0).toUpperCase() + props.cell.value.slice(1)
+    props?.cell?.value.charAt(0).toUpperCase() + props?.cell?.value.slice(1)
   const pin = props.cell.row.original.pinOnTop
   return (
     <>

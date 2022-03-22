@@ -1,5 +1,5 @@
-import { ITransaction } from '../components/transactions/types'
-import useResource from './useResource'
+import { ITransaction } from '../../components/transactions/types'
+import useResource from '../useResource'
 
 const useTransactions = () => {
   const URL = 'https://retoolapi.dev/WBYZNS/transactions'

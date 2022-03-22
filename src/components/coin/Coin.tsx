@@ -2,7 +2,7 @@ import { Skeleton, Stack } from '@mui/material'
 import { Box } from '@mui/system'
 import { FormattedMessage } from 'react-intl'
 import { useParams } from 'react-router-dom'
-import useCoin from '../../api/useCoin'
+import useCoin from '../../api/coins/useCoin'
 
 export interface ICoin {
   id: string

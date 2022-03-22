@@ -3,15 +3,13 @@ import AddIcon from '@mui/icons-material/Add'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import TransactionsForm from './TransactionsForm'
-import { useMutation, useQueryClient } from 'react-query'
-import addNewTransaction from './table/actions/addNewTransaction'
 import { ITransaction } from './types'
+import useAddNewTransaction from '../../api/transactions/useAddNewTransaction'
 
 const AddNewTransaction = () => {
   const intl = useIntl()
   const [open, setOpen] = useState(false)
-  const { mutateAsync } = useMutation(addNewTransaction)
-  const queryClient = useQueryClient()
+  const { mutateAsync } = useAddNewTransaction()
 
   const handleSubmit = async (values: ITransaction) => {
     await mutateAsync({
@@ -25,7 +23,6 @@ const AddNewTransaction = () => {
       description: values.description ? values.description : '',
       pinOnTop: values.pinOnTop,
     })
-    queryClient.invalidateQueries('transactions')
   }
 
   return (

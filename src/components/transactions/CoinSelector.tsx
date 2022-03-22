@@ -1,7 +1,7 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import useCoins from '../../api/useCoins'
+import useCoins from '../../api/coins/useCoins'
 import { ICoinSelectorPros } from './types'
 
 const CoinSelector = (props: ICoinSelectorPros) => {

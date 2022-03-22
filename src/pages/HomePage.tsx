@@ -3,7 +3,7 @@ import CoinCard from '../components/cards/CoinCard'
 import CoinsTable from '../components/coin/table/CoinsTable'
 import { Grid, Box, Card, Skeleton } from '@mui/material'
 import { FormattedMessage } from 'react-intl'
-import useCoins from '../api/useCoins'
+import useCoins from '../api/coins/useCoins'
 
 interface ICryptoCoin {
   id: string
