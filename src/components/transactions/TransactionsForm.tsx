@@ -17,47 +17,25 @@ import {
 } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
 import CoinSelector from './CoinSelector'
-import { ITransaction, ITransactionsForm } from './types'
+import { ITransactionsForm } from './types'
 import { Formik } from 'formik'
 import TextInput from '../shared/textField/TextInput'
 import useInitialValue from './useInitialValue'
 import useValidationSchema from './useValidationSchema'
 import { Clear } from '@mui/icons-material'
-import { useMutation, useQueryClient } from 'react-query'
-import addNewTransaction from './table/actions/addNewTransaction'
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
-  const initialValue = useInitialValue()
+  const initialValue = useInitialValue(props?.data)
   const validationSchema = useValidationSchema()
-  const { mutateAsync } = useMutation(addNewTransaction)
-  const queryClient = useQueryClient()
-
-  const handleSubmit = async (values: ITransaction) => {
-    await mutateAsync({
-      id: Math.random() * 100 + 1,
-      coin: values.coin,
-      amount: values.amount,
-      date: values.date,
-      currency: values.currency,
-      type: values.type,
-      price: values.price,
-      description: values.description ? values.description : '',
-      pinOnTop: values.pinOnTop,
-    })
-    queryClient.invalidateQueries('transactions')
-    props.setOpen(false)
-  }
 
   return (
     <>
       <Formik
         onSubmit={values => {
-          props?.editStatus && props?.handleEdit
-            ? props?.handleEdit(props.data?.id, values)
-            : handleSubmit(values)
+          props?.handleSubmit(values)
         }}
-        initialValues={props.editStatus ? props?.data : initialValue}
+        initialValues={initialValue}
         validationSchema={validationSchema}
       >
         {({ values, setFieldValue, submitForm, errors, touched }) => (
@@ -70,15 +48,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
             }}
           >
             <CardHeader
-              title={
-                !props?.editStatus
-                  ? intl.formatMessage({
-                      id: 'transaction.title',
-                    })
-                  : intl.formatMessage({
-                      id: 'transaction.title.edit',
-                    })
-              }
+              title={props?.title}
               action={
                 <Tooltip
                   title={intl.formatMessage({ id: 'generic.label.close' })}
@@ -100,7 +70,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
                     setFieldValue={setFieldValue}
                     messageError={errors.amount}
                     touched={touched.amount}
-                    coin={props?.data?.coin}
+                    coin={values.coin}
                   />
                 </Grid>
                 <Grid item>
@@ -249,6 +219,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
                   variant="outlined"
                   onClick={() => {
                     submitForm()
+                    props.setOpen(false)
                   }}
                 >
                   <FormattedMessage
@@ -261,6 +232,7 @@ const TransactionsForm = (props: ITransactionsForm) => {
                   variant="outlined"
                   onClick={() => {
                     submitForm()
+                    props.setOpen(false)
                   }}
                 >
                   <FormattedMessage

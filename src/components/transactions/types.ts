@@ -32,7 +32,8 @@ export interface ICoinSelectorPros extends IValidation {
 
 export interface ITransactionsForm {
   setOpen: (value: boolean) => void
-  editStatus?: boolean
+  title: string
   data?: any
-  handleEdit?: (id: string, values: ITransaction) => void
+  editStatus: boolean
+  handleSubmit: (values: ITransaction) => void
 }
