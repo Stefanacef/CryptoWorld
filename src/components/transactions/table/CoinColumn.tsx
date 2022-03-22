@@ -1,9 +1,9 @@
-import { IconButton, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import { useIntl } from 'react-intl'
 import PushPinIcon from '@mui/icons-material/PushPin'
 import { Box } from '@mui/system'
 
-const CoinColumnHeader = (props: any) => {
+const CoinColumn = (props: any) => {
   const intl = useIntl()
   const coin =
     props.cell.value.charAt(0).toUpperCase() + props.cell.value.slice(1)
@@ -27,4 +27,4 @@ const CoinColumnHeader = (props: any) => {
   )
 }
 
-export default CoinColumnHeader
+export default CoinColumn

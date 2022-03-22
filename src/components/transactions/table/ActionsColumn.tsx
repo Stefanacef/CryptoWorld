@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { updateTransaction } from './actions/editTransaction'
 import useTransaction from '../../../api/useTransaction'
 
-const ActionsColumnHeader = ({ cell }: any) => {
+const ActionsColumn = ({ cell }: any) => {
   const intl = useIntl()
   const [open, setOpen] = useState(false)
 
@@ -41,7 +41,6 @@ const ActionsColumnHeader = ({ cell }: any) => {
       pinOnTop: values.pinOnTop,
     })
     queryClient.invalidateQueries('transactions')
-    setOpen(false)
   }
 
   return (
@@ -78,16 +77,18 @@ const ActionsColumnHeader = ({ cell }: any) => {
       <Dialog onClose={() => setOpen(false)} open={open}>
         <TransactionsForm
           setOpen={setOpen}
-          editStatus={true}
           title={intl.formatMessage({
             id: 'transaction.title.edit',
           })}
-          data={cell.row.original}
+          transactionsData={cell.row.original}
           handleSubmit={handleEdit}
+          buttonText={intl.formatMessage({
+            id: 'generic.label.save',
+          })}
         />
       </Dialog>
     </>
   )
 }
 
-export default ActionsColumnHeader
+export default ActionsColumn

@@ -9,7 +9,7 @@ const style = {
   textOverflow: 'ellipsis',
 }
 
-const DescriptionColumnHeader = (props: { description: string }) => {
+const Description = (props: { description: string }) => {
   const [hidden, setHidden] = useState(true)
 
   return (
@@ -47,4 +47,4 @@ const DescriptionColumnHeader = (props: { description: string }) => {
   )
 }
 
-export default DescriptionColumnHeader
+export default Description

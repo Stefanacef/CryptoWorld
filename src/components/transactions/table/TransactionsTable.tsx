@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Table from '../../shared/table/Table'
-import CoinColumnHeader from './CoinColumnHeader'
-import DateColumnHeader from './DateColumnHeader'
-import DescriptionColumnHeader from './DescriptionColumnHeader'
-import TypeColumnHeader from './TypeColumnHeader'
+import CoinColumn from './CoinColumn'
+import DateColumn from './DateColumn'
+import DescriptionColumn from './Description'
+import TypeColumn from './TypeColumnHeader'
 import FilterByType from './FilterByType'
 import FilterByName from '../../shared/table/FilterByName'
-import ActionsColumnHeader from './ActionsColumnHeader'
+import ActionsColumn from './ActionsColumn'
 import useTransactions from '../../../api/useTransactions'
 import { Skeleton } from '@mui/material'
 import { sortBy } from 'lodash'
@@ -15,7 +15,6 @@ import { sortBy } from 'lodash'
 const TransactionsTable = () => {
   const intl = useIntl()
   const { data: transactions, isLoading, error, isError } = useTransactions()
-  console.log(transactions)
 
   const sortedTransactions = sortBy(
     transactions,
@@ -28,7 +27,7 @@ const TransactionsTable = () => {
       {
         Header: intl.formatMessage({ id: 'transactions.cell.coin' }),
         accessor: 'coin',
-        Cell: ({ cell }: any) => <CoinColumnHeader cell={cell} />,
+        Cell: ({ cell }: any) => <CoinColumn cell={cell} />,
         Filter: FilterByName,
       },
       {
@@ -45,26 +44,24 @@ const TransactionsTable = () => {
       },
       {
         Header: intl.formatMessage({ id: 'transactions.cell.date' }),
-        Cell: ({ cell }: any) => <DateColumnHeader date={cell.value} />,
+        Cell: ({ cell }: any) => <DateColumn date={cell.value} />,
         accessor: 'date',
       },
       {
         Header: intl.formatMessage({ id: 'transactions.cell.type' }),
         accessor: 'type',
-        Cell: ({ cell }: any) => <TypeColumnHeader type={cell.value} />,
+        Cell: ({ cell }: any) => <TypeColumn type={cell.value} />,
         Filter: FilterByType,
       },
       {
         Header: intl.formatMessage({ id: 'transactions.cell.description' }),
         accessor: 'description',
-        Cell: ({ cell }: any) => (
-          <DescriptionColumnHeader description={cell.value} />
-        ),
+        Cell: ({ cell }: any) => <DescriptionColumn description={cell.value} />,
       },
       {
         Header: intl.formatMessage({ id: 'table.header.cell.actions' }),
         id: 'action',
-        Cell: ({ cell }: any) => <ActionsColumnHeader cell={cell} />,
+        Cell: ({ cell }: any) => <ActionsColumn cell={cell} />,
       },
     ],
     [intl]

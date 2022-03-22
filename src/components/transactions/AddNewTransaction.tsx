@@ -49,9 +49,11 @@ const AddNewTransaction = () => {
         <TransactionsForm
           setOpen={setOpen}
           handleSubmit={handleSubmit}
-          editStatus={false}
           title={intl.formatMessage({
             id: 'transaction.title',
+          })}
+          buttonText={intl.formatMessage({
+            id: 'generic.label.submit',
           })}
         />
       </Dialog>

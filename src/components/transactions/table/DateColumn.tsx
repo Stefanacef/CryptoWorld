@@ -1,6 +1,6 @@
 import { FormattedDate } from 'react-intl'
 
-const DateColumnHeader = (props: { date: string }) => {
+const DateColumn = (props: { date: string }) => {
   const date = new Date(props.date)
   return (
     <div>
@@ -14,4 +14,4 @@ const DateColumnHeader = (props: { date: string }) => {
   )
 }
 
-export default DateColumnHeader
+export default DateColumn

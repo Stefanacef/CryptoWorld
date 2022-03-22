@@ -61,9 +61,9 @@ export default function HomePage() {
                 height="500px"
                 animation="wave"
               />
-            ) : (
-              data && <CoinsTable data={data} />
-            )}
+            ) : data ? (
+              <CoinsTable data={data} />
+            ) : null}
           </Box>
         </>
       )}

@@ -26,7 +26,7 @@ import { Clear } from '@mui/icons-material'
 
 const TransactionsForm = (props: ITransactionsForm) => {
   const intl = useIntl()
-  const initialValue = useInitialValue(props?.data)
+  const initialValue = useInitialValue(props?.transactionsData)
   const validationSchema = useValidationSchema()
 
   return (
@@ -168,7 +168,6 @@ const TransactionsForm = (props: ITransactionsForm) => {
                     <span style={{ color: '#FC4F4F' }}>{errors.type}</span>
                   ) : null}
                 </Grid>
-
                 <Grid item>
                   <Typography variant="body1" color="text.secondary">
                     <FormattedMessage
@@ -186,7 +185,6 @@ const TransactionsForm = (props: ITransactionsForm) => {
                       setFieldValue('description', e.target.value)
                     }}
                   ></TextareaAutosize>
-
                   {errors.description && touched.description ? (
                     <span style={{ color: '#FC4F4F' }}>
                       {errors.description}
@@ -214,33 +212,15 @@ const TransactionsForm = (props: ITransactionsForm) => {
               disableSpacing
               sx={{ paddingLeft: '16px', marginTop: '15px' }}
             >
-              {!props.editStatus ? (
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    submitForm()
-                    props.setOpen(false)
-                  }}
-                >
-                  <FormattedMessage
-                    id="generic.label.submit"
-                    defaultMessage="Submit"
-                  />
-                </Button>
-              ) : (
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    submitForm()
-                    props.setOpen(false)
-                  }}
-                >
-                  <FormattedMessage
-                    id="generic.label.save"
-                    defaultMessage="Save"
-                  />
-                </Button>
-              )}
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  submitForm()
+                  props.setOpen(false)
+                }}
+              >
+                {props.buttonText}
+              </Button>
             </CardActions>
           </Card>
         )}
