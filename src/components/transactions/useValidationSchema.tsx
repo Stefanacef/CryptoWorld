@@ -9,32 +9,32 @@ const useValidationSchema = () => {
       Yup.object({
         coin: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.coin.input.required',
           })
         ),
         amount: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.amount.input.required',
           })
         ),
         date: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.price.input.required',
           })
         ),
         currency: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.currency.input.required',
           })
         ),
         type: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.date.input.required',
           })
         ),
         price: Yup.string().required(
           intl.formatMessage({
-            id: 'transaction.text.input.required',
+            id: 'transaction.type.input.required',
           })
         ),
         description: Yup.string()
