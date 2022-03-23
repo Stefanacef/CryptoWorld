@@ -3,7 +3,7 @@ import useResource from '../useResource'
 
 const useTransaction = (id?: number | undefined) => {
   const URL: string = `https://retoolapi.dev/WBYZNS/transactions/${id}`
-  return useResource<ITransaction>(URL, 'transaction')
+  return useResource<ITransaction>(URL, ['transaction', id])
 }
 
 export default useTransaction
