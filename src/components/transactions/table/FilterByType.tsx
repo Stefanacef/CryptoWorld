@@ -9,7 +9,7 @@ const FilterByType = ({ column }: any) => {
     const type = ['Buy', 'Sell']
 
     return type
-  }, [intl])
+  }, [])
 
   return (
     <Box
