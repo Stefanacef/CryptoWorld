@@ -6,10 +6,7 @@ const FilterByType = ({ column }: any) => {
   const { filterValue, setFilter } = column
   const intl = useIntl()
   const options = useMemo(() => {
-    const type = [
-      intl.formatMessage({ id: 'transaction.buy' }),
-      intl.formatMessage({ id: 'transaction.sell' }),
-    ]
+    const type = ['Buy', 'Sell']
 
     return type
   }, [intl])
@@ -38,17 +35,12 @@ const FilterByType = ({ column }: any) => {
             <FormattedMessage id="transaction.all" defaultMessage="All" />
           </MenuItem>
           {options.map((option, i) => (
-            <MenuItem
-              key={i}
-              value={
-                option === 'Cumparat'
-                  ? 'Buy'
-                  : option === 'Vandut'
-                  ? 'Sell'
-                  : option
-              }
-            >
-              {option}
+            <MenuItem key={i} value={option}>
+              {option === 'Buy' ? (
+                <FormattedMessage id="transaction.buy" defaultMessage="Buy" />
+              ) : (
+                <FormattedMessage id="transaction.sell" defaultMessage="Sell" />
+              )}
             </MenuItem>
           ))}
         </Select>

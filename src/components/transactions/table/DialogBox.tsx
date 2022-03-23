@@ -30,6 +30,7 @@ export const DialogBox = (props: IDialogBox) => {
       pinOnTop: values.pinOnTop,
     })
   }
+
   return (
     <Dialog onClose={() => props.setOpen(false)} open={props.open}>
       <TransactionsForm
