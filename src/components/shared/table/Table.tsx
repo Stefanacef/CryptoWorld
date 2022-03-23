@@ -38,6 +38,7 @@ function Table(props: ITable) {
       defaultColumn,
       columns: props.columns,
       data,
+      disableSortBy: props.disableSortBy ? props.disableSortBy : false,
     },
     useFilters,
     useSortBy,

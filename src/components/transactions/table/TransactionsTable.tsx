@@ -18,8 +18,7 @@ const TransactionsTable = () => {
 
   const sortedTransactions = sortBy(
     transactions,
-    transaction => !transaction.pinOnTop,
-    'id'
+    transaction => !transaction.pinOnTop
   )
 
   const columns = useMemo(
@@ -86,6 +85,7 @@ const TransactionsTable = () => {
           data={sortedTransactions}
           columns={columns}
           message={intl.formatMessage({ id: 'transactions.no.transaction' })}
+          disableSortBy={true}
         />
       )}
     </>
