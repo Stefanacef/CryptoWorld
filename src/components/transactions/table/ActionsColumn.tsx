@@ -1,44 +1,21 @@
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
-import { Dialog, Grid, IconButton, Tooltip } from '@mui/material'
+import { Grid, IconButton, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
-import TransactionsForm from '../TransactionsForm'
-import { ITransaction } from '../types'
 import CircularProgress from '@mui/material/CircularProgress'
-import useTransaction from '../../../api/transactions/useTransaction'
-import useEditTransaction from '../../../api/transactions/useEditTansaction'
 import useDeleteTransaction from '../../../api/transactions/useDeleteTransaction'
+import { DialogBox } from './DialogBox'
 
 const ActionsColumn = ({ cell }: any) => {
   const intl = useIntl()
   const [open, setOpen] = useState(false)
 
-  const { mutateAsync: mutateAsyncEditDelete, isLoading } =
-    useDeleteTransaction()
-  const { mutateAsync: mutateAsyncEdit } = useEditTransaction()
-
-  const { data } = useTransaction(cell.row.original.id)
+  const { mutateAsync, isLoading } = useDeleteTransaction()
 
   const handleDelete = async () => {
-    await mutateAsyncEditDelete(cell.row.original.id)
+    await mutateAsync(cell.row.original.id)
   }
-
-  const handleEdit = async (values: ITransaction) => {
-    await mutateAsyncEdit({
-      ...data,
-      id: cell.row.original.id,
-      coin: values.coin,
-      amount: values.amount,
-      date: values.date,
-      currency: values.currency,
-      type: values.type,
-      price: values.price,
-      description: values.description ? values.description : '',
-      pinOnTop: values.pinOnTop,
-    })
-  }
-
   return (
     <>
       <Grid container justifyContent="flex-end" alignItems="center">
@@ -70,19 +47,7 @@ const ActionsColumn = ({ cell }: any) => {
           </Tooltip>
         </Grid>
       </Grid>
-      <Dialog onClose={() => setOpen(false)} open={open}>
-        <TransactionsForm
-          setOpen={setOpen}
-          title={intl.formatMessage({
-            id: 'transaction.title.edit',
-          })}
-          transactionsData={cell.row.original}
-          handleSubmit={handleEdit}
-          buttonText={intl.formatMessage({
-            id: 'generic.label.save',
-          })}
-        />
-      </Dialog>
+      {open ? <DialogBox setOpen={setOpen} open={open} cell={cell} /> : null}
     </>
   )
 }
