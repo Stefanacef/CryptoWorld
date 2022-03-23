@@ -4,12 +4,10 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 const FilterByType = ({ column }: any) => {
   const { filterValue, setFilter } = column
-  const intl = useIntl()
   const options = useMemo(() => {
     const type = ['Buy', 'Sell']
-
     return type
-  }, [intl])
+  }, [])
 
   return (
     <Box
