@@ -11,11 +11,12 @@ import {
   Button,
   CardActions,
   Grid,
+  Box,
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
+import TextInput from '../shared/textField/TextInput'
 
 const SignUpCard = () => {
   const setUser = useSetRecoilState(usersAtom)
@@ -80,15 +81,10 @@ const SignUpCard = () => {
           <CardContent>
             <Grid container direction="column" rowGap="30px">
               <Grid item>
-                <TextField
+                <TextInput
                   id="lastName"
                   name="lastName"
-                  label={intl.formatMessage({
-                    id: 'signUp.last.name.label',
-                  })}
-                  type="text"
-                  variant="filled"
-                  fullWidth
+                  label="signUp.last.name.label"
                   value={values.lastName}
                   onChange={e => {
                     setFieldValue('lastName', e.target.value)
@@ -106,15 +102,10 @@ const SignUpCard = () => {
                 </Box>
               </Grid>
               <Grid item>
-                <TextField
+                <TextInput
                   id="firstName"
                   name="firstName"
-                  label={intl.formatMessage({
-                    id: 'signUp.first.name.label',
-                  })}
-                  type="text"
-                  variant="filled"
-                  fullWidth
+                  label="signUp.first.name.label"
                   value={values.firstName}
                   onChange={e => {
                     setFieldValue('firstName', e.target.value)
@@ -142,7 +133,7 @@ const SignUpCard = () => {
                   variant="filled"
                   fullWidth
                   value={values.email}
-                  onChange={e => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('email', e.target.value)
                   }}
                 />
@@ -169,7 +160,7 @@ const SignUpCard = () => {
                   variant="filled"
                   fullWidth
                   value={values.password}
-                  onChange={e => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setFieldValue('password', e.target.value)
                   }}
                 />

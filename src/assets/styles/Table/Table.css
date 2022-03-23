@@ -27,6 +27,8 @@ table th {
   text-align: left;
   background-color: #2196f3;
   color: white;
+  vertical-align: top;
+  position: relative;
 }
 .table-body-symbol {
   margin-right: 15px;

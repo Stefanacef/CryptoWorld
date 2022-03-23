@@ -1,10 +1,10 @@
 import { Skeleton, Stack } from '@mui/material'
 import { Box } from '@mui/system'
 import { FormattedMessage } from 'react-intl'
-import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
+import useCoin from '../../api/coins/useCoin'
 
-interface ICoin {
+export interface ICoin {
   id: string
   last_updated: string
   name: string
@@ -13,16 +13,7 @@ interface ICoin {
 
 const Coin = () => {
   const { id } = useParams()
-  const URL: string = `https://api.coingecko.com/api/v3/coins/${id}`
-
-  const fetchCoins = async () => {
-    const response = await fetch(URL)
-    return response.json()
-  }
-  const { data, isLoading, isError, error } = useQuery<ICoin, Error>(
-    'coins',
-    fetchCoins
-  )
+  const { data, isLoading, isError, error } = useCoin(id)
 
   return (
     <Box p="30px">

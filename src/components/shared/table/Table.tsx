@@ -7,11 +7,11 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { Button, Grid, TextField, Tooltip, Box } from '@mui/material'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { ITableData } from './types'
+import { ITable } from './types'
 
-function Table(props: { data: ITableData[]; columns: any }) {
+function Table(props: ITable) {
   const intl = useIntl()
-  const data = useMemo(() => props.data, [props.data])
+  const data = useMemo(() => props?.data, [props.data])
   const defaultColumn = useMemo(
     () => ({
       Filter: <span></span>,
@@ -38,6 +38,7 @@ function Table(props: { data: ITableData[]; columns: any }) {
       defaultColumn,
       columns: props.columns,
       data,
+      disableSortBy: props.disableSortBy ? props.disableSortBy : false,
     },
     useFilters,
     useSortBy,
@@ -88,102 +89,110 @@ function Table(props: { data: ITableData[]; columns: any }) {
           </tbody>
         </table>
       </Box>
-      <Box>
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="flex-end"
-          height="80px"
-        >
-          <Grid item textAlign="left">
-            <TextField
-              size="small"
-              id="filled-basic"
-              label={intl.formatMessage({ id: 'table.search.page' })}
-              variant="filled"
-              type="number"
-              defaultValue=""
-              onChange={e => {
-                const pageNumber = e.target.value
-                  ? Number(e.target.value) - 1
-                  : 0
-                gotoPage(pageNumber)
-              }}
-              onBlur={e => (e.target.value = '')}
-            />
+      {data.length > 10 ? (
+        <Box>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="flex-end"
+            height="80px"
+          >
+            <Grid item textAlign="left">
+              <TextField
+                size="small"
+                id="filled-basic"
+                label={intl.formatMessage({ id: 'table.search.page' })}
+                variant="filled"
+                type="number"
+                defaultValue=""
+                onChange={e => {
+                  const pageNumber = e.target.value
+                    ? Number(e.target.value) - 1
+                    : 0
+                  gotoPage(pageNumber)
+                }}
+                onBlur={e => (e.target.value = '')}
+              />
+            </Grid>
+            <Grid item>
+              <Box>
+                <Tooltip
+                  title={intl.formatMessage({ id: 'table.button.first.page' })}
+                  arrow
+                >
+                  <span>
+                    <Button
+                      variant="outlined"
+                      onClick={() => gotoPage(0)}
+                      disabled={!canPreviousPage}
+                    >
+                      <NavigateBeforeIcon />
+                      <NavigateBeforeIcon />
+                    </Button>
+                  </span>
+                </Tooltip>
+                <Tooltip
+                  title={intl.formatMessage({
+                    id: 'table.button.previous.page',
+                  })}
+                  arrow
+                >
+                  <span>
+                    <Button
+                      variant="outlined"
+                      onClick={() => previousPage()}
+                      disabled={!canPreviousPage}
+                      sx={{ margin: '0 10px' }}
+                    >
+                      <NavigateBeforeIcon />
+                    </Button>
+                  </span>
+                </Tooltip>
+                <Tooltip
+                  title={intl.formatMessage({ id: 'table.button.next.page' })}
+                  arrow
+                >
+                  <span>
+                    <Button
+                      variant="outlined"
+                      onClick={() => nextPage()}
+                      disabled={!canNextPage}
+                      sx={{ margin: '0 10px' }}
+                    >
+                      <NavigateNextIcon />
+                    </Button>
+                  </span>
+                </Tooltip>
+                <Tooltip
+                  title={intl.formatMessage({ id: 'table.button.last.page' })}
+                  arrow
+                >
+                  <span>
+                    <Button
+                      variant="outlined"
+                      onClick={() => gotoPage(pageCount - 1)}
+                      disabled={!canNextPage}
+                    >
+                      <NavigateNextIcon />
+                      <NavigateNextIcon />
+                    </Button>
+                  </span>
+                </Tooltip>
+              </Box>
+            </Grid>
+            <Grid item alignSelf="flex-start">
+              <Box color="black">
+                <FormattedMessage id="table.page" defaultMessage="Page" /> :
+                {pageIndex + 1} / {pageOptions.length}
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Box>
-              <Tooltip
-                title={intl.formatMessage({ id: 'table.button.first.page' })}
-                arrow
-              >
-                <span>
-                  <Button
-                    variant="outlined"
-                    onClick={() => gotoPage(0)}
-                    disabled={!canPreviousPage}
-                  >
-                    <NavigateBeforeIcon />
-                    <NavigateBeforeIcon />
-                  </Button>
-                </span>
-              </Tooltip>
-              <Tooltip
-                title={intl.formatMessage({ id: 'table.button.previous.page' })}
-                arrow
-              >
-                <span>
-                  <Button
-                    variant="outlined"
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                    sx={{ margin: '0 10px' }}
-                  >
-                    <NavigateBeforeIcon />
-                  </Button>
-                </span>
-              </Tooltip>
-              <Tooltip
-                title={intl.formatMessage({ id: 'table.button.next.page' })}
-                arrow
-              >
-                <span>
-                  <Button
-                    variant="outlined"
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                    sx={{ margin: '0 10px' }}
-                  >
-                    <NavigateNextIcon />
-                  </Button>
-                </span>
-              </Tooltip>
-              <Tooltip
-                title={intl.formatMessage({ id: 'table.button.last.page' })}
-                arrow
-              >
-                <span>
-                  <Button
-                    variant="outlined"
-                    onClick={() => gotoPage(pageCount - 1)}
-                    disabled={!canNextPage}
-                  >
-                    <NavigateNextIcon />
-                    <NavigateNextIcon />
-                  </Button>
-                </span>
-              </Tooltip>
-            </Box>
-          </Grid>
-          <Grid item alignSelf="flex-start">
-            <Box color="black">
-              <FormattedMessage id="table.page" defaultMessage="Page" /> :
-              {pageIndex + 1} / {pageOptions.length}
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      ) : (
+        data.length < 1 && (
+          <Box sx={{ paddingTop: '30px' }}>{props.message}</Box>
+        )
+      )}
     </>
   )
 }

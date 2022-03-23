@@ -1,9 +1,9 @@
 import Carousel from '../components/carousel/Carousel'
 import CoinCard from '../components/cards/CoinCard'
-import CoinsTable from '../components/tables/CoinsTable'
+import CoinsTable from '../components/coin/table/CoinsTable'
 import { Grid, Box, Card, Skeleton } from '@mui/material'
-import { useQuery } from 'react-query'
 import { FormattedMessage } from 'react-intl'
+import useCoins from '../api/coins/useCoins'
 
 interface ICryptoCoin {
   id: string
@@ -13,17 +13,7 @@ interface ICryptoCoin {
 }
 
 export default function HomePage() {
-  const URL: string = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-
-  const fetchCoins = async () => {
-    const response = await fetch(URL)
-    return response.json()
-  }
-  const { data, isLoading, isError, error } = useQuery<ICryptoCoin[], Error>(
-    'coins',
-    fetchCoins
-  )
-
+  const { data, isLoading, isError, error } = useCoins()
   const topFiveCoins = data?.slice(-5)
 
   return (
@@ -71,9 +61,9 @@ export default function HomePage() {
                 height="500px"
                 animation="wave"
               />
-            ) : (
+            ) : data ? (
               <CoinsTable data={data} />
-            )}
+            ) : null}
           </Box>
         </>
       )}
