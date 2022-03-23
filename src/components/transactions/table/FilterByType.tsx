@@ -1,10 +1,9 @@
 import { Box, FormControl, MenuItem, Select } from '@mui/material'
 import { useMemo } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 const FilterByType = ({ column }: any) => {
   const { filterValue, setFilter } = column
-  const intl = useIntl()
   const options = useMemo(() => {
     const type = ['Buy', 'Sell']
 
