@@ -32,13 +32,10 @@ const Description = (props: { description: string }) => {
             {hidden ? (
               <FormattedMessage
                 id="generic.label.see.more"
-                defaultMessage="See more "
+                defaultMessage="See more"
               />
             ) : (
-              <FormattedMessage
-                id="generic.label.hide"
-                defaultMessage="Hide "
-              />
+              <FormattedMessage id="generic.label.hide" defaultMessage="Hide" />
             )}
           </Typography>
         </>

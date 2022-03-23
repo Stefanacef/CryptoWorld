@@ -16,9 +16,9 @@ const TransactionsTable = () => {
   const intl = useIntl()
   const { data: transactions, isLoading, error, isError } = useTransactions()
 
-  const sortedTransactions = sortBy(
-    transactions,
-    transaction => !transaction.pinOnTop
+  const sortedTransactions = useMemo(
+    () => sortBy(transactions, transaction => !transaction.pinOnTop),
+    [transactions]
   )
 
   const columns = useMemo(
